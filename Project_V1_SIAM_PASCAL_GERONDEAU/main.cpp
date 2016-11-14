@@ -1,9 +1,9 @@
 #include <iostream>
-
+#include "main.hpp"
 using namespace std;
 
 int main()
 {
-    cout << "Hello world!" << endl;
+    Game x;
     return 0;
 }

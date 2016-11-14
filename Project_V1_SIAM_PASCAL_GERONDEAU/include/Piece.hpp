@@ -10,16 +10,16 @@ class Piece
         Piece();
         virtual ~Piece();
         Piece(const Piece& other);
-        unsigned short Getx() { return m_x; }
-        void Setx(unsigned short val) { m_x = val; }
-        unsigned short Gety() { return m_y; }
-        void Sety(unsigned short val) { m_y = val; }
-        unsigned short Getstrength() { return m_strength; }
-        void Setstrength(unsigned short val) { m_strength = val; }
-        bool Getstate() { return m_state; }
-        void Setstate(bool val) { m_state = val; }
-        BITMAP* GetimgPiece() { return m_imgPiece; }
-        void SetimgPiece(BITMAP* val) { m_imgPiece = val; }
+        unsigned short Getx() ;
+        void Setx(unsigned short val);
+        unsigned short Gety() ;
+        void Sety(unsigned short val) ;
+        unsigned short Getstrength() ;
+        void Setstrength(unsigned short val) ;
+        bool Getstate() ;
+        void Setstate(bool val);
+        BITMAP* GetimgPiece();
+        void SetimgPiece(BITMAP* val);
     protected:
     private:
         unsigned short m_x;

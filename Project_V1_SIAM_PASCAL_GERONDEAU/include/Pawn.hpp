@@ -10,10 +10,10 @@ class Pawn : virtual public Piece
         Pawn();
         ~Pawn();
         Pawn(const Pawn& other);
-        char GetOrientation() { return m_Orientation; }
-        void SetOrientation(char val) { m_Orientation = val; }
-        unsigned short Getteam() { return m_team; }
-        void Setteam(unsigned short val) { m_team = val; }
+        char GetOrientation();
+        void SetOrientation(char val) ;
+        unsigned short Getteam();
+        void Setteam(unsigned short val);
     protected:
     private:
         char m_Orientation;

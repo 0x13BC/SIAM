@@ -41,6 +41,7 @@
 		<Unit filename="include/Piece.hpp" />
 		<Unit filename="include/Player.hpp" />
 		<Unit filename="main.cpp" />
+		<Unit filename="main.hpp" />
 		<Unit filename="src/BoardGame.cpp" />
 		<Unit filename="src/Game.cpp" />
 		<Unit filename="src/Mountain.cpp" />

@@ -31,3 +31,42 @@
 1478789983 source:c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v1_siam_pascal_gerondeau\src\pawn.cpp
 	"Pawn.hpp"
 
+1479125502 source:c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\main.cpp
+	<iostream>
+
+1479125502 source:c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\src\boardgame.cpp
+	"BoardGame.hpp"
+
+1479125501 c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\include\boardgame.hpp
+	"Pawn.hpp"
+
+1479125897 c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\include\pawn.hpp
+	"Piece.hpp"
+
+1479125897 c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\include\piece.hpp
+
+1479125502 source:c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\src\game.cpp
+	"Game.hpp"
+
+1479125501 c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\include\game.hpp
+	"BoardGame.hpp"
+
+1479125502 source:c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\src\mountain.cpp
+	"Mountain.hpp"
+
+1479125501 c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\include\mountain.hpp
+	"Piece.hpp"
+
+1479125502 source:c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\src\player.cpp
+	"Player.hpp"
+
+1479125502 c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\include\player.hpp
+	<stack>
+	"Pawn.hpp"
+
+1479126300 source:c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\src\pawn.cpp
+	"Pawn.hpp"
+
+1479126300 source:c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\src\piece.cpp
+	"Piece.hpp"
+
