@@ -14,7 +14,7 @@ class Player
         unsigned int GetnbrOut() ;
         void SetnbrOut(unsigned int val) ;
         int GetstockPiece() ;
-        void SetstockPiece(Pawn* val) ;
+        void AddstockPiece(Pawn* val) ;
     protected:
     private:
         unsigned int m_nbrOut;

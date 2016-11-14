@@ -31,25 +31,26 @@
 1478789983 source:c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v1_siam_pascal_gerondeau\src\pawn.cpp
 	"Pawn.hpp"
 
-1479127084 source:c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\main.cpp
+1479130553 source:c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\main.cpp
 	<iostream>
 	"main.hpp"
 
-1479125502 source:c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\src\boardgame.cpp
+1479130815 source:c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\src\boardgame.cpp
 	"BoardGame.hpp"
 
-1479127437 c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\include\boardgame.hpp
-	"Pawn.hpp"
+1479130931 c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\include\boardgame.hpp
+	"Piece.hpp"
+	<vector>
 
 1479125897 c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\include\pawn.hpp
 	"Piece.hpp"
 
 1479129310 c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\include\piece.hpp
 
-1479125502 source:c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\src\game.cpp
+1479130950 source:c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\src\game.cpp
 	"Game.hpp"
 
-1479125501 c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\include\game.hpp
+1479130130 c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\include\game.hpp
 	"BoardGame.hpp"
 
 1479125502 source:c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\src\mountain.cpp
@@ -58,10 +59,10 @@
 1479125501 c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\include\mountain.hpp
 	"Piece.hpp"
 
-1479125502 source:c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\src\player.cpp
+1479130971 source:c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\src\player.cpp
 	"Player.hpp"
 
-1479125502 c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\include\player.hpp
+1479130997 c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\include\player.hpp
 	<stack>
 	"Pawn.hpp"
 

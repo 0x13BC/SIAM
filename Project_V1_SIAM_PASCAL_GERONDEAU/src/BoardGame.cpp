@@ -10,27 +10,27 @@ BoardGame::~BoardGame()
     //dtor
 }
 
-Pawn *** Getmap()
+Piece* BoardGame::Getmap(int x, int y)
 {
-    return m_map;
+    if(x<m_nTaille && x>=0 && y<m_nTaille && y>=0) return m_map[x][y];
 }
-void Setmap(Pawn *** val)
+void BoardGame::Addmap(Piece* val,int x, int y)
 {
-    m_map = val;
+    if(x<m_nTaille && x>=0 && y<m_nTaille && y>=0) m_map[x][y] = val;
 }
-unsigned int GetnTaille()
+unsigned int BoardGame::GetnTaille()
 {
     return m_nTaille;
 }
-void SetnTaille(unsigned int val)
+void BoardGame::SetnTaille(unsigned int val)
 {
     m_nTaille = val;
 }
-BITMAP* GetimgBoard()
+BITMAP* BoardGame::GetimgBoard()
 {
     return m_imgBoard;
 }
-void SetimgBoard(BITMAP* val)
+void BoardGame::SetimgBoard(BITMAP* val)
 {
     m_imgBoard = val;
 }

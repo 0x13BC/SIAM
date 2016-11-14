@@ -9,8 +9,8 @@ class BoardGame
     public:
         BoardGame();
         ~BoardGame();
-
-        void Addmap( Piece* pion);
+        Piece* Getmap(int x, int y);
+        void Addmap( Piece* pion,int x, int y);
         unsigned int GetnTaille();
         void SetnTaille(unsigned int val);
         BITMAP* GetimgBoard();

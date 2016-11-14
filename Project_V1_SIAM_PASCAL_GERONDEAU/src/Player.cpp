@@ -13,20 +13,20 @@ Player::~Player()
 Player::Player(const Player& other)
 {
     //copy ctor
-}s
-unsigned int GetnbrOut()
+}
+unsigned int Player::GetnbrOut()
 {
     return m_nbrOut;
 }
-void SetnbrOut(unsigned int val)
+void Player::SetnbrOut(unsigned int val)
 {
     m_nbrOut = val;
 }
-int GetstockPiece()
+int Player::GetstockPiece()
 {
     return m_stockPiece.size();
 }
-void AddstockPiece(Pawn* val)
+void Player::AddstockPiece(Pawn* val)
 {
     m_stockPiece.push(val);
 }

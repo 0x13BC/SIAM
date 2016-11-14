@@ -10,11 +10,11 @@ Game::~Game()
     //dtor
 }
 
-unsigned int GetdisplayMod()
+unsigned int Game::GetdisplayMod()
 {
     return m_displayMod;
 }
-void SetdisplayMod(unsigned int val)
+void Game::SetdisplayMod(unsigned int val)
 {
     m_displayMod = val;
 }
