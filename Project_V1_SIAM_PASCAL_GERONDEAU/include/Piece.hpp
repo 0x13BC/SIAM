@@ -20,6 +20,8 @@ class Piece
         void Setstate(bool val);
         BITMAP* GetimgPiece();
         void SetimgPiece(BITMAP* val);
+        virtual display()=0;
+        virtual push()=0;
     protected:
     private:
         unsigned short m_x;

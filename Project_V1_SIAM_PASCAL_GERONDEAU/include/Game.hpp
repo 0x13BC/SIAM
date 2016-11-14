@@ -9,8 +9,9 @@ class Game
     public:
         Game();
         ~Game();
-        unsigned int GetdisplayMod() { return m_displayMod; }
-        void SetdisplayMod(unsigned int val) { m_displayMod = val; }
+        unsigned int GetdisplayMod() ;
+        void SetdisplayMod(unsigned int val) ;
+
     protected:
     private:
         unsigned int m_displayMod;

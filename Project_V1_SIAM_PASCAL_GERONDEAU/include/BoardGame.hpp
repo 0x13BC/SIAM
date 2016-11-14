@@ -1,23 +1,23 @@
 #ifndef BOARDGAME_HPP
 #define BOARDGAME_HPP
-
-#include "Pawn.hpp"
-
+#include "Piece.hpp"
+#include <vector>
+using namespace std ;
 
 class BoardGame
 {
     public:
         BoardGame();
         ~BoardGame();
-        Pawn *** Getmap() { return m_map; }
-        void Setmap(Pawn *** val) { m_map = val; }
-        unsigned int GetnTaille() { return m_nTaille; }
-        void SetnTaille(unsigned int val) { m_nTaille = val; }
-        BITMAP* GetimgBoard() { return m_imgBoard; }
-        void SetimgBoard(BITMAP* val) { m_imgBoard = val; }
+
+        void Addmap( Piece* pion);
+        unsigned int GetnTaille();
+        void SetnTaille(unsigned int val);
+        BITMAP* GetimgBoard();
+        void SetimgBoard(BITMAP* val);
     protected:
     private:
-        Pawn *** m_map;
+        vector< vector<Piece*> > m_map;
         unsigned int m_nTaille;
         BITMAP* m_imgBoard;
 };
