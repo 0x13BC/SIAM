@@ -1,8 +1,9 @@
 #include "Piece.hpp"
 
-Piece::Piece()
+Piece::Piece(BITMAP* image)
+: m_imgPiece(image)
 {
-    //ctor
+
 }
 
 Piece::~Piece()

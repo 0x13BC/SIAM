@@ -1,8 +1,8 @@
 #include "Pawn.hpp"
 
-Pawn::Pawn()
+Pawn::Pawn(BITMAP* img, int team)
+: Piece(img), m_Orientation(0), m_team(team)
 {
-    //ctor
 }
 
 Pawn::~Pawn()
@@ -30,4 +30,14 @@ unsigned short Pawn::Getteam()
 void Pawn::Setteam(unsigned short val)
 {
     m_team = val;
+}
+
+void Pawn::display()
+{
+
+}
+
+void Pawn::push()
+{
+
 }

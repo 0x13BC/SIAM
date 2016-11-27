@@ -8,13 +8,14 @@
 class Player
 {
     public:
-        Player();
+        Player(int type);
         ~Player();
         Player(const Player& other);
         unsigned int GetnbrOut() ;
         void SetnbrOut(unsigned int val) ;
         int GetstockPiece() ;
         void AddstockPiece(Pawn* val) ;
+        int Play(unsigned int display_mode, BoardGame& board);
     protected:
     private:
         unsigned int m_nbrOut;

@@ -7,7 +7,7 @@
 class Mountain : virtual public Piece
 {
     public:
-        Mountain();
+        Mountain(BITMAP* img);
         ~Mountain();
     protected:
     private:

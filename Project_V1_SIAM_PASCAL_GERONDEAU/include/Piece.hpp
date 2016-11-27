@@ -1,13 +1,14 @@
 #ifndef PIECE_HPP
 #define PIECE_HPP
+#include "General.h"
 
-#define BITMAP int
 
+class BoardGame;
 
 class Piece
 {
     public:
-        Piece();
+        Piece(BITMAP* image);
         virtual ~Piece();
         Piece(const Piece& other);
         unsigned short Getx() ;
@@ -20,8 +21,8 @@ class Piece
         void Setstate(bool val);
         BITMAP* GetimgPiece();
         void SetimgPiece(BITMAP* val);
-        virtual display()=0;
-        virtual push()=0;
+        virtual void display()=0;
+        virtual void push()=0;
     protected:
     private:
         unsigned short m_x;

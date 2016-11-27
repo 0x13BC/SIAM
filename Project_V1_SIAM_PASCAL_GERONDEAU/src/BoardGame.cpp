@@ -1,5 +1,5 @@
 #include "BoardGame.hpp"
-
+#include "General.h"
 BoardGame::BoardGame()
 {
     //ctor
@@ -13,6 +13,7 @@ BoardGame::~BoardGame()
 Piece* BoardGame::Getmap(int x, int y)
 {
     if(x<m_nTaille && x>=0 && y<m_nTaille && y>=0) return m_map[x][y];
+    else return NULL;
 }
 void BoardGame::Addmap(Piece* val,int x, int y)
 {
@@ -33,4 +34,9 @@ BITMAP* BoardGame::GetimgBoard()
 void BoardGame::SetimgBoard(BITMAP* val)
 {
     m_imgBoard = val;
+}
+
+void BoardGame::display(BITMAP* buffer, int disp_mod)
+{
+
 }

@@ -1,6 +1,7 @@
 #include "Game.hpp"
 
-Game::Game()
+Game::Game(Console* ecran)
+: m_ecran(ecran)
 {
     //ctor
 }
@@ -19,24 +20,36 @@ void Game::SetdisplayMod(unsigned int val)
     m_displayMod = val;
 }
 
+void Game::win_display(int winner)
+{
+    if(GetdisplayMod())
+    {
 
+    }
+    else
+    {
+        m_ecran->setColor(COLOR_GREEN);
+        // m_ecran->gotoligcol(milieu_x-taille_msg/2, milieu_y);
+        cout<< (winner==1 ? "Les rhinoceros": "Les elephants") << " gagnent !" << endl;
+    }
+}
 void Game::Play()
 {
-    BITMAP* buffer=NULL;
-    Joueur rhino();
-    Joueur elephant();
+     BITMAP* buffer=NULL;
 
-    BoardGame board();
+    Player rhino(1);
+    Player elephant(2);
+
 
     int win=0;
 
     while(!win)
     {
-        if(rhino.play(GetdisplayMod() ,&board)) win=1;
-        else if(elephant.play(GetdisplayMod() ,&board)) win=2;
-        board.display(buffer, GetdisplayMod());
-        if(GetdisplayMod()) blit(buffer,source,0,0,0,0, SCREEN_W, SCREEN_H);
+        if(rhino.Play(GetdisplayMod() ,m_BG)) win=1;
+        else if(elephant.Play(GetdisplayMod() ,m_BG)) win=2;
+        m_BG.display(buffer, GetdisplayMod());
+        if(GetdisplayMod()) blit(buffer,screen,0,0,0,0, SCREEN_W, SCREEN_H);
     }
-
+    return win_display(win);
 
 }

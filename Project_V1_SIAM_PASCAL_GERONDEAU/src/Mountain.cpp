@@ -1,6 +1,7 @@
 #include "Mountain.hpp"
 
-Mountain::Mountain()
+Mountain::Mountain(BITMAP* img)
+: Piece(img)
 {
     //ctor
 }

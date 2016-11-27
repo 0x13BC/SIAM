@@ -15,6 +15,7 @@ class BoardGame
         void SetnTaille(unsigned int val);
         BITMAP* GetimgBoard();
         void SetimgBoard(BITMAP* val);
+        void display(BITMAP* buffer, int disp_mod);
     protected:
     private:
         vector< vector<Piece*> > m_map;

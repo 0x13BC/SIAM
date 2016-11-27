@@ -1,8 +1,8 @@
 #include "Player.hpp"
-
-Player::Player()
+#define NB_PIONS_PLAYER 5
+Player::Player(int type)
 {
-    //ctor
+    for(unsigned int i=0; i<NB_PIONS_PLAYER;i++) m_stockPiece.push(new Pawn(create_bitmap(10,10), type));
 }
 
 Player::~Player()
@@ -29,4 +29,9 @@ int Player::GetstockPiece()
 void Player::AddstockPiece(Pawn* val)
 {
     m_stockPiece.push(val);
+}
+
+int Player::Play(unsigned int diplay_mode, BoardGame& board)
+{
+
 }
