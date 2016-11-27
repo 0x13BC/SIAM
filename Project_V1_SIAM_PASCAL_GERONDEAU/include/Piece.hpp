@@ -1,7 +1,7 @@
 #ifndef PIECE_HPP
 #define PIECE_HPP
 #include "General.h"
-
+#include "Console.h"
 
 class BoardGame;
 
@@ -21,10 +21,9 @@ class Piece
         void Setstate(bool val);
         BITMAP* GetimgPiece();
         void SetimgPiece(BITMAP* val);
-        virtual void display()=0;
-        virtual void push()=0;
+        virtual void display(){};
+        virtual void push(){};
     protected:
-    private:
         unsigned short m_x;
         unsigned short m_y;
         unsigned short m_strength;

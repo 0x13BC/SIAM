@@ -3,8 +3,7 @@
 
 #include "Piece.hpp"
 
-
-class Pawn : virtual public Piece
+class Pawn :  public Piece
 {
     public:
         Pawn(BITMAP* image, int team);
@@ -14,8 +13,8 @@ class Pawn : virtual public Piece
         void SetOrientation(char val);
         unsigned short Getteam();
         void Setteam(unsigned short val);
-        void display();
-        void push();
+        virtual void display(BITMAP* dest, int disp_mode, Console* ecran);
+        virtual void push();
     protected:
 
     private:

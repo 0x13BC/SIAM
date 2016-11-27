@@ -1,5 +1,7 @@
 #include "Pawn.hpp"
-
+#define RAPPORT 40
+#define DECALAGE_X 20
+#define DECALAGE_Y 20
 Pawn::Pawn(BITMAP* img, int team)
 : Piece(img), m_Orientation(0), m_team(team)
 {
@@ -32,9 +34,12 @@ void Pawn::Setteam(unsigned short val)
     m_team = val;
 }
 
-void Pawn::display()
+void Pawn::display(BITMAP* dest, int disp_mode, Console* ecran)
 {
-
+    if(disp_mode)
+    {
+        rotate_sprite(dest, m_imgPiece, DECALAGE_X + m_x*RAPPORT,DECALAGE_Y + m_y*RAPPORT, (fixed)(m_Orientation*64));
+    }
 }
 
 void Pawn::push()

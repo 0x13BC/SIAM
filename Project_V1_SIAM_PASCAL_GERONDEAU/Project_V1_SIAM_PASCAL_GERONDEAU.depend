@@ -43,11 +43,12 @@
 	"Piece.hpp"
 	<vector>
 
-1480284890 c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\include\pawn.hpp
+1480288029 c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\include\pawn.hpp
 	"Piece.hpp"
 
-1480283670 c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\include\piece.hpp
+1480288117 c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\include\piece.hpp
 	"General.h"
+	"Console.h"
 
 1480283730 source:c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\src\game.cpp
 	"Game.hpp"
@@ -70,7 +71,7 @@
 	<stack>
 	"Pawn.hpp"
 
-1480284890 source:c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\src\pawn.cpp
+1480287799 source:c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\src\pawn.cpp
 	"Pawn.hpp"
 
 1480280603 source:c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\src\piece.cpp
