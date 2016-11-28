@@ -1,9 +1,11 @@
 #include "Piece.hpp"
 
-Piece::Piece(BITMAP* image)
-: m_imgPiece(image)
+Piece::Piece(BITMAP* image, unsigned short team, int strength)
+: m_imgPiece(image), m_strength(strength)
 {
-
+    m_state=FALSE;
+    if(team<=2) m_team=team;
+    else team=0;
 }
 
 Piece::~Piece()
@@ -13,7 +15,13 @@ Piece::~Piece()
 
 Piece::Piece(const Piece& other)
 {
-    //copy ctor
+    m_imgPiece= create_bitmap(other.m_imgPiece->w,other.m_imgPiece->h);
+    blit(other.m_imgPiece,m_imgPiece, 0,0,0,0, m_imgPiece->w, m_imgPiece->h);
+    m_strength=other.m_strength;
+    m_state=other.m_state;
+    m_x=other.m_x;
+    m_team=other.m_team;
+    m_y=other.m_y;
 }
 
 
@@ -21,25 +29,19 @@ unsigned short Piece::Getx()
 {
     return m_x;
 }
-void Piece::Setx(unsigned short val)
-{
-    m_x = val;
-}
+
 unsigned short Piece::Gety()
 {
     return m_y;
-}
-void Piece::Sety(unsigned short val)
-{
-    m_y = val;
 }
 unsigned short Piece::Getstrength()
 {
     return m_strength;
 }
-void Piece::Setstrength(unsigned short val)
+
+unsigned short Piece::Getteam()
 {
-    m_strength = val;
+    return m_team;
 }
 bool Piece::Getstate()
 {

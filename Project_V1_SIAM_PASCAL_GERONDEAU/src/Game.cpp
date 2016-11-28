@@ -33,7 +33,7 @@ void Game::win_display(int winner)
         cout<< (winner==1 ? "Les rhinoceros": "Les elephants") << " gagnent !" << endl;
     }
 }
-void Game::Play()
+void Game::start()
 {
      BITMAP* buffer=NULL;
 
@@ -45,8 +45,8 @@ void Game::Play()
 
     while(!win)
     {
-        if(rhino.Play(GetdisplayMod() ,m_BG)) win=1;
-        else if(elephant.Play(GetdisplayMod() ,m_BG)) win=2;
+        if(rhino.Play(GetdisplayMod() ,m_BG, m_ecran)) win=1;
+        else if(elephant.Play(GetdisplayMod() ,m_BG, m_ecran)) win=2;
         m_BG.display(buffer, GetdisplayMod());
         if(GetdisplayMod()) blit(buffer,screen,0,0,0,0, SCREEN_W, SCREEN_H);
     }

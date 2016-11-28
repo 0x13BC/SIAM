@@ -14,7 +14,7 @@ class Game
         unsigned int GetdisplayMod() ;
         void SetdisplayMod(unsigned int val) ;
         void win_display(int winner);
-        void Play();
+        void start();
 
     protected:
     private:

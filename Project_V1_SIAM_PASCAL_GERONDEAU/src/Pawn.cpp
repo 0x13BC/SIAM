@@ -2,8 +2,9 @@
 #define RAPPORT 40
 #define DECALAGE_X 20
 #define DECALAGE_Y 20
-Pawn::Pawn(BITMAP* img, int team)
-: Piece(img), m_Orientation(0), m_team(team)
+#define PAWN_STRENGTH 1
+Pawn::Pawn(BITMAP* img, unsigned short team)
+: Piece(img, team, PAWN_STRENGTH), m_Orientation(0)
 {
 }
 
@@ -25,14 +26,8 @@ void Pawn::SetOrientation(char val)
 {
     m_Orientation = val;
 }
-unsigned short Pawn::Getteam()
-{
-    return m_team;
-}
-void Pawn::Setteam(unsigned short val)
-{
-    m_team = val;
-}
+
+
 
 void Pawn::display(BITMAP* dest, int disp_mode, Console* ecran)
 {
