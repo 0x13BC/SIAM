@@ -35,9 +35,12 @@ void Pawn::display(BITMAP* dest, int disp_mode, Console* ecran)
     {
         rotate_sprite(dest, m_imgPiece, DECALAGE_X + m_x*RAPPORT,DECALAGE_Y + m_y*RAPPORT, (fixed)(m_Orientation*64));
     }
+
+    (void)ecran;
 }
 
-void Pawn::push()
+bool Pawn::push(char direction,char order)
 {
-
+        (void)direction;
+        (void)order;
 }

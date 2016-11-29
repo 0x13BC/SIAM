@@ -8,20 +8,33 @@
 
 class Game
 {
-    public:
-        Game(Console* ecran);
-        ~Game();
-        unsigned int GetdisplayMod() ;
-        void SetdisplayMod(unsigned int val) ;
-        void win_display(int winner);
-        void start();
-
-    protected:
     private:
+        // ATTRIBUTES
+
         unsigned int m_displayMod;
         BoardGame m_BG;
         BITMAP* m_board_image;
         Console* m_ecran;
+
+     protected:
+
+    public:
+        //CTOR & DTOR
+
+        Game(Console* ecran);
+        ~Game();
+
+        //SETTERS & GETTERS
+
+        unsigned int GetdisplayMod() ;
+        void SetdisplayMod(unsigned int val) ;
+
+        //METHODS
+        void win_display(int winner);
+        void start();
+
+
+
 
 };
 

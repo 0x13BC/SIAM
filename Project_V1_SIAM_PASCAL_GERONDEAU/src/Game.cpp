@@ -1,5 +1,7 @@
 #include "Game.hpp"
 
+//----------------------------------------CTOR-&-DTOR----------------------------------------//
+
 Game::Game(Console* ecran)
 : m_ecran(ecran)
 {
@@ -11,6 +13,8 @@ Game::~Game()
     //dtor
 }
 
+//-------------------------------------SETTERS-&-GETTERS-------------------------------------//
+
 unsigned int Game::GetdisplayMod()
 {
     return m_displayMod;
@@ -19,6 +23,8 @@ void Game::SetdisplayMod(unsigned int val)
 {
     m_displayMod = val;
 }
+
+//------------------------------------------METHODS------------------------------------------//
 
 void Game::win_display(int winner)
 {

@@ -1,5 +1,8 @@
 #include "BoardGame.hpp"
 #include "General.h"
+
+//----------------------------------------CTOR-&-DTOR----------------------------------------//
+
 BoardGame::BoardGame()
 {
     //ctor
@@ -9,6 +12,8 @@ BoardGame::~BoardGame()
 {
     //dtor
 }
+
+//-------------------------------------SETTERS-&-GETTERS-------------------------------------//
 
 Piece* BoardGame::Getmap(int x, int y)
 {
@@ -35,6 +40,8 @@ void BoardGame::SetimgBoard(BITMAP* val)
 {
     m_imgBoard = val;
 }
+
+//------------------------------------------METHODS------------------------------------------//
 
 void BoardGame::display(BITMAP* buffer, int disp_mod)
 {

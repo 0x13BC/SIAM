@@ -1,5 +1,7 @@
 #include "Piece.hpp"
 
+//----------------------------------------CTOR-&-DTOR----------------------------------------//
+
 Piece::Piece(BITMAP* image, unsigned short team, int strength)
 : m_imgPiece(image), m_strength(strength)
 {
@@ -24,6 +26,7 @@ Piece::Piece(const Piece& other)
     m_y=other.m_y;
 }
 
+//-------------------------------------SETTERS-&-GETTERS-------------------------------------//
 
 unsigned short Piece::Getx()
 {
@@ -59,3 +62,5 @@ void Piece::SetimgPiece(BITMAP* val)
 {
     m_imgPiece = val;
 }
+
+//------------------------------------------METHODS------------------------------------------//

@@ -5,17 +5,31 @@
 
 class Pawn :  public Piece
 {
+    private:
+
+        // ATTRIBUTES
+
+        char m_Orientation;
+
     public:
+
+        //CTOR & DTOR
+
         Pawn(BITMAP* image, unsigned short team);
         ~Pawn();
         Pawn(const Pawn& other);
+
+        //SETTERS & GETTERS
+
         char GetOrientation();
         void SetOrientation(char val);
-        void display(BITMAP* dest, int disp_mode, Console* ecran);
-        void push();
 
-    private:
-        char m_Orientation;
+        //METHODS
+
+        void display(BITMAP* dest, int disp_mode, Console* ecran);
+        bool push(char direction,char order);
+
+
 };
 
 #endif // PAWN_HPP

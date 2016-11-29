@@ -6,11 +6,23 @@
 
 class Mountain : virtual public Piece
 {
+
+    private:
+
+    protected:
+
     public:
+
+        //CTOR & DTOR
+
         Mountain(BITMAP* img);
         ~Mountain();
-    protected:
-    private:
+
+        //SETTERS & GETTERS
+
+        //METHODS
+
+
 };
 
 #endif // MOUNTAIN_HPP
