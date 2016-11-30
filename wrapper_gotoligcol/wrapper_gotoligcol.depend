@@ -11,3 +11,15 @@
 	<conio.h>
 	<windows.h>
 
+1480383996 source:c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\wrapper_gotoligcol\console.cpp
+	"console.h"
+	<conio.h>
+	<windows.h>
+
+1480380902 c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\wrapper_gotoligcol\console.h
+	<iostream>
+
+1480454449 source:c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\wrapper_gotoligcol\main.cpp
+	<iostream>
+	"console.h"
+

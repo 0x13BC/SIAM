@@ -88,7 +88,7 @@ int main()
     // Affichage avec gotoligcol et couleur
     pConsole->gotoLigCol(5, 10);
     pConsole->setColor(COLOR_GREEN);
-    std::cout << "Hello World !" <<3/2<<" "<<5/2<<" "<<5/3<< std::endl;
+    std::cout << "Hello World !" << std::endl;
     pConsole->setColor(COLOR_DEFAULT);
 
     DamierCaseV2(pConsole);

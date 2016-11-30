@@ -59,3 +59,8 @@ void Game::start()
     return win_display(win);
 
 }
+
+void Game::test()
+{
+    m_BG.boardCons(m_ecran);
+}

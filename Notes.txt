@@ -1,0 +1,8 @@
+Faire des formes sur le terminal:
+\x"Hexa"
+
+https://en.wikipedia.org/wiki/Box-drawing_character
+https://fr.wikipedia.org/wiki/Page_de_code_437
+https://en.wikipedia.org/wiki/List_of_Unicode_characters
+https://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references
+https://fr.wikipedia.org/wiki/Table_des_caract%C3%A8res_Unicode_(0000-0FFF)

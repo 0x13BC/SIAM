@@ -8,7 +8,10 @@ int main()
     install_mouse();
     install_keyboard();
     set_gfx_mode(GFX_AUTODETECT_WINDOWED, 400, 600,0,0);
-    Game jeu();
+    Console*pEcran=NULL;
+    pEcran = Console::getInstance();
+    Game jeu(pEcran);
+    jeu.test();
     //jeu.start();
     return 0;
 } END_OF_MAIN();

@@ -97,6 +97,9 @@ void Console::setColor(Color col)
         case COLOR_PURPLE:
             this->_setColor(5, 0);
             break;
+        case COLOR_NDEFAULT:
+            this->_setColor(0,15);
+            break;
         default:
             this->_setColor(7, 0);
     }

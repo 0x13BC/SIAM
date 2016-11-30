@@ -1,13 +1,13 @@
 # depslib dependency file v1.0
-1480385539 source:c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v1_siam_pascal_gerondeau\main.cpp
+1480457782 source:c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v1_siam_pascal_gerondeau\main.cpp
 	<iostream>
 	"main.hpp"
 
-1480448001 source:c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v1_siam_pascal_gerondeau\src\boardgame.cpp
+1480462390 source:c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v1_siam_pascal_gerondeau\src\boardgame.cpp
 	"BoardGame.hpp"
 	"General.h"
 
-1480447074 c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v1_siam_pascal_gerondeau\include\boardgame.hpp
+1480469733 c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v1_siam_pascal_gerondeau\include\boardgame.hpp
 	"Piece.hpp"
 	<vector>
 
@@ -18,10 +18,10 @@
 	"General.h"
 	"Console.h"
 
-1480447487 source:c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v1_siam_pascal_gerondeau\src\game.cpp
+1480457491 source:c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v1_siam_pascal_gerondeau\src\game.cpp
 	"Game.hpp"
 
-1480447078 c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v1_siam_pascal_gerondeau\include\game.hpp
+1480457355 c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v1_siam_pascal_gerondeau\include\game.hpp
 	"BoardGame.hpp"
 	"Console.h"
 	"Player.hpp"
@@ -104,19 +104,19 @@
 	<allegro.h>
 	<iostream>
 
-1480373981 source:c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v1_siam_pascal_gerondeau\src\console.cpp
+1480457936 source:c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v1_siam_pascal_gerondeau\src\console.cpp
 	"console.h"
 	<conio.h>
 	<windows.h>
 
-1480373981 c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v1_siam_pascal_gerondeau\include\console.h
+1480458173 c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v1_siam_pascal_gerondeau\include\console.h
 	<iostream>
 
 1480373981 c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v1_siam_pascal_gerondeau\include\general.h
 	<allegro.h>
 	<iostream>
 
-1479733093 c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v1_siam_pascal_gerondeau\main.hpp
+1480457847 c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v1_siam_pascal_gerondeau\main.hpp
 	<allegro.h>
 	"include\Player.hpp"
 	"include\Mountain.hpp"
@@ -127,4 +127,7 @@
 	<ctime>
 	"Pawn.hpp"
 	"BoardGame.hpp"
+
+1480451562 source:c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v1_siam_pascal_gerondeau\src\player.cpp
+	"Player.hpp"
 

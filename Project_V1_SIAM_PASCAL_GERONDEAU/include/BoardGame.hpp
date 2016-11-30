@@ -2,6 +2,12 @@
 #define BOARDGAME_HPP
 #include "Piece.hpp"
 #include <vector>
+
+#define NTAILLE 5
+#define MULTIPLICATOR 3
+#define MARGINBOARDX 10
+#define MARGINBOARDY 10
+
 using namespace std ;
 
 class BoardGame
@@ -9,7 +15,7 @@ class BoardGame
     private:
         // ATTRIBUTES
         vector< vector<Piece*> > m_map;
-        unsigned int m_nTaille;
+        int m_nTaille;
         BITMAP* m_imgBoard;
 
     protected:
@@ -33,6 +39,7 @@ class BoardGame
         //METHODS
 
         void display(BITMAP* buffer, int disp_mod);
+        int boardCons(Console*pConsole);
 
 
 };
