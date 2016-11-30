@@ -1,7 +1,9 @@
 #ifndef PAWN_HPP
 #define PAWN_HPP
 
-#include "Piece.hpp"
+#include "BoardGame.hpp"
+
+
 
 class Pawn :  public Piece
 {
@@ -27,7 +29,7 @@ class Pawn :  public Piece
         //METHODS
 
         void display(BITMAP* dest, int disp_mode, Console* ecran);
-        bool push(char direction,char order);
+        bool push(BoardGame& board,char direction,char order);
 
 
 };

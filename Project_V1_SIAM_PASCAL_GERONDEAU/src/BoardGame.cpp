@@ -58,12 +58,12 @@ int BoardGame::boardCons(Console*pConsole)
     for(int i=0; i<NTAILLE*MULTIPLICATOR; i++)
     {
 
-        pConsole->setColor(COLOR_BLACK);
+        pConsole->setColor(COLOR_BLUE);
         if(!(i%MULTIPLICATOR))
         {
             pConsole->gotoLigCol(i+test+MARGINBOARDY,MARGINBOARDX);
-            for(int k=0; k<NTAILLE*MULTIPLICATOR; k++)std::cout<<"--";
-            for(int k=0; k<=NTAILLE; k++)std::cout<<"-";
+            for(int k=0; k<NTAILLE*MULTIPLICATOR; k++)std::cout<<"\xC4\xC4";
+            for(int k=0; k<=NTAILLE; k++)std::cout<<"\xC4";
             test++;
             //std::cout<<std::endl;
         }
@@ -71,7 +71,7 @@ int BoardGame::boardCons(Console*pConsole)
         for(int j=0; j<NTAILLE*MULTIPLICATOR; j++)
         {
 
-            if(!(j%MULTIPLICATOR))std::cout<<"|";
+            if(!(j%MULTIPLICATOR))std::cout<<"\xBA";
 
             pConsole->setColor(COLOR_NDEFAULT);
             if((i==MULTIPLICATOR/2+MULTIPLICATOR*(i/MULTIPLICATOR))
@@ -82,16 +82,33 @@ int BoardGame::boardCons(Console*pConsole)
 
             }
             else std::cout<<"  ";
-            pConsole->setColor(COLOR_BLACK);
+            pConsole->setColor(COLOR_BLUE);
 
         }
         y++;
-        std::cout<<"|"/*<<std::endl*/;
+        std::cout<<"\xB3"/*<<std::endl*/;
     }
     pConsole->gotoLigCol(MARGINBOARDY+test+NTAILLE*MULTIPLICATOR,MARGINBOARDX);
-    for(int k=0; k<NTAILLE*MULTIPLICATOR; k++)std::cout<<"--";
-    for(int k=0; k<=NTAILLE; k++)std::cout<<"-";
+    for(int k=0; k<NTAILLE*MULTIPLICATOR; k++)std::cout<<"\xC4\xC4";
+    for(int k=0; k<=NTAILLE; k++)std::cout<<"\xC4";
     std::cout<<std::endl;
     pConsole->setColor(COLOR_DEFAULT);
+
     return 0;
 }
+
+int BoardGame::stockCons(Console*pConsole,int x0, int y0)
+{
+    int xsave=1;
+    pConsole->gotoLigCol(x0,y0);
+    std::cout<<"\xC4\xC4\xC4";
+    for(int i=0;i<5;i++)
+    {
+        pConsole->gotoLigCol(x0+xsave,y0);
+        std::cout<<"\xB3"<<"P"<<"\xB3";
+        xsave++;
+    }
+
+    return 0;
+}
+

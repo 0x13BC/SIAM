@@ -3,22 +3,22 @@
 	<iostream>
 	"main.hpp"
 
-1480462390 source:c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v1_siam_pascal_gerondeau\src\boardgame.cpp
+1480504974 source:c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v1_siam_pascal_gerondeau\src\boardgame.cpp
 	"BoardGame.hpp"
 	"General.h"
 
-1480469733 c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v1_siam_pascal_gerondeau\include\boardgame.hpp
+1480507004 c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v1_siam_pascal_gerondeau\include\boardgame.hpp
 	"Piece.hpp"
 	<vector>
 
-1480451019 c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v1_siam_pascal_gerondeau\include\pawn.hpp
-	"Piece.hpp"
+1480506605 c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v1_siam_pascal_gerondeau\include\pawn.hpp
+	"BoardGame.hpp"
 
-1480451029 c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v1_siam_pascal_gerondeau\include\piece.hpp
+1480506630 c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v1_siam_pascal_gerondeau\include\piece.hpp
 	"General.h"
 	"Console.h"
 
-1480457491 source:c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v1_siam_pascal_gerondeau\src\game.cpp
+1480507061 source:c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v1_siam_pascal_gerondeau\src\game.cpp
 	"Game.hpp"
 
 1480457355 c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v1_siam_pascal_gerondeau\include\game.hpp
@@ -35,7 +35,7 @@
 1480447346 source:c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v1_siam_pascal_gerondeau\src\piece.cpp
 	"Piece.hpp"
 
-1480451010 source:c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v1_siam_pascal_gerondeau\src\pawn.cpp
+1480506339 source:c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v1_siam_pascal_gerondeau\src\pawn.cpp
 	"Pawn.hpp"
 
 1479732479 source:c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\main.cpp
@@ -128,6 +128,6 @@
 	"Pawn.hpp"
 	"BoardGame.hpp"
 
-1480451562 source:c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v1_siam_pascal_gerondeau\src\player.cpp
+1480507134 source:c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v1_siam_pascal_gerondeau\src\player.cpp
 	"Player.hpp"
 

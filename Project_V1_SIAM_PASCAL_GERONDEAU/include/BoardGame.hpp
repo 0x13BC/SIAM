@@ -8,13 +8,12 @@
 #define MARGINBOARDX 10
 #define MARGINBOARDY 10
 
-using namespace std ;
 
 class BoardGame
 {
     private:
         // ATTRIBUTES
-        vector< vector<Piece*> > m_map;
+        std::vector< std::vector<Piece*> > m_map;
         int m_nTaille;
         BITMAP* m_imgBoard;
 
@@ -40,6 +39,7 @@ class BoardGame
 
         void display(BITMAP* buffer, int disp_mod);
         int boardCons(Console*pConsole);
+        int stockCons(Console*pConsole,int x0,int y0);
 
 
 };

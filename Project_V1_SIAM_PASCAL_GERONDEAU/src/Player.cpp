@@ -143,7 +143,7 @@
                             {
                             case '\r':
                                 if(!select && auth_check(x,y, board)) select=1;
-                                else if(board.Getmap(x,y)->push(/*board,*/ direction, order))test=0; /// CANNOT PUT BOARD IN PIECE CAUSE CALL LOOP
+                                else if(board.Getmap(x,y)->push(board, direction, order))test=0; /// CANNOT PUT BOARD IN PIECE CAUSE CALL LOOP
                                 else
                                 {
                                     ecran->gotoLigCol(DECALAGE_X_TEXT, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);

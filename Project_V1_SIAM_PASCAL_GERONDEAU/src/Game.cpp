@@ -36,7 +36,7 @@ void Game::win_display(int winner)
     {
         m_ecran->setColor(COLOR_GREEN);
         // m_ecran->gotoligcol(milieu_x-taille_msg/2, milieu_y);
-        cout<< (winner==1 ? "Les rhinoceros": "Les elephants") << " gagnent !" << endl;
+        std::cout<< (winner==1 ? "Les rhinoceros": "Les elephants") << " gagnent !" << std::endl;
     }
 }
 void Game::start()
@@ -62,5 +62,6 @@ void Game::start()
 
 void Game::test()
 {
+    m_BG.stockCons(m_ecran,0,0);
     m_BG.boardCons(m_ecran);
 }

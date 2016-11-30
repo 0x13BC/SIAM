@@ -39,7 +39,7 @@ void Pawn::display(BITMAP* dest, int disp_mode, Console* ecran)
     (void)ecran;
 }
 
-bool Pawn::push(char direction,char order)
+bool Pawn::push(BoardGame& board,char direction,char order)
 {
         (void)direction;
         (void)order;

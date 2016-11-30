@@ -1,8 +1,10 @@
 #ifndef PIECE_HPP
 #define PIECE_HPP
+
 #include "General.h"
 #include "Console.h"
 
+class BoardGame;
 
 class Piece
 {
@@ -41,7 +43,7 @@ class Piece
         //METHODS
 
         virtual void display(BITMAP* dest, int disp_mod, Console* ecran)=0;
-        virtual bool push(char direction,char order)=0;
+        virtual bool push(BoardGame& board,char direction,char order)=0;
 
 };
 
