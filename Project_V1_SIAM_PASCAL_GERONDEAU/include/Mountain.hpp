@@ -21,6 +21,10 @@ class Mountain : virtual public Piece
         //SETTERS & GETTERS
 
         //METHODS
+        std::string Getstring();
+        void display(BITMAP* dest, int disp_mod, Console* ecran);
+        bool push(BoardGame& board,char direction,char order);
+
 
 
 };

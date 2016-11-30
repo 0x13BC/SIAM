@@ -30,6 +30,7 @@ class Pawn :  public Piece
 
         void display(BITMAP* dest, int disp_mode, Console* ecran);
         bool push(BoardGame& board,char direction,char order);
+        std::string Getstring();
 
 
 };

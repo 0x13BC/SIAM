@@ -28,6 +28,23 @@ void Pawn::SetOrientation(char val)
 }
 
 
+string Pawn::Getstring()
+{
+    string of_the_jedi="";
+    of_the_jedi+= (m_team ? (m_team==1 ? "R" : "E") : "M");
+    switch(m_Orientation)
+    {
+        case 1: of_the_jedi+= "d";
+        break;
+        case 2: of_the_jedi+= "b";
+        break;
+        case -1: of_the_jedi+= "g";
+        break;
+        case -2: of_the_jedi+= "h";
+        break;
+    }
+    return of_the_jedi; //Because I can
+}
 
 void Pawn::display(BITMAP* dest, int disp_mode, Console* ecran)
 {

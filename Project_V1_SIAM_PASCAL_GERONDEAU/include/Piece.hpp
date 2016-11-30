@@ -41,7 +41,7 @@ class Piece
         void SetimgPiece(BITMAP* val);
 
         //METHODS
-
+        virtual std::string Getstring()=0;
         virtual void display(BITMAP* dest, int disp_mod, Console* ecran)=0;
         virtual bool push(BoardGame& board,char direction,char order)=0;
 

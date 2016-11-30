@@ -41,6 +41,11 @@ void BoardGame::SetimgBoard(BITMAP* val)
     m_imgBoard = val;
 }
 
+void BoardGame::Setmap(int x, int y, Piece* pt)
+{
+    if(x>=0 && y>=0 && x<MAP_SIZEX && y<MAP_SIZEY) m_map[x][y]=pt;
+}
+
 //------------------------------------------METHODS------------------------------------------//
 
 void BoardGame::display(BITMAP* buffer, int disp_mod)
@@ -48,6 +53,7 @@ void BoardGame::display(BITMAP* buffer, int disp_mod)
     (void)buffer;
     (void)disp_mod;
 }
+
 
 int BoardGame::boardCons(Console*pConsole)
 {
@@ -77,7 +83,7 @@ int BoardGame::boardCons(Console*pConsole)
             if((i==MULTIPLICATOR/2+MULTIPLICATOR*(i/MULTIPLICATOR))
                     &&(j==(MULTIPLICATOR/2)+MULTIPLICATOR*(j/MULTIPLICATOR)))
             {
-                std::cout<<"LL"; ///PUT BOARD[x][y] HERE!!!
+                std::cout<<Getmap(x,y)->Getstring(); ///PUT BOARD[x][y] HERE!!!
                 x++;
 
             }

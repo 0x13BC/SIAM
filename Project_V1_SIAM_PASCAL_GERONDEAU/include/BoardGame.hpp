@@ -34,6 +34,7 @@ class BoardGame
         void SetnTaille(unsigned int val);
         BITMAP* GetimgBoard();
         void SetimgBoard(BITMAP* val);
+        void Setmap(int x, int y, Piece* pt);
 
         //METHODS
 
