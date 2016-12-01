@@ -2,7 +2,7 @@
 #define PAWN_HPP
 
 #include "BoardGame.hpp"
-
+class Player;
 
 
 class Pawn :  public Piece
@@ -12,12 +12,13 @@ class Pawn :  public Piece
         // ATTRIBUTES
 
         char m_Orientation;
+        Player* m_wielder;
 
     public:
 
         //CTOR & DTOR
 
-        Pawn(BITMAP* image, unsigned short team);
+        Pawn(BITMAP* image, unsigned short team, Player* wielder);
         ~Pawn();
         Pawn(const Pawn& other);
 

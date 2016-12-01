@@ -1,8 +1,7 @@
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
+#include "General.h"
 
-#include <stack>
-#include <ctime>
 #include "Pawn.hpp"
 #include "BoardGame.hpp"
 
