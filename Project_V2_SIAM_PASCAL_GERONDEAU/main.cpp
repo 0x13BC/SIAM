@@ -17,8 +17,6 @@ int main()
     pEcran = Console::getInstance();
     Game jeu(pEcran);
 
-system ( "color 20" );
-
     int choice=0;
         do
         {
