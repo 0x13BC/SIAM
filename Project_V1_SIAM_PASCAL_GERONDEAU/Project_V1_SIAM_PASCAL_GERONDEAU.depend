@@ -141,7 +141,7 @@
 	"include\Mountain.hpp"
 	"include\Game.hpp"
 
-1480589439 c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\project_v1_siam_pascal_gerondeau\include\player.hpp
+1480612413 c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\project_v1_siam_pascal_gerondeau\include\player.hpp
 	"General.h"
 	"Pawn.hpp"
 	"BoardGame.hpp"
@@ -185,7 +185,7 @@
 1480517026 source:c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\project_v1_siam_pascal_gerondeau\src\piece.cpp
 	"Piece.hpp"
 
-1480553971 source:c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\project_v1_siam_pascal_gerondeau\src\player.cpp
+1480612495 source:c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\project_v1_siam_pascal_gerondeau\src\player.cpp
 	"Player.hpp"
 
 1480554393 source:c:\users\gerondeau\documents\ing2\projet info 1\project_v1_siam_pascal_gerondeau\project_v1_siam_pascal_gerondeau\src\boardgame.cpp

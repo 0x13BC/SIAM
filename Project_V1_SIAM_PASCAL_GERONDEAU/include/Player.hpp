@@ -17,7 +17,7 @@ class Player
 
         unsigned int m_nbrOut;
         std::stack <Pawn*> m_stockPiece;
-        void turnPiece(BoardGame& board, int x, int y, Console* ecran);
+        void turnPiece(Piece* pion, Console* ecran);
 
     protected:
 
