@@ -6,3 +6,15 @@ https://fr.wikipedia.org/wiki/Page_de_code_437
 https://en.wikipedia.org/wiki/List_of_Unicode_characters
 https://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references
 https://fr.wikipedia.org/wiki/Table_des_caract%C3%A8res_Unicode_(0000-0FFF)
+
+
+    0 = Noir        8 = Gris
+    1 = Bleu        9 = Bleu clair
+    2 = Vert        A = Vert clair
+    3 = Bleu-gris        B = Cyan
+    4 = Rouge      C = Rouge clair
+    5 = Violet     D = Violet clair
+    6 = Jaune        E = Jaune clair
+    7 = Blanc       F = Blanc brillant
+
+system("color BT") B:background T:Texte
