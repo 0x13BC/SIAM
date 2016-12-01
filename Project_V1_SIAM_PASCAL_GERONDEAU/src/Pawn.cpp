@@ -88,6 +88,7 @@ int Pawn::push(BoardGame& board,char direction,char order, int power_sum)
                 else
                 {
                     m_wielder->AddstockPiece(this);
+                    m_state=false;
                     return 1;
                 }
             }
