@@ -1,0 +1,69 @@
+# depslib dependency file v1.0
+1480612494 source:c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v2_siam_pascal_gerondeau\main.cpp
+	<iostream>
+	"main.hpp"
+	<conio.h>
+	<iostream>
+
+1480610985 c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v2_siam_pascal_gerondeau\main.hpp
+	<allegro.h>
+	"include\Player.hpp"
+	"include\Mountain.hpp"
+	"include\Game.hpp"
+
+1480451231 c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v2_siam_pascal_gerondeau\include\player.hpp
+	<stack>
+	<ctime>
+	"Pawn.hpp"
+	"BoardGame.hpp"
+
+1480603145 c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v2_siam_pascal_gerondeau\include\pawn.hpp
+	"BoardGame.hpp"
+
+1480608764 c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v2_siam_pascal_gerondeau\include\boardgame.hpp
+	"Piece.hpp"
+	<vector>
+
+1480603145 c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v2_siam_pascal_gerondeau\include\piece.hpp
+	"General.h"
+	"Console.h"
+
+1480373981 c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v2_siam_pascal_gerondeau\include\general.h
+	<allegro.h>
+	<iostream>
+
+1480458173 c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v2_siam_pascal_gerondeau\include\console.h
+	<iostream>
+
+1480603145 c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v2_siam_pascal_gerondeau\include\mountain.hpp
+	"Piece.hpp"
+
+1480457355 c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v2_siam_pascal_gerondeau\include\game.hpp
+	"BoardGame.hpp"
+	"Console.h"
+	"Player.hpp"
+
+1480614628 source:c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v2_siam_pascal_gerondeau\src\boardgame.cpp
+	"BoardGame.hpp"
+	"General.h"
+
+1480610976 source:c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v2_siam_pascal_gerondeau\src\console.cpp
+	"console.h"
+	<conio.h>
+	<windows.h>
+
+1480615286 source:c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v2_siam_pascal_gerondeau\src\game.cpp
+	"Game.hpp"
+
+1480605921 source:c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v2_siam_pascal_gerondeau\src\mountain.cpp
+	"Mountain.hpp"
+
+1480615461 source:c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v2_siam_pascal_gerondeau\src\pawn.cpp
+	"Pawn.hpp"
+
+1480447346 source:c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v2_siam_pascal_gerondeau\src\piece.cpp
+	"Piece.hpp"
+
+1480507134 source:c:\users\paul\documents\ing2.2\informatique\c++\projet\siam\project_v2_siam_pascal_gerondeau\src\player.cpp
+	"Player.hpp"
+
