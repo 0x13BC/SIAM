@@ -24,12 +24,12 @@ class Pawn :  public Piece
         //SETTERS & GETTERS
 
         char GetOrientation();
-        void SetOrientation(char val);
+        void SetOrientation(int val);
 
         //METHODS
 
         void display(BITMAP* dest, int disp_mode, Console* ecran);
-        bool push(BoardGame& board,char direction,char order);
+        int push(BoardGame& board,char direction,char order, int power_sum);
         std::string Getstring();
 
 

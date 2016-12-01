@@ -31,8 +31,15 @@ void Mountain::display(BITMAP* dest, int disp_mod, Console* ecran)
 {
 
 }
-bool Mountain::push(BoardGame& board,char direction,char order)
-{
-    m_x+= (direction==1 || direction==-1 ? (m_x+direction<MAP_SIZEX && m_x+direction>=0 ? direction : 0): 0);
-    m_y+= (direction==2 || direction==-2 ? (m_y+(direction/ABS(direction))<MAP_SIZEY && m_x+(direction/ABS(direction))>=0 ? direction : 0): 0)
+int Mountain::push(BoardGame& board,char direction,char order, int power_sum)
+{ ///FAUX A REFAIRE Cf RECURSIVITE PAWN.PUSH()
+    int x=m_x, y=m_y;
+    m_x+= (direction==1 || direction==-1 ? direction : 0);
+    m_y+= (direction==2 || direction==-2 ? direction/ABS(direction) : 0);
+    if(m_x<0 || m_y<0 || m_y>=MAP_SIZEY || m_x>=MAP_SIZEX) return true;
+    else
+    {
+        board.Setmap(m_x,m_y, this);
+        board.Setmap(x,y,NULL);
+    }
 }
