@@ -1,8 +1,7 @@
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
+#include "General.h"
 
-#include <stack>
-#include <ctime>
 #include "Pawn.hpp"
 #include "BoardGame.hpp"
 
@@ -18,7 +17,7 @@ class Player
 
         unsigned int m_nbrOut;
         std::stack <Pawn*> m_stockPiece;
-
+        void turnPiece(Piece* pion, Console* ecran);
 
     protected:
 

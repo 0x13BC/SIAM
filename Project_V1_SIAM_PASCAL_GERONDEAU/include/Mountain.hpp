@@ -1,7 +1,7 @@
 #ifndef MOUNTAIN_HPP
 #define MOUNTAIN_HPP
 
-#include "Piece.hpp"
+#include "BoardGame.hpp"
 
 
 class Mountain : virtual public Piece
@@ -23,7 +23,8 @@ class Mountain : virtual public Piece
         //METHODS
         std::string Getstring();
         void display(BITMAP* dest, int disp_mod, Console* ecran);
-        bool push(BoardGame& board,char direction,char order);
+        int push(BoardGame& board,char direction,char order, int power_sum);
+        void SetOrientation(int x){} //Unused virtual function
 
 
 

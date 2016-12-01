@@ -1,6 +1,7 @@
 #include "BoardGame.hpp"
 #include "General.h"
-
+#define MAP_SIZEX 5
+#define MAP_SIZEY 5
 //----------------------------------------CTOR-&-DTOR----------------------------------------//
 
 BoardGame::BoardGame()
