@@ -161,7 +161,7 @@ int Player::Play_console(BoardGame& board, Console* ecran)
 //----------------------------------------------------WHILE TEST BOUCLE DE SELECTION DE CASE--------------------------------------------
             while(test)
             {
-                ecran->gotoLigCol(DECALAGE_X_TEXT+5*x, DECALAGE_Y_TEXT+y);
+                ecran->gotoLigCol( DECALAGE_Y_TEXT+y,DECALAGE_X_TEXT+5*x);
                 if(test2)
                 {
                     if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
@@ -207,10 +207,10 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                         if(x>0 && !select) x--;
                         break;
                     case 's':
-                        if (y<BOARD_HEIGHT && !select) y++;
+                        if (y+1<BOARD_HEIGHT && !select) y++;
                         break;
                     case 'd':
-                        if(x<BOARD_WIDTH && !select) x++;
+                        if(x+1<BOARD_WIDTH && !select) x++;
                         break;
                     case ' ':
                         if(select) order = (order ?  0 : 1);
@@ -218,7 +218,7 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                     }
                     if (select) direction=(touche != ' ' && touche!= 27 && touche != '\r' ? touche : direction);
                     ecran->gotoLigCol(DECALAGE_X_TEXT, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
-                    cout<< (char)(y+'A'-1) << x;
+                    cout<< (char)(y+'A') << x;
                     if(select)
                     {
                         ecran->gotoLigCol(DECALAGE_X_TEXT, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN+1);
@@ -254,11 +254,12 @@ int Player::Play_console(BoardGame& board, Console* ecran)
             time_t t=time(NULL);
             while(!test)
             {
-                ecran->gotoLigCol(DECALAGE_X_TEXT+5*x, DECALAGE_Y_TEXT+y);
+
+                ecran->gotoLigCol(DECALAGE_Y_TEXT+y,DECALAGE_X_TEXT+5*x);
                 if(test2)
                 {
                     if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
-                    else cout << x<<y<<difftime(time(NULL),t)-(int)difftime(time(NULL),t);
+                    else cout <<"00";
                 }
                 else cout<< "  ";
                 if(difftime(time(NULL),t) >= 0.2)
@@ -326,10 +327,10 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                     if(x>0 && (y==0 || y==BOARD_HEIGHT-1) && !select) x--;
                     break;
                 case 's':
-                    if (y<BOARD_HEIGHT && (x==0 || x==BOARD_WIDTH-1) && !select) y++;
+                    if (y+1<BOARD_HEIGHT && (x==0 || x==BOARD_WIDTH-1) && !select) y++;
                     break;
                 case 'd':
-                    if(x<BOARD_WIDTH &&(y==0 || y==BOARD_HEIGHT-1) && !select) x++;
+                    if(x+1<BOARD_WIDTH &&(y==0 || y==BOARD_HEIGHT-1) && !select) x++;
                     break;
                 }
             }

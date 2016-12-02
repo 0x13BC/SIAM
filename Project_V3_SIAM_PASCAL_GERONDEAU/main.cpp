@@ -44,8 +44,8 @@ int main()
 
                 system("cls");
 
-                jeu.test();
-                //jeu.start();
+                //jeu.test();
+                jeu.start();
 
             break;
             case 3:
