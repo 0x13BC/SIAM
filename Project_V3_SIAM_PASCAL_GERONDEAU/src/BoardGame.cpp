@@ -6,6 +6,8 @@
 BoardGame::BoardGame()
     :m_map(std::vector < std::vector<Piece*> >(5,std::vector<Piece*>(5,NULL)))
 {
+    for(int i=1;i<4;i++)
+        m_map[i][2]= new Mountain(NULL);
     //ctor
     std::cout<<"ctor BoardGame();Map size: "<< m_map.size()<<std::endl;
 }

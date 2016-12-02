@@ -1,0 +1,13 @@
+Ci-dessus, un wrapper permettant d'encapsuler les fonctions de la librairie conio.h du C.
+
+Vu qu'il n'y a pas d'équivalent en C++ pour cette librairie, voilà le code qui contient deux fichiers "console.cpp" et "console.h" à copier dans vos projets CodeBlocks. Un main est aussi présent pour vous montrer comment utiliser les fonctions.
+
+Méthodes présentes dans la classe Console :
+
+Console::gotoligcol => équivalent du gotoligcol du C
+Console::isKeyboardPressed => équivalent du kbhit du C
+Console::getInputKey => équivalent du getch du C
+Console::setColor => pour mettre des couleurs dans la console :)
+
+
+GetCursorPos permet d'avoir les coordonnées de la souris

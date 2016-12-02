@@ -3,6 +3,16 @@
 
 using namespace std;
 
+void getCursorXY(int &x, int&y) {
+
+		CONSOLE_SCREEN_BUFFER_INFO csbi;
+
+		if (GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi)) {
+			x = csbi.dwCursorPosition.X;
+			y = csbi.dwCursorPosition.Y;
+		}
+}
+
 int main()
 {
     allegro_init();
@@ -12,6 +22,8 @@ int main()
     Console*pEcran=NULL;
     pEcran = Console::getInstance();
     Game jeu(pEcran);
+    POINT lol;
+    int x,y;
 
     system("color 20");
 
@@ -21,6 +33,7 @@ int main()
             cout<<"Enter your choice:"<<endl
                  <<"                    (1).Jouer."<<endl
                  <<"                    (2).Option."<<endl
+                 <<"                    (3).Test curseur."<<endl
                  <<"                    (0).Quit."<<endl
                  <<"Choice:";
             cin>>choice;
@@ -35,8 +48,13 @@ int main()
                 //jeu.start();
 
             break;
-            case 2:
+            case 3:
+                GetCursorPos(&lol);
+                pEcran->gotoLigCol(10,0);
+                getCursorXY(x,y);
+                std::cout<<lol.x<<" "<<lol.y<<std::endl;
 
+                std::cout<<x<<" "<<y;
             break;
             case 0:
                 cout<<"Quit..."<<endl;

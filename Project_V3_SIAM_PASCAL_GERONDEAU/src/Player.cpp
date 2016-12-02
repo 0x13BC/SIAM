@@ -40,6 +40,7 @@ void Player::SetnbrOut(unsigned int val)
 }
 int Player::GetstockPiece()
 {
+    cout<<m_stockPiece.size();
     return m_stockPiece.size();
 }
 void Player::AddstockPiece(Pawn* val)
@@ -164,7 +165,7 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                 if(test2)
                 {
                     if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
-                    else cout << "OO";
+                    else cout << "00";
                 }
                 else cout<< "  ";
                 if(ecran->isKeyboardPressed())
@@ -239,7 +240,11 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                         }
 
                     }
-                    if(difftime(time(NULL),t)-(int)difftime(time(NULL),t) <= 0.1) test2= (test2 ? 0 : 1);
+                    if(difftime(time(NULL),t) >= 0.2)
+                    {
+                        test2= (test2 ? 0 : 1);
+                        t=time(NULL);
+                    }
                 }
 
             }
@@ -253,10 +258,14 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                 if(test2)
                 {
                     if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
-                    else cout << "OO";
+                    else cout << x<<y<<difftime(time(NULL),t)-(int)difftime(time(NULL),t);
                 }
                 else cout<< "  ";
-                if(difftime(time(NULL),t)-(int)difftime(time(NULL),t) <= 0.1) test2= (test2 ? 0 : 1);
+                if(difftime(time(NULL),t) >= 0.2)
+                {
+                    test2= (test2 ? 0 : 1);
+                    t=time(NULL);
+                }
 
                 if(ecran->isKeyboardPressed())
                 {

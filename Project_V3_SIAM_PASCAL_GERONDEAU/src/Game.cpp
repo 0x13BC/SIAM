@@ -3,7 +3,7 @@
 //----------------------------------------CTOR-&-DTOR----------------------------------------//
 
 Game::Game(Console* ecran)
-: m_ecran(ecran)
+: m_ecran(ecran),m_displayMod(0)
 {
     //ctor
 }
@@ -45,6 +45,7 @@ void Game::start()
 
     Player rhino(1);
     Player elephant(2);
+    //m_BG.boardCons(m_ecran);
 
 
     int win=0;
@@ -64,8 +65,9 @@ void Game::test()
 {
     Pawn chocolate(NULL,1,NULL);
     Mountain vanilla(NULL);
-    m_BG.Setmap(1,2,&chocolate);
+    m_BG.Setmap(0,0,&chocolate);
     m_BG.Setmap(3,4,&vanilla);
+
     m_BG.stockCons(m_ecran,10,6);
     m_BG.stockCons(m_ecran,10,46);
     m_BG.boardCons(m_ecran);
