@@ -1,7 +1,7 @@
 #include "Player.hpp"
 #define NB_PIONS_PLAYER 5
 #define DECALAGE_X_TEXT 10
-#define DECALAGE_Y_TEXT 3
+#define DECALAGE_Y_TEXT 10
 #define BOARD_HEIGHT 5
 #define BOARD_WIDTH  5
 #define MARGIN 2
@@ -81,7 +81,7 @@ void Player::put(unsigned int dispMod, BoardGame& board)
     int y=0;
     if(board.Getmap(x,y)== NULLVOID)
     {
-        board.Addmap(GivePawn(),x,y);
+        board.Setmap(x,y,GivePawn());
     }
     (void)dispMod;
 }

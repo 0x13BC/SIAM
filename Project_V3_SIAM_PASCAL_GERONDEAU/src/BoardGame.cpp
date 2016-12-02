@@ -24,10 +24,7 @@ Piece* BoardGame::Getmap(int x, int y)
     if(x<m_nTaille && x>=0 && y<m_nTaille && y>=0) return m_map[x][y];
     else return NULL;
 }
-void BoardGame::Addmap(Piece* val,int x, int y)
-{
-    if(x<m_nTaille && x>=0 && y<m_nTaille && y>=0) m_map[x][y] = val;
-}
+
 unsigned int BoardGame::GetnTaille()
 {
     return m_nTaille;
@@ -52,16 +49,43 @@ void BoardGame::Setmap(int x, int y, Piece* pt)
 
 //------------------------------------------METHODS------------------------------------------//
 
-void BoardGame::display(BITMAP* buffer, int disp_mod)
+void BoardGame::display(BITMAP* buffer, int disp_mod,Console*pEcran)
 {
+    int posx=0,posy=0;
+
     (void)buffer;
+
     (void)disp_mod;
+
+    for(int i=0;i<NTAILLE;i++)
+    {
+        for(int j=0; j<NTAILLE;j++)
+        {
+                posx=2*(MULTIPLICATOR)*i+2*(i+1)+MULTIPLICATOR/2+MARGINBOARDX;
+                posy=(MULTIPLICATOR)*j+(j+1)+MULTIPLICATOR/2+MARGINBOARDY;
+            pEcran->gotoLigCol(posy,posx);
+            if(Getmap(i,j)!=NULL)
+                std::cout<<Getmap(i,j)->Getstring(); ///PUT BOARD[x][y] HERE!!!
+                else
+                std::cout<<"00";
+        }
+    }
+    pEcran->gotoLigCol(MARGINBOARDY+5+NTAILLE*MULTIPLICATOR,MARGINBOARDX);
+
+           /* if((i==MULTIPLICATOR/2+MULTIPLICATOR*(i/MULTIPLICATOR))
+                    &&(j==(MULTIPLICATOR/2)+MULTIPLICATOR*(j/MULTIPLICATOR)))
+            {
+
+                x++;
+
+            }
+            else */
 }
 
 
 int BoardGame::boardCons(Console*pConsole)
 {
-    int test=0;
+    int shift=0;
     int x=0,y=0;
 
     pConsole->gotoLigCol(MARGINBOARDY,MARGINBOARDX);
@@ -71,30 +95,20 @@ int BoardGame::boardCons(Console*pConsole)
         pConsole->setColor(COLOR_BLUE);
         if(!(i%MULTIPLICATOR))
         {
-            pConsole->gotoLigCol(i+test+MARGINBOARDY,MARGINBOARDX);
+            pConsole->gotoLigCol(i+shift+MARGINBOARDY,MARGINBOARDX);
             for(int k=0; k<NTAILLE*MULTIPLICATOR; k++)std::cout<<"\xC4\xC4";
             for(int k=0; k<=NTAILLE; k++)std::cout<<"\xC4";
-            test++;
+            shift++;
             //std::cout<<std::endl;
         }
-        pConsole->gotoLigCol((i+test+MARGINBOARDY),MARGINBOARDX);
+        pConsole->gotoLigCol((i+shift+MARGINBOARDY),MARGINBOARDX);
         for(int j=0; j<NTAILLE*MULTIPLICATOR; j++)
         {
 
             if(!(j%MULTIPLICATOR))std::cout<<"\xBA";
 
             pConsole->setColor(COLOR_NDEFAULT);
-            if((i==MULTIPLICATOR/2+MULTIPLICATOR*(i/MULTIPLICATOR))
-                    &&(j==(MULTIPLICATOR/2)+MULTIPLICATOR*(j/MULTIPLICATOR)))
-            {
-                if(Getmap(x,y)!=NULL)
-                std::cout<<Getmap(x,y)->Getstring(); ///PUT BOARD[x][y] HERE!!!
-                else
-                std::cout<<"  ";
-                x++;
-
-            }
-            else std::cout<<"  ";
+            std::cout<<"  ";
             pConsole->setColor(COLOR_BLUE);
 
         }
@@ -103,7 +117,7 @@ int BoardGame::boardCons(Console*pConsole)
         y++;
         std::cout<<"\xBA"/*<<std::endl*/;
     }
-    pConsole->gotoLigCol(MARGINBOARDY+test+NTAILLE*MULTIPLICATOR,MARGINBOARDX);
+    pConsole->gotoLigCol(MARGINBOARDY+shift+NTAILLE*MULTIPLICATOR,MARGINBOARDX);
     for(int k=0; k<NTAILLE*MULTIPLICATOR; k++)std::cout<<"\xC4\xC4";
     for(int k=0; k<=NTAILLE; k++)std::cout<<"\xC4";
     std::cout<<std::endl;

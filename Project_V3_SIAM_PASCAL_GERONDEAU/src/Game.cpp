@@ -45,7 +45,7 @@ void Game::start()
 
     Player rhino(1);
     Player elephant(2);
-    //m_BG.boardCons(m_ecran);
+    m_BG.boardCons(m_ecran);
 
 
     int win=0;
@@ -54,7 +54,7 @@ void Game::start()
     {
         if(rhino.Play(GetdisplayMod() ,m_BG, m_ecran)) win=1;
         else if(elephant.Play(GetdisplayMod() ,m_BG, m_ecran)) win=2;
-        m_BG.display(buffer, GetdisplayMod());
+        m_BG.display(buffer, GetdisplayMod(),m_ecran);
         if(GetdisplayMod()) blit(buffer,screen,0,0,0,0, SCREEN_W, SCREEN_H);
     }
     return win_display(win);
@@ -64,11 +64,18 @@ void Game::start()
 void Game::test()
 {
     Pawn chocolate(NULL,1,NULL);
+    Pawn chocolate2(NULL,1,NULL);
+    Pawn chocolate3(NULL,1,NULL);
+    Pawn chocolate4(NULL,1,NULL);
+
     Mountain vanilla(NULL);
-    m_BG.Setmap(0,0,&chocolate);
+    m_BG.Setmap(3,0,&chocolate);
+    m_BG.Setmap(4,1,&chocolate);
+    m_BG.Setmap(2,3,&chocolate);
     m_BG.Setmap(3,4,&vanilla);
 
     m_BG.stockCons(m_ecran,10,6);
     m_BG.stockCons(m_ecran,10,46);
     m_BG.boardCons(m_ecran);
+    m_BG.display(NULL,0,m_ecran);
 }

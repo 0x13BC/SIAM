@@ -8,7 +8,7 @@
 #define MAP_SIZEX 5
 #define MAP_SIZEY 5
 
-#define MULTIPLICATOR 3
+#define MULTIPLICATOR 5
 #define MARGINBOARDX 10
 #define MARGINBOARDY 10
 
@@ -33,7 +33,6 @@ class BoardGame
         //SETTERS & GETTERS
 
         Piece* Getmap(int x, int y);
-        void Addmap( Piece* pion,int x, int y);
         unsigned int GetnTaille();
         void SetnTaille(unsigned int val);
         BITMAP* GetimgBoard();
@@ -42,7 +41,7 @@ class BoardGame
 
         //METHODS
 
-        void display(BITMAP* buffer, int disp_mod);
+        void display(BITMAP* buffer, int disp_mod,Console* pEcran);
         int boardCons(Console*pConsole);
         int stockCons(Console*pConsole,int x0,int y0);
 

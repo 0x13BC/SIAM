@@ -11,10 +11,11 @@ class Game
     private:
         // ATTRIBUTES
 
+        Console* m_ecran;
         unsigned int m_displayMod;
         BoardGame m_BG;
         BITMAP* m_board_image;
-        Console* m_ecran;
+
 
      protected:
 
