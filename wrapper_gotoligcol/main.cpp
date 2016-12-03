@@ -5,76 +5,25 @@
 #define MULTIPLICATOR 3
 
 
-
-int DamierCase(Console* pConsole)
+void homepage(int x0,int y0)
 {
-    for(int i=0; i<NTAILLE*MULTIPLICATOR; i++)
-    {
-        pConsole->setColor(COLOR_DEFAULT);
-        if(!(i%MULTIPLICATOR))
-        {
-            for(int k=0; k<NTAILLE*MULTIPLICATOR+NTAILLE; k++)std::cout<<"-";
-            std::cout<<std::endl;
-        }
-        for(int j=0; j<=NTAILLE*MULTIPLICATOR; j++)
-        {
-            if(!(j%MULTIPLICATOR))std::cout<<"|";
 
-            pConsole->setColor(COLOR_NDEFAULT);
-            std::cout<<" ";
-            pConsole->setColor(COLOR_DEFAULT);
-
-        }
+            for(int y=0;y<y0;y++){std::cout<<std::endl;}
 
 
-        std::cout<<std::endl;
-    }
-
-    return 0;
-}
-
-int DamierCaseV2(Console*pConsole)
-{
-    for(int i=0; i<NTAILLE*MULTIPLICATOR; i++)
-    {
-        pConsole->setColor(COLOR_BLUE);
-        if(!(i%MULTIPLICATOR))
-        {
-            for(int k=0; k<NTAILLE*MULTIPLICATOR; k++)std::cout<<"--";
-            for(int k=0; k<=NTAILLE; k++)std::cout<<"-";
-            std::cout<<std::endl;
-        }
-        for(int j=0; j<NTAILLE*MULTIPLICATOR; j++)
-        {
-            if(!(j%MULTIPLICATOR))std::cout<<"|";
-
-            pConsole->setColor(COLOR_NDEFAULT);
-            if((i==MULTIPLICATOR/2+MULTIPLICATOR*(i/MULTIPLICATOR))
-                    &&(j==(MULTIPLICATOR/2)+MULTIPLICATOR*(j/MULTIPLICATOR)))
-            {
-                std::cout<<"LL"; ///PUT BOARD[x][y] HERE!!!
-                //pConsole->gotoLigCol(0,0);
-                //std::cout<<NTAILLE/2;
-                //pConsole->gotoLigCol(i*MULTIPLICATOR,j*MULTIPLICATOR);
-            }
-            else std::cout<<"  ";
-            pConsole->setColor(COLOR_BLUE);
-
-        }
+            for(int x=0;x<x0;x++){std::cout<<" ";} std::cout<<"   \xDB\xDB\xDB\xDB\xDB   "<<"   \xDB\xDB\xDB\xDB\xDB\xDB  "<<"     \xDB\xDB  "<<"   \xDB       \xDB"<<std::endl;
+             for(int x=0;x<x0;x++){std::cout<<" ";}std::cout<<"\xDB\xDB         "<<"      \xDB    "<<"    \xDB\xDB\xDB  "<<"  \xDB \xDB     \xDB \xDB"<<std::endl;
+            for(int x=0;x<x0;x++){std::cout<<" ";} std::cout<<"\xDB          "<<"     \xDB\xDB   "<<"    \xDB \xDB\xDB  "<<" \xDB\xDB  \xDB\xDB  \xDB\xDB \xDB\xDB"<<std::endl;
+            for(int x=0;x<x0;x++){std::cout<<" ";} std::cout<<"\xDB\xDB         "<<"     \xDB    "<<"   \xDB\xDB \xDB\xDB  "<<" \xDB\xDB   \xDB \xDB   \xDB\xDB"<<std::endl;
+             for(int x=0;x<x0;x++){std::cout<<" ";}std::cout<<"   \xDB\xDB\xDB     "<<"     \xDB    "<<"   \xDB  \xDB\xDB  "<<" \xDB\xDB    \xDB\xDB   \xDB\xDB"<<std::endl;
+           for(int x=0;x<x0;x++){std::cout<<" ";}  std::cout<<"     \xDB\xDB\xDB    "<<"   \xDB     "<<"  \xDB\xDB  \xDB\xDB  "<<" \xDB\xDB    \xDB\xDB   \xDB\xDB"<<std::endl;
+            for(int x=0;x<x0;x++){std::cout<<" ";} std::cout<<"      \xDB\xDB    "<<"   \xDB     "<<"  \xDB\xDB\xDB\xDB\xDB\xDB  "<<" \xDB\xDB    \xDB    \xDB\xDB"<<std::endl;
+           for(int x=0;x<x0;x++){std::cout<<" ";}  std::cout<<"      \xDB\xDB    "<<"  \xDB\xDB     "<<" \xDB\xDB\xDB   \xDB  "<<"\xDB\xDB         \xDB\xDB"<<std::endl;
+           for(int x=0;x<x0;x++){std::cout<<" ";}  std::cout<<"      \xDB     "<<"  \xDB      "<<" \xDB     \xDB  "<<"\xDB\xDB         \xDB\xDB"<<std::endl;
+           for(int x=0;x<x0;x++){std::cout<<" ";}  std::cout<<"\xDB\xDB\xDB\xDB\xDB       "<<"\xDB\xDB\xDB\xDB\xDB    "<<"\xDB\xDB     \xDB  "<<"\xDB\xDB         \xDB\xDB"<<std::endl<<std::endl<<std::endl;
+           for(int x=0;x<x0+8;x++){std::cout<<" ";} std::cout<<"PRESS ANY KEY TO CONTINUE:";
 
 
-        std::cout<<"|"<<std::endl;
-    }
-    for(int k=0; k<NTAILLE*MULTIPLICATOR; k++)std::cout<<"--";
-    for(int k=0; k<=NTAILLE; k++)std::cout<<"-";
-    std::cout<<std::endl;
-    return 0;
-}
-
-int DamierGoto(Console* pConsole)
-{
-    (void)pConsole;
-    return 0;
 }
 
 int main()
@@ -89,9 +38,10 @@ int main()
     pConsole->gotoLigCol(5, 10);
     pConsole->setColor(COLOR_GREEN);
     std::cout << "Hello World !" << std::endl;
+    pConsole->gotoLigCol(5, 10);
+    homepage(5,10);
     pConsole->setColor(COLOR_DEFAULT);
-
-   // DamierCaseV2(pConsole);
+pConsole->showCursor(false);
     // Boucle événementielle
     while (!quit)
     {
