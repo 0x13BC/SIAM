@@ -44,6 +44,8 @@ class BoardGame
         void display(BITMAP* buffer, int disp_mod,Console* pEcran);
         int boardCons(Console*pConsole);
         int stockCons(Console*pConsole,int x0,int y0);
+        int BoardGame::stockDispCons(Console* pConsole,int x0,int y0);
+        void homepage(int x0, int y0);
 
 
 };
