@@ -102,15 +102,19 @@ void Player::turnPiece(Piece* pion, Console* ecran)
         switch(touche)
         {
         case 'z':
+        case 'Z':
             pion->SetOrientation(-2);
             break;
         case 'q':
+        case 'Q':
             pion->SetOrientation(-1);
             break;
         case 's':
+        case 'S':
             pion->SetOrientation(2);
             break;
         case 'd':
+        case 'D':
             pion->SetOrientation(1);
             break;
         }
@@ -224,6 +228,7 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                         }
                         else select=0;
                     case 'z':
+                    case 'Z':
                         ecran->setColor(COLOR_NDEFAULT);
                         ecran->gotoLigCol((MULTIPLICATOR)*y+(y+1)+MULTIPLICATOR/2+MARGINBOARDY,(2*(MULTIPLICATOR)*x)+x+MULTIPLICATOR+MARGINBOARDX);
                         if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
@@ -238,18 +243,21 @@ int Player::Play_console(BoardGame& board, Console* ecran)
 
                         break;
                     case 'q':
+                    case 'Q':
                         ecran->setColor(COLOR_NDEFAULT);
                         ecran->gotoLigCol((MULTIPLICATOR)*y+(y+1)+MULTIPLICATOR/2+MARGINBOARDY,(2*(MULTIPLICATOR)*x)+x+MULTIPLICATOR+MARGINBOARDX);
                         if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
                         else cout <<"  ";
                         ecran->setColor(COLOR_WHITEANDBLACK);
-                        if(x>0) {
-                                if(!select) x--;
-                                else direction=-1;
+                        if(x>0)
+                        {
+                            if(!select) x--;
+                            else direction=-1;
                         }
                         test2=1;
                         break;
                     case 's':
+                    case 'S':
                         ecran->setColor(COLOR_NDEFAULT);
                         ecran->gotoLigCol((MULTIPLICATOR)*y+(y+1)+MULTIPLICATOR/2+MARGINBOARDY,(2*(MULTIPLICATOR)*x)+x+MULTIPLICATOR+MARGINBOARDX);
                         if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
@@ -265,6 +273,7 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                         break;
 
                     case 'd':
+                    case 'D':
                         ecran->setColor(COLOR_NDEFAULT);
                         ecran->gotoLigCol((MULTIPLICATOR)*y+(y+1)+MULTIPLICATOR/2+MARGINBOARDY,(2*(MULTIPLICATOR)*x)+x+MULTIPLICATOR+MARGINBOARDX);
                         if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
@@ -287,21 +296,22 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                     if(select)
                     {
                         ecran->setColor(COLOR_NDEFAULT);
-
+                        ecran->gotoLigCol(DECALAGE_X_TEXT, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN+1);
+                        cout<< "Ordre:           ";
                         ecran->gotoLigCol(DECALAGE_X_TEXT, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN+1);
                         cout<< "Ordre: " << (order ? "move" : "turn only");
                         switch(direction)
                         {
-                        case 'z':
+                        case -2:
                             cout << " up";
                             break;
-                        case 'q':
+                        case -1:
                             cout << " left";
                             break;
-                        case 's':
+                        case 2:
                             cout << " down";
                             break;
-                        case 'd':
+                        case 1:
                             cout << " right";
                             break;
                         }
@@ -309,11 +319,11 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                     }
 
                 }
-                 if(difftime(time(NULL),t) >= 0.2)
-                    {
-                        test2= (test2 ? 0 : 1);
-                        t=time(NULL);
-                    }
+                if(difftime(time(NULL),t) >= 0.2)
+                {
+                    test2= (test2 ? 0 : 1);
+                    t=time(NULL);
+                }
 
             }
             ecran->showCursor(true);
@@ -363,10 +373,10 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                             turnPiece(m_stockPiece.top(),ecran);
                             m_stockPiece.pop();
                             ecran->setColor(COLOR_NDEFAULT);
-                        ecran->gotoLigCol((MULTIPLICATOR)*y+(y+1)+MULTIPLICATOR/2+MARGINBOARDY,(2*(MULTIPLICATOR)*x)+x+MULTIPLICATOR+MARGINBOARDX);
-                        if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
-                        else cout <<"  ";
-                        ecran->setColor(COLOR_WHITEANDBLACK);
+                            ecran->gotoLigCol((MULTIPLICATOR)*y+(y+1)+MULTIPLICATOR/2+MARGINBOARDY,(2*(MULTIPLICATOR)*x)+x+MULTIPLICATOR+MARGINBOARDX);
+                            if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
+                            else cout <<"  ";
+                            ecran->setColor(COLOR_WHITEANDBLACK);
                             test=1;
                             boucle=0;
                         }
@@ -414,6 +424,8 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                         break;
 
                     case 'z':
+                    case 'Z':
+
 
                         ecran->setColor(COLOR_NDEFAULT);
                         ecran->gotoLigCol((MULTIPLICATOR)*y+(y+1)+MULTIPLICATOR/2+MARGINBOARDY,(2*(MULTIPLICATOR)*x)+x+MULTIPLICATOR+MARGINBOARDX);
@@ -423,7 +435,10 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                         if(y>0 && (x==0 || x==BOARD_WIDTH-1) && !select) y--;
                         break;
 
+
                     case 'q':
+                    case 'Q':
+
 
                         ecran->setColor(COLOR_NDEFAULT);
                         ecran->gotoLigCol((MULTIPLICATOR)*y+(y+1)+MULTIPLICATOR/2+MARGINBOARDY,(2*(MULTIPLICATOR)*x)+x+MULTIPLICATOR+MARGINBOARDX);
@@ -434,6 +449,7 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                         break;
 
                     case 's':
+                    case 'S':
 
                         ecran->setColor(COLOR_NDEFAULT);
                         ecran->gotoLigCol((MULTIPLICATOR)*y+(y+1)+MULTIPLICATOR/2+MARGINBOARDY,(2*(MULTIPLICATOR)*x)+x+MULTIPLICATOR+MARGINBOARDX);
@@ -444,6 +460,7 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                         break;
 
                     case 'd':
+                    case 'D':
 
                         ecran->setColor(COLOR_NDEFAULT);
                         ecran->gotoLigCol((MULTIPLICATOR)*y+(y+1)+MULTIPLICATOR/2+MARGINBOARDY,(2*(MULTIPLICATOR)*x)+x+MULTIPLICATOR+MARGINBOARDX);

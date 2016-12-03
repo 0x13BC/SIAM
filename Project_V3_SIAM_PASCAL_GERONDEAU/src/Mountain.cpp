@@ -35,11 +35,12 @@ int Mountain::push(BoardGame& board,char direction,char order, float power_sum, 
 {
     std::cout<<"MOUNTAIN PUSH             "<< std::endl;
     system("pause");
-    int add_x,add_y, bonus_strength, result;
+    int add_x,add_y, result;
+    float bonus_strength;
     add_x= (direction==1 || direction==-1? direction : 0);
     add_y= (direction==2 || direction==-2? direction/ABS(direction) : 0);
     bonus_strength=-m_strength;// Calcul de l(influence sur la poussée
-    if(m_strength+bonus_strength>0) //Si la pièce laisse la possibilité de pousser derrière
+    if(power_sum+bonus_strength>0) //Si la pièce laisse la possibilité de pousser derrière
     {
         if(m_x+add_x>=0 && m_x+add_x<MAP_SIZEX && m_y+add_y<MAP_SIZEY && m_y+add_y>=0)
         {

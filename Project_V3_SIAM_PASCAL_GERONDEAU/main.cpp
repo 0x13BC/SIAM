@@ -25,8 +25,8 @@ int main()
     POINT lol;///CAN BE DESTROYED
     int x,y;
 
-    system("color 20");
-
+    system("COLOR A");
+    pEcran->setColor(COLOR_GREEN);
     jeu.homepage(20,5);
 
     int choice=0;
