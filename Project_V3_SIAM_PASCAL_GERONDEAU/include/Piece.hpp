@@ -24,7 +24,7 @@ class Piece
 
         //CTOR & DTOR
 
-        Piece(BITMAP* image, unsigned short team=0, int strength=0);
+        Piece(BITMAP* image, unsigned short team=0, int strength=0.9);
         virtual ~Piece();
         Piece(const Piece& other);
 

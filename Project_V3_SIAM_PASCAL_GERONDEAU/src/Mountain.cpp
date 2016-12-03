@@ -4,7 +4,7 @@
 //----------------------------------------CTOR-&-DTOR----------------------------------------//
 
 Mountain::Mountain(BITMAP* img)
-: Piece(img)
+    : Piece(img)
 {
     //ctor
 }
@@ -27,19 +27,46 @@ std::string Mountain::Getstring()
     return "MM";
 }
 
-void Mountain::display(BITMAP* dest, int disp_mod, Console* ecran)
+void Mountain::display(BITMAP* dest)
 {
 
 }
 int Mountain::push(BoardGame& board,char direction,char order, int power_sum)
-{ ///FAUX A REFAIRE Cf RECURSIVITE PAWN.PUSH()
-    int x=m_x, y=m_y;
-    m_x+= (direction==1 || direction==-1 ? direction : 0);
-    m_y+= (direction==2 || direction==-2 ? direction/ABS(direction) : 0);
-    if(m_x<0 || m_y<0 || m_y>=MAP_SIZEY || m_x>=MAP_SIZEX) return true;
-    else
+{
+    int add_x,add_y, bonus_strength, result;
+    add_x= (direction==1 || direction==-1? direction : 0);
+    add_y= (direction==2 || direction==-2? direction/ABS(direction) : 0);
+    bonus_strength=-m_strength;// Calcul de l(influence sur la poussée
+    if(m_strength+bonus_strength>0) //Si la pièce laisse la possibilité de pousser derrière
     {
-        board.Setmap(m_x,m_y, this);
-        board.Setmap(x,y,NULL);
+        if(m_x+add_x>=0 && m_x+add_x<MAP_SIZEX && m_y+add_y<MAP_SIZEY && m_y+add_y>=0)
+        {
+            if(board.Getmap(m_x+add_x,m_y+add_y)==NULL) //EN ADMETTANT QU'ON INITIALISE TOUT LE TABLEAU + LES CASES IMMEDIATEMENT A L'EXTERIEUR A NULL
+            {
+                board.Setmap(m_x,m_y,NULL);
+                board.Setmap(m_x+add_x,m_y+add_y,(Piece*)this);
+                m_x+=add_x;
+                m_y+=add_y;
+                return 1;
+            }
+            else
+            {
+                if((result=board.Getmap(m_x+add_x,m_y+add_y)->push(board, direction, order, power_sum+bonus_strength))==1)//si la case d'après est d'accord
+                {
+                    board.Setmap(m_x+add_x,m_y+add_y,(Piece*)this);
+                    board.Setmap(m_x,m_y,NULL);
+                    m_x+=add_x;
+                    m_y+=add_y;
+                    return 1;
+                }
+                else if(result==2) return 2;
+                else  return -1;
+            }
+        }
+        else return 2;
+
     }
+    else return -1;
+
+    return 0;
 }
