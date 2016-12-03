@@ -234,11 +234,11 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                         if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
                         else cout <<"  ";
                         ecran->setColor(COLOR_WHITEANDBLACK);
-                        if(y>0 )
+                        if(y>0)
                         {
                             if(!select) y--;
-                            else direction=-2;
                         }
+                         direction=-2;
                         test2=1;
 
                         break;
@@ -252,8 +252,8 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                         if(x>0)
                         {
                             if(!select) x--;
-                            else direction=-1;
                         }
+                        direction=-1;
                         test2=1;
                         break;
                     case 's':
@@ -266,8 +266,9 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                         if (y+1<BOARD_HEIGHT)
                         {
                             if(!select) y++;
-                            else direction=2;
+
                         }
+                        direction=2;
                         test2=1;
 
                         break;
@@ -282,8 +283,8 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                         if(x+1<BOARD_WIDTH)
                         {
                             if(!select) x++;
-                            else direction=1;
                         }
+                        direction=1;
                         test2=1;
                         break;
 
