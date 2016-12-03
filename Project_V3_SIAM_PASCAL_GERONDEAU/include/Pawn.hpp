@@ -29,7 +29,7 @@ class Pawn :  public Piece
 
         //METHODS
 
-        void display(BITMAP* dest, int disp_mode, Console* ecran);
+        void display(BITMAP* dest);
         int push(BoardGame& board,char direction,char order, int power_sum);
         std::string Getstring();
 

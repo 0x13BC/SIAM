@@ -22,7 +22,7 @@ class Mountain : virtual public Piece
 
         //METHODS
         std::string Getstring();
-        void display(BITMAP* dest, int disp_mod, Console* ecran);
+        void display(BITMAP* dest);
         int push(BoardGame& board,char direction,char order, int power_sum);
         void SetOrientation(int x){} //Unused virtual function
 

@@ -53,15 +53,12 @@ std::string Pawn::Getstring()
     return of_the_jedi; //Because I can
 }
 
-void Pawn::display(BITMAP* dest, int disp_mode, Console* ecran)
+void Pawn::display(BITMAP* dest)
 {
-    if(disp_mode)
-    {
         rotate_sprite(dest, m_imgPiece, DECALAGE_X + m_x*RAPPORT,DECALAGE_Y + m_y*RAPPORT, (fixed)(m_Orientation*64));
     }
 
-    (void)ecran;
-}
+
 
 int Pawn::push(BoardGame& board,char direction,char order, int power_sum)
 {
