@@ -34,6 +34,7 @@ class Game
         void win_display(int winner);
         void start();
         void test();
+        void homepage(int x0,int y0);
 
 
 

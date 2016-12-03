@@ -9,7 +9,7 @@
 #define MAP_SIZEY 5
 
 #define MULTIPLICATOR 1 // ONLY ODD NUMBERS
-#define MARGINBOARDX 50
+#define MARGINBOARDX 35
 #define MARGINBOARDY 10
 
 
@@ -44,6 +44,8 @@ class BoardGame
         void display(BITMAP* buffer, int disp_mod,Console* pEcran);
         int boardCons(Console*pConsole);
         int stockCons(Console*pConsole,int x0,int y0);
+        int BoardGame::stockDispCons(Console* pConsole,int x0,int y0);
+        void homepage(int x0, int y0);
 
 
 };
