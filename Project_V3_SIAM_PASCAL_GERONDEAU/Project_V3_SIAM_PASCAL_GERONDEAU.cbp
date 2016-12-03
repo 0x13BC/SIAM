@@ -38,6 +38,7 @@
 		<Unit filename="include/Console.h" />
 		<Unit filename="include/Game.hpp" />
 		<Unit filename="include/General.h" />
+		<Unit filename="include/Graphic.hpp" />
 		<Unit filename="include/Mountain.hpp" />
 		<Unit filename="include/Pawn.hpp" />
 		<Unit filename="include/Piece.hpp" />
@@ -47,6 +48,7 @@
 		<Unit filename="src/BoardGame.cpp" />
 		<Unit filename="src/Console.cpp" />
 		<Unit filename="src/Game.cpp" />
+		<Unit filename="src/Graphic.cpp" />
 		<Unit filename="src/Mountain.cpp" />
 		<Unit filename="src/Pawn.cpp" />
 		<Unit filename="src/Piece.cpp" />
