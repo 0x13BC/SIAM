@@ -91,7 +91,7 @@ int main()
     std::cout << "Hello World !" << std::endl;
     pConsole->setColor(COLOR_DEFAULT);
 
-    DamierCaseV2(pConsole);
+   // DamierCaseV2(pConsole);
     // Boucle événementielle
     while (!quit)
     {

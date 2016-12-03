@@ -14,6 +14,7 @@ enum Color
     COLOR_PURPLE = 6,
     COLOR_DEFAULT = 7, // gris couleur de base de la console
     COLOR_NDEFAULT =8, // Fond gris
+    COLOR_WHITEANDBLACK=9;
 };
 
 class Console
@@ -33,6 +34,8 @@ class Console
         // Méthodes privées
         void _setColor(int front, int back);
     public:
+
+        void showCursor(bool visible);
         // Méthodes statiques (publiques)
         static Console* getInstance();
         static void deleteInstance();
