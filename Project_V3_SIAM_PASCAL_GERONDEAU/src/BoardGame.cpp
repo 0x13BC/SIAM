@@ -142,8 +142,34 @@ int BoardGame::stockCons(Console*pConsole,int x0, int y0)
     return 0;
 }
 
-int BoardGame::stockDispCons(Console* pConsole,int x0,int y0)
+
+int BoardGame::stockDispCons(Console* pConsole,int x0,int y0,int team,int nbr)
 {
+
+    x0++;
+    if(team==ELEPHANT)
+    {
+
+    for(int i=0;i<5;i++)
+    {
+        pConsole->gotoLigCol(y0+(MULTIPLICATOR)*i+(i+1)+MULTIPLICATOR/2,x0);
+        if(nbr>i)std::cout<<"E";
+        else std::cout<<" ";
+    }
+
+    }
+    if(team==RHINOCEROS)
+    {
+
+    for(int i=0;i<5;i++)
+    {
+       pConsole->gotoLigCol(y0+(MULTIPLICATOR)*i+(i+1)+MULTIPLICATOR/2,x0);
+        if(nbr>i)std::cout<<"R";
+        else std::cout<<" ";
+    }
+
+    }
 
     return 0;
 }
+

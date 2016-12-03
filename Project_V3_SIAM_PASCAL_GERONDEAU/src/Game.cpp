@@ -50,6 +50,8 @@ void Game::start()
     m_BG.boardCons(m_ecran);
     m_BG.stockCons(m_ecran,MARGINBOARDX-3,MARGINBOARDY);
     m_BG.stockCons(m_ecran,MARGINBOARDX+2*NTAILLE*MULTIPLICATOR+NTAILLE+1,MARGINBOARDY);
+    m_BG.stockDispCons(m_ecran,MARGINBOARDX+2*NTAILLE*MULTIPLICATOR+NTAILLE+1,MARGINBOARDY,RHINOCEROS,rhino.GetstockPiece());
+    m_BG.stockDispCons(m_ecran,MARGINBOARDX-3,MARGINBOARDY,ELEPHANT,elephant.GetstockPiece());
     m_BG.display(NULL,0,m_ecran);
 
 
@@ -60,10 +62,13 @@ void Game::start()
     while(!win)
     {
         win=elephant.Play(GetdisplayMod() ,m_BG, m_ecran);
+        m_BG.stockDispCons(m_ecran ,MARGINBOARDX-3,MARGINBOARDY,ELEPHANT,elephant.GetstockPiece());
 
         if(win==3 || win==4) return win_display(win);
-        else win=rhino.Play(GetdisplayMod() ,m_BG, m_ecran);
-
+        else
+            {win=rhino.Play(GetdisplayMod() ,m_BG, m_ecran);
+                m_BG.stockDispCons(m_ecran,MARGINBOARDX+2*NTAILLE*MULTIPLICATOR+NTAILLE+1,MARGINBOARDY,RHINOCEROS,rhino.GetstockPiece());
+            }
         if(win==3 || win==4) return win_display(win);
         m_BG.display(buffer, GetdisplayMod(),m_ecran);
         if(GetdisplayMod()) blit(buffer,screen,0,0,0,0, SCREEN_W, SCREEN_H);
