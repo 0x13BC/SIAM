@@ -55,8 +55,8 @@ std::string Pawn::Getstring()
 
 void Pawn::display(BITMAP* dest)
 {
-        rotate_sprite(dest, m_imgPiece, DECALAGE_X + m_x*RAPPORT,DECALAGE_Y + m_y*RAPPORT, (fixed)(m_Orientation*64));
-    }
+    rotate_sprite(dest, m_imgPiece, DECALAGE_X + m_x*RAPPORT,DECALAGE_Y + m_y*RAPPORT, (fixed)(m_Orientation*64));
+}
 
 
 
@@ -102,11 +102,12 @@ int Pawn::push(BoardGame& board,char direction,char order, float power_sum, bool
                         else return 2;
                     }
                     else if(result==3 || result==4) return result;
-                        else return -1;
+                    else return -1;
                 }
             }
             else
             {
+                board.Setmap(m_x,m_y,NULL);
                 m_wielder->AddstockPiece(this);
                 m_state=false;
                 return 1;
@@ -115,12 +116,10 @@ int Pawn::push(BoardGame& board,char direction,char order, float power_sum, bool
         else if(board.Getmap(m_x+add_x,m_y+add_y)==NULL && first==true)
         {
             board.Setmap(m_x,m_y,NULL);
-
-
-                    board.Setmap(m_x+add_x,m_y+add_y,(Piece*)this);
-                    m_x+=add_x;
-                    m_y+=add_y;
-                    return 1;
+            board.Setmap(m_x+add_x,m_y+add_y,(Piece*)this);
+            m_x+=add_x;
+            m_y+=add_y;
+            return 1;
         }
         else return -1;
     }
@@ -128,6 +127,13 @@ int Pawn::push(BoardGame& board,char direction,char order, float power_sum, bool
     {
         m_Orientation=direction;
 
+    }
+    else if(order==2)
+    {
+        board.Setmap(m_x,m_y,NULL);
+        m_wielder->AddstockPiece(this);
+        m_state=false;
+                        return 1;
     }
     return 0;
 }

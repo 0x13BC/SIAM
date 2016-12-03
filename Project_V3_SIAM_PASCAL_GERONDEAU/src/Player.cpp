@@ -297,10 +297,10 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                     if(select)
                     {
                         ecran->setColor(COLOR_NDEFAULT);
-                        ecran->gotoLigCol(DECALAGE_X_TEXT, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN+1);
+                        ecran->gotoLigCol(DECALAGE_X_TEXT, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN+2);
                         cout<< "Ordre:           ";
-                        ecran->gotoLigCol(DECALAGE_X_TEXT, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN+1);
-                        cout<< "Ordre: " << (order ? "move" : oreder==0? "turn only" : "remove");
+                        ecran->gotoLigCol(DECALAGE_X_TEXT, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN+2);
+                        cout<< "Ordre: " << (order==1 ? "move" : order==0? "turn only" : "remove");
                         if(order!= 2)
                         {
                             switch(direction)
