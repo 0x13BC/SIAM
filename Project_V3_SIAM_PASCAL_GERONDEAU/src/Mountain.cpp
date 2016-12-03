@@ -31,8 +31,10 @@ void Mountain::display(BITMAP* dest)
 {
 
 }
-int Mountain::push(BoardGame& board,char direction,char order, int power_sum, bool first)
+int Mountain::push(BoardGame& board,char direction,char order, float power_sum, bool first)
 {
+    std::cout<<"MOUNTAIN PUSH             "<< std::endl;
+    system("pause");
     int add_x,add_y, bonus_strength, result;
     add_x= (direction==1 || direction==-1? direction : 0);
     add_y= (direction==2 || direction==-2? direction/ABS(direction) : 0);
@@ -45,18 +47,16 @@ int Mountain::push(BoardGame& board,char direction,char order, int power_sum, bo
             {
                 board.Setmap(m_x,m_y,NULL);
                 board.Setmap(m_x+add_x,m_y+add_y,(Piece*)this);
-                m_x+=add_x;
-                m_y+=add_y;
+                std::cout<<  "strength " << power_sum <<"  m_x " <<m_x <<"  m_y "<< m_y << std::endl ;
                 return 1;
             }
             else
             {
                 if((result=board.Getmap(m_x+add_x,m_y+add_y)->push(board, direction, order, power_sum+bonus_strength,false))==1)//si la case d'après est d'accord
                 {
-                    board.Setmap(m_x+add_x,m_y+add_y,(Piece*)this);
                     board.Setmap(m_x,m_y,NULL);
-                    m_x+=add_x;
-                    m_y+=add_y;
+                    board.Setmap(m_x+add_x,m_y+add_y,(Piece*)this);
+
                     return 1;
                 }
                 else if(result==2) return 2;

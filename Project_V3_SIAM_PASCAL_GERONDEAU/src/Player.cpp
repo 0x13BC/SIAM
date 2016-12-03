@@ -126,7 +126,7 @@ int Player::Play_console(BoardGame& board, Console* ecran)
     int test=-1, test2=0;
     int x=0, y=0;
     char order=1;
-    char direction='d';
+    char direction=1;
     int select=0;
     ecran->gotoLigCol(0, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
 //-----------------------------------WHILE BOUCLE, BOUCLE GENERALE DE JEU DU JOUER ==> DROIT DE RETRACTTIOn DE DECISION-------------
@@ -157,7 +157,7 @@ int Player::Play_console(BoardGame& board, Console* ecran)
             cout<<"                                                  "<<endl;
             cout<<"                                                  "<<endl;
         }
-        if(test)
+        if(test=='1')
         {
             time_t t=time(NULL);
 //----------------------------------------------------WHILE TEST BOUCLE DE SELECTION DE CASE--------------------------------------------
@@ -223,14 +223,19 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                             test=0; //EXIT BOUCLE SELECTION CASE, RETOUR CHOIX DE L'ACTION
                         }
                         else select=0;
-                    case 'z':ecran->setColor(COLOR_NDEFAULT);
-
+                    case 'z':
+                        ecran->setColor(COLOR_NDEFAULT);
                         ecran->gotoLigCol((MULTIPLICATOR)*y+(y+1)+MULTIPLICATOR/2+MARGINBOARDY,(2*(MULTIPLICATOR)*x)+x+MULTIPLICATOR+MARGINBOARDX);
                         if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
                         else cout <<"  ";
                         ecran->setColor(COLOR_WHITEANDBLACK);
-                        if(y>0 && !select) y--;
+                        if(y>0 )
+                        {
+                            if(!select) y--;
+                            else direction=-2;
+                        }
                         test2=1;
+
                         break;
                     case 'q':
                         ecran->setColor(COLOR_NDEFAULT);
@@ -238,7 +243,10 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                         if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
                         else cout <<"  ";
                         ecran->setColor(COLOR_WHITEANDBLACK);
-                        if(x>0 && !select) x--;
+                        if(x>0) {
+                                if(!select) x--;
+                                else direction=-1;
+                        }
                         test2=1;
                         break;
                     case 's':
@@ -247,7 +255,11 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                         if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
                         else cout <<"  ";
                         ecran->setColor(COLOR_WHITEANDBLACK);
-                        if (y+1<BOARD_HEIGHT && !select) y++;
+                        if (y+1<BOARD_HEIGHT)
+                        {
+                            if(!select) y++;
+                            else direction=2;
+                        }
                         test2=1;
 
                         break;
@@ -258,7 +270,11 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                         if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
                         else cout <<"  ";
                         ecran->setColor(COLOR_WHITEANDBLACK);
-                        if(x+1<BOARD_WIDTH && !select) x++;
+                        if(x+1<BOARD_WIDTH)
+                        {
+                            if(!select) x++;
+                            else direction=1;
+                        }
                         test2=1;
                         break;
 
@@ -266,7 +282,6 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                         if(select) order = (order ?  0 : 1);
                         break;
                     }
-                    if (select) direction=(touche != ' ' && touche!= 27 && touche != '\r' ? touche : direction);
                     ecran->gotoLigCol(DECALAGE_X_TEXT, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
                     cout<< (char)(y+'A') << x;
                     if(select)
@@ -292,18 +307,20 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                         }
 
                     }
-                    if(difftime(time(NULL),t) >= 0.2)
+
+                }
+                 if(difftime(time(NULL),t) >= 0.2)
                     {
                         test2= (test2 ? 0 : 1);
                         t=time(NULL);
                     }
-                }
 
             }
             ecran->showCursor(true);
         }
         else
         {
+            test=0;
             time_t t=time(NULL);
             ecran->showCursor(false);
             while(!test)
@@ -373,7 +390,7 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                                 m_stockPiece.top()->Setstate(true);
                                 m_stockPiece.pop();
                                 board.boardCons(ecran);
-                            board.display(NULL,0,ecran);
+                                board.display(NULL,0,ecran);
                                 test=1;
                                 boucle=0;
                             }

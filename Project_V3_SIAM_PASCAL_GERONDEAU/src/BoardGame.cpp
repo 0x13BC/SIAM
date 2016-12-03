@@ -7,7 +7,12 @@ BoardGame::BoardGame()
     :m_map(std::vector < std::vector<Piece*> >(5,std::vector<Piece*>((unsigned int)5,NULL)))
 {
     for(int i=1;i<4;i++)
-        m_map[i][2]= new Mountain(NULL);
+        {
+            m_map[i][2]= new Mountain(NULL);
+            m_map[i][2]->Setx(i);
+            m_map[i][2]->Sety(2);
+        }
+
     //ctor
     std::cout<<"ctor BoardGame();Map size: "<< m_map.size()<<std::endl;
 }
@@ -45,6 +50,10 @@ void BoardGame::SetimgBoard(BITMAP* val)
 void BoardGame::Setmap(int x, int y, Piece* pt)
 {
     if(x>=0 && y>=0 && x<MAP_SIZEX && y<MAP_SIZEY) m_map[x][y]=pt;
+    if(pt)
+    {pt->Setx(x);
+    pt->Sety(y);
+    }
 }
 
 //------------------------------------------METHODS------------------------------------------//

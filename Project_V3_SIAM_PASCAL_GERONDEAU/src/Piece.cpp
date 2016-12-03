@@ -2,7 +2,7 @@
 
 //----------------------------------------CTOR-&-DTOR----------------------------------------//
 
-Piece::Piece(BITMAP* image, unsigned short team, int strength)
+Piece::Piece(BITMAP* image, unsigned short team, float strength)
 : m_imgPiece(image), m_strength(strength)
 {
     m_state=FALSE;
@@ -53,6 +53,14 @@ bool Piece::Getstate()
 void Piece::Setstate(bool val)
 {
     m_state = val;
+}
+void Piece::Setx(int x)
+{
+    if(x<5 && x>=0) m_x=x;
+}
+void Piece::Sety(int y)
+{
+    if(y<5 && y>=0) m_y=y;
 }
 BITMAP* Piece::GetimgPiece()
 {

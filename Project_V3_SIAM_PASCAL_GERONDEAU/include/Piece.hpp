@@ -16,7 +16,7 @@ class Piece
         unsigned short int m_team;
         unsigned short int m_x;
         unsigned short int m_y;
-        unsigned short int m_strength;
+        float m_strength;
         bool m_state;
 
 
@@ -24,7 +24,7 @@ class Piece
 
         //CTOR & DTOR
 
-        Piece(BITMAP* image, unsigned short team=0, int strength=0.9);
+        Piece(BITMAP* image, unsigned short team=0, float strength=0.9);
         virtual ~Piece();
         Piece(const Piece& other);
 
@@ -34,6 +34,8 @@ class Piece
         unsigned short Gety() ;
         unsigned short Getstrength() ;
         unsigned short Getteam();
+        void Setx(int x);
+        void Sety(int y);
         void Setstrength(unsigned short val) ;
         bool Getstate() ;
         void Setstate(bool val);
@@ -44,7 +46,7 @@ class Piece
         virtual void SetOrientation(int orientation)=0;
         virtual std::string Getstring()=0;
         virtual void display(BITMAP* dest)=0;
-        virtual int push(BoardGame& board,char direction,char order, int power_sum, bool first)=0;
+        virtual int push(BoardGame& board,char direction,char order, float power_sum, bool first)=0;
 
 };
 

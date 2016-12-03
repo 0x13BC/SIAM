@@ -36,7 +36,7 @@ void Game::win_display(int winner)
     {
         m_ecran->setColor(COLOR_GREEN);
         // m_ecran->gotoligcol(milieu_x-taille_msg/2, milieu_y);
-        std::cout<< (winner==1 ? "Les rhinoceros": "Les elephants") << " gagnent !" << std::endl;
+        std::cout<< (winner==3 ? "Les rhinoceros": "Les elephants") << " gagnent !" << std::endl;
     }
 }
 void Game::start()
@@ -59,12 +59,16 @@ void Game::start()
 
     while(!win)
     {
-        if(rhino.Play(GetdisplayMod() ,m_BG, m_ecran)) win=1;
-        else if(elephant.Play(GetdisplayMod() ,m_BG, m_ecran)) win=2;
+        win=elephant.Play(GetdisplayMod() ,m_BG, m_ecran);
+
+        if(win==3 || win==4) return win_display(win);
+        else win=rhino.Play(GetdisplayMod() ,m_BG, m_ecran);
+
+        if(win==3 || win==4) return win_display(win);
         m_BG.display(buffer, GetdisplayMod(),m_ecran);
         if(GetdisplayMod()) blit(buffer,screen,0,0,0,0, SCREEN_W, SCREEN_H);
     }
-    return win_display(win);
+
 
 }
 
