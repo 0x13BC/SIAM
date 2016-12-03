@@ -22,7 +22,7 @@ int main()
     Console*pEcran=NULL;
     pEcran = Console::getInstance();
     Game jeu(pEcran);
-    POINT lol;
+    POINT lol;///CAN BE DESTROYED
     int x,y;
 
     system("color 20");
@@ -44,15 +44,15 @@ int main()
 
                 system("cls");
 
-                jeu.test();
-                //jeu.start();
+                //jeu.test();
+                jeu.start();
 
             break;
             case 3:
-                GetCursorPos(&lol);
+                GetCursorPos(&lol);///CAN BE DESTROYED
                 pEcran->gotoLigCol(10,0);
                 getCursorXY(x,y);
-                std::cout<<lol.x<<" "<<lol.y<<std::endl;
+                std::cout<<lol.x<<" "<<lol.y<<std::endl;///CAN BE DESTROYED
 
                 std::cout<<x<<" "<<y;
             break;

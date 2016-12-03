@@ -38,6 +38,15 @@ void Console::gotoLigCol(int lig, int col)
     SetConsoleCursorPosition( GetStdHandle( STD_OUTPUT_HANDLE ), mycoord );
 }
 
+void Console::showCursor(bool visible)
+{
+    HANDLE MyHandlemoron=GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_CURSOR_INFO ci;
+    ci.dwSize=1;
+    ci.bVisible=visible;
+    SetConsoleCursorInfo(MyHandlemoron,&ci);
+}
+
 int Console::getInputKey()
 {
     return getch();
@@ -100,6 +109,12 @@ void Console::setColor(Color col)
         case COLOR_NDEFAULT:
             this->_setColor(0,15);
             break;
+
+        case COLOR_WHITEANDBLACK:
+            this->_setColor(15,0);
+            break;
+
+
         default:
             this->_setColor(7, 0);
     }

@@ -14,6 +14,7 @@ enum Color
     COLOR_PURPLE = 6,
     COLOR_DEFAULT = 7, // gris couleur de base de la console
     COLOR_NDEFAULT =8, // Fond gris
+    COLOR_WHITEANDBLACK=9,
 };
 
 class Console
@@ -39,6 +40,7 @@ class Console
 
         // Méthodes publiques
         void gotoLigCol(int lig, int col);
+        void showCursor(bool visible);
         bool isKeyboardPressed();
         int getInputKey();
         void setColor(Color col);

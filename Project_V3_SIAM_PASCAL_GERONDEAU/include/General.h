@@ -2,3 +2,4 @@
 #include <iostream>
 #include <stack>
 #include <ctime>
+#include <winalleg.h>

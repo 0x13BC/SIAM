@@ -45,7 +45,14 @@ void Game::start()
 
     Player rhino(1);
     Player elephant(2);
+
+
     m_BG.boardCons(m_ecran);
+    m_BG.stockCons(m_ecran,MARGINBOARDX-3,MARGINBOARDY);
+    m_BG.stockCons(m_ecran,MARGINBOARDX+2*NTAILLE*MULTIPLICATOR+NTAILLE+1,MARGINBOARDY);
+    m_BG.display(NULL,0,m_ecran);
+
+
 
 
     int win=0;
@@ -64,18 +71,19 @@ void Game::start()
 void Game::test()
 {
     Pawn chocolate(NULL,1,NULL);
-    Pawn chocolate2(NULL,1,NULL);
-    Pawn chocolate3(NULL,1,NULL);
+    Pawn chocolate2(NULL,0,NULL);
+    Pawn chocolate3(NULL,0,NULL);
     Pawn chocolate4(NULL,1,NULL);
 
     Mountain vanilla(NULL);
     m_BG.Setmap(3,0,&chocolate);
-    m_BG.Setmap(4,1,&chocolate);
-    m_BG.Setmap(2,3,&chocolate);
+    m_BG.Setmap(4,1,&chocolate2);
+    m_BG.Setmap(2,3,&chocolate3);
     m_BG.Setmap(3,4,&vanilla);
 
-    m_BG.stockCons(m_ecran,10,6);
-    m_BG.stockCons(m_ecran,10,46);
+    m_BG.stockCons(m_ecran,MARGINBOARDX-3,MARGINBOARDY);
+    m_BG.stockCons(m_ecran,MARGINBOARDX+2*NTAILLE*MULTIPLICATOR+NTAILLE+1,MARGINBOARDY);
     m_BG.boardCons(m_ecran);
     m_BG.display(NULL,0,m_ecran);
+
 }

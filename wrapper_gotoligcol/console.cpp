@@ -66,9 +66,22 @@ bool Console::isKeyboardPressed()
 14: jaune fluo
 15: blanc
 */
+void Console::showCursor(bool visible)
+{
+    HANDLE MyHandlemoron=GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_CURSOR_INFO ci;
+    ci.dwSize=1;
+    ci.bVisible=visible;
+    SetConsoleCursorInfo(MyHandlemoron,&ci);
+}
+
 void Console::_setColor(int back, int front)
 {
     HANDLE H=GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_CURSOR_INFO ci;
+    ci.bVisible=FALSE;
+    ci.dwSize=100;
+    SetConsoleCursorInfo(H,&ci);
     SetConsoleTextAttribute(H,front*16+back);
 }
 
@@ -100,6 +113,10 @@ void Console::setColor(Color col)
 
         case COLOR_NDEFAULT:
             this->_setColor(0,15);
+            break;
+
+        case COLOR_WHITEANDBLACK:
+            this->_setColor(15,0);
             break;
 
         default:

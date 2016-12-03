@@ -40,7 +40,7 @@ void Player::SetnbrOut(unsigned int val)
 }
 int Player::GetstockPiece()
 {
-    cout<<m_stockPiece.size();
+    //cout<<m_stockPiece.size();
     return m_stockPiece.size();
 }
 void Player::AddstockPiece(Pawn* val)
@@ -159,13 +159,15 @@ int Player::Play_console(BoardGame& board, Console* ecran)
         {
             time_t t=time(NULL);
 //----------------------------------------------------WHILE TEST BOUCLE DE SELECTION DE CASE--------------------------------------------
+            ecran->showCursor(false);
             while(test)
             {
+
                 ecran->gotoLigCol( DECALAGE_Y_TEXT+y,DECALAGE_X_TEXT+5*x);
                 if(test2)
                 {
                     if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
-                    else cout << "00";
+                    else cout << "  ";
                 }
                 else cout<< "  ";
                 if(ecran->isKeyboardPressed())
@@ -201,17 +203,38 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                         }
                         else select=0;
                     case 'z':
+
+                        ecran->gotoLigCol((MULTIPLICATOR)*y+(y+1)+MULTIPLICATOR/2+MARGINBOARDY,(2*(MULTIPLICATOR)*x)+x+MULTIPLICATOR+MARGINBOARDX);
+                    if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
+                    else cout <<"  ";
                         if(y>0 && !select) y--;
+
                         break;
                     case 'q':
+
+                        ecran->gotoLigCol((MULTIPLICATOR)*y+(y+1)+MULTIPLICATOR/2+MARGINBOARDY,(2*(MULTIPLICATOR)*x)+x+MULTIPLICATOR+MARGINBOARDX);
+                    if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
+                    else cout <<"  ";
                         if(x>0 && !select) x--;
+
                         break;
                     case 's':
+
+                        ecran->gotoLigCol((MULTIPLICATOR)*y+(y+1)+MULTIPLICATOR/2+MARGINBOARDY,(2*(MULTIPLICATOR)*x)+x+MULTIPLICATOR+MARGINBOARDX);
+                    if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
+                    else cout <<"  ";
                         if (y+1<BOARD_HEIGHT && !select) y++;
+
                         break;
+
                     case 'd':
+
+                        ecran->gotoLigCol((MULTIPLICATOR)*y+(y+1)+MULTIPLICATOR/2+MARGINBOARDY,(2*(MULTIPLICATOR)*x)+x+MULTIPLICATOR+MARGINBOARDX);
+                    if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
+                    else cout <<"  ";
                         if(x+1<BOARD_WIDTH && !select) x++;
                         break;
+
                     case ' ':
                         if(select) order = (order ?  0 : 1);
                         break;
@@ -243,25 +266,30 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                     if(difftime(time(NULL),t) >= 0.2)
                     {
                         test2= (test2 ? 0 : 1);
+
                         t=time(NULL);
                     }
                 }
 
             }
+            ecran->showCursor(true);
         }
         else
         {
             time_t t=time(NULL);
+            ecran->showCursor(false);
             while(!test)
             {
-
-                ecran->gotoLigCol(DECALAGE_Y_TEXT+y,DECALAGE_X_TEXT+5*x);
+                ecran->gotoLigCol((MULTIPLICATOR)*y+(y+1)+MULTIPLICATOR/2+MARGINBOARDY,(2*(MULTIPLICATOR)*x)+x+MULTIPLICATOR+MARGINBOARDX);
                 if(test2)
                 {
+                    ecran->setColor(COLOR_WHITEANDBLACK);
                     if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
-                    else cout <<"00";
+                    else cout <<"  ";
                 }
-                else cout<< "  ";
+                else {ecran->setColor(COLOR_NDEFAULT);
+                        if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
+                        else cout <<"  ";}
                 if(difftime(time(NULL),t) >= 0.2)
                 {
                     test2= (test2 ? 0 : 1);
@@ -270,7 +298,9 @@ int Player::Play_console(BoardGame& board, Console* ecran)
 
                 if(ecran->isKeyboardPressed())
                 {
+                    test2=1;
                     touche=ecran->getInputKey();
+
                     switch(touche)
                     {
                     case '\r':
@@ -320,24 +350,51 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                         test=1;
                     }
                     else select=0;
+                    break;
+
                 case 'z':
+
+                    ecran->setColor(COLOR_NDEFAULT);
+                   ecran->gotoLigCol((MULTIPLICATOR)*y+(y+1)+MULTIPLICATOR/2+MARGINBOARDY,(2*(MULTIPLICATOR)*x)+x+MULTIPLICATOR+MARGINBOARDX);
+                    if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
+                    else cout <<"  ";
                     if(y>0 && (x==0 || x==BOARD_WIDTH-1) && !select) y--;
                     break;
+
                 case 'q':
+
+                    ecran->setColor(COLOR_NDEFAULT);
+                    ecran->gotoLigCol((MULTIPLICATOR)*y+(y+1)+MULTIPLICATOR/2+MARGINBOARDY,(2*(MULTIPLICATOR)*x)+x+MULTIPLICATOR+MARGINBOARDX);
+                    if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
+                    else cout <<"  ";
                     if(x>0 && (y==0 || y==BOARD_HEIGHT-1) && !select) x--;
                     break;
+
                 case 's':
+
+                    ecran->setColor(COLOR_NDEFAULT);
+                   ecran->gotoLigCol((MULTIPLICATOR)*y+(y+1)+MULTIPLICATOR/2+MARGINBOARDY,(2*(MULTIPLICATOR)*x)+x+MULTIPLICATOR+MARGINBOARDX);
+                    if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
+                    else cout <<"  ";
                     if (y+1<BOARD_HEIGHT && (x==0 || x==BOARD_WIDTH-1) && !select) y++;
                     break;
+
                 case 'd':
+
+                    ecran->setColor(COLOR_NDEFAULT);
+                   ecran->gotoLigCol((MULTIPLICATOR)*y+(y+1)+MULTIPLICATOR/2+MARGINBOARDY,(2*(MULTIPLICATOR)*x)+x+MULTIPLICATOR+MARGINBOARDX);
+                    if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
+                    else cout <<"  ";
                     if(x+1<BOARD_WIDTH &&(y==0 || y==BOARD_HEIGHT-1) && !select) x++;
                     break;
+                    ecran->setColor(COLOR_WHITEANDBLACK);
                 }
             }
 
 
             ///FAIRE RENTRER UNE PIECE
         }
+        ecran->showCursor(TRUE);
     }
 }
 

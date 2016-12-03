@@ -57,36 +57,29 @@ void BoardGame::display(BITMAP* buffer, int disp_mod,Console*pEcran)
 
     (void)disp_mod;
 
+    pEcran->setColor(COLOR_NDEFAULT);
+
     for(int i=0;i<NTAILLE;i++)
     {
         for(int j=0; j<NTAILLE;j++)
         {
-                posx=2*(MULTIPLICATOR)*i+2*(i+1)+MULTIPLICATOR/2+MARGINBOARDX;
+                posx=(2*(MULTIPLICATOR)*i)+i+MULTIPLICATOR+MARGINBOARDX;
                 posy=(MULTIPLICATOR)*j+(j+1)+MULTIPLICATOR/2+MARGINBOARDY;
             pEcran->gotoLigCol(posy,posx);
             if(Getmap(i,j)!=NULL)
                 std::cout<<Getmap(i,j)->Getstring(); ///PUT BOARD[x][y] HERE!!!
                 else
-                std::cout<<"00";
+                std::cout<<"  ";
         }
     }
-    pEcran->gotoLigCol(MARGINBOARDY+5+NTAILLE*MULTIPLICATOR,MARGINBOARDX);
-
-           /* if((i==MULTIPLICATOR/2+MULTIPLICATOR*(i/MULTIPLICATOR))
-                    &&(j==(MULTIPLICATOR/2)+MULTIPLICATOR*(j/MULTIPLICATOR)))
-            {
-
-                x++;
-
-            }
-            else */
+    pEcran->setColor(COLOR_DEFAULT);
+    pEcran->gotoLigCol(1+MARGINBOARDY+NTAILLE+NTAILLE*MULTIPLICATOR,MARGINBOARDX);
 }
 
 
 int BoardGame::boardCons(Console*pConsole)
 {
     int shift=0;
-    int x=0,y=0;
 
     pConsole->gotoLigCol(MARGINBOARDY,MARGINBOARDX);
     for(int i=0; i<NTAILLE*MULTIPLICATOR; i++)
@@ -112,9 +105,6 @@ int BoardGame::boardCons(Console*pConsole)
             pConsole->setColor(COLOR_BLUE);
 
         }
-        x=0;
-        if(i==(MULTIPLICATOR/2)+MULTIPLICATOR*(i/MULTIPLICATOR))
-        y++;
         std::cout<<"\xBA"/*<<std::endl*/;
     }
     pConsole->gotoLigCol(MARGINBOARDY+shift+NTAILLE*MULTIPLICATOR,MARGINBOARDX);
@@ -128,15 +118,18 @@ int BoardGame::boardCons(Console*pConsole)
 
 int BoardGame::stockCons(Console*pConsole,int x0, int y0)
 {
-    int xsave=1;
-    pConsole->gotoLigCol(x0,y0);
+    int ysave=1;
+    pConsole->gotoLigCol(y0,x0);
     std::cout<<"\xC4\xC4\xC4";
-    for(int i=0;i<5;i++)
+
+    for(int i=0;i<(NTAILLE*MULTIPLICATOR)+NTAILLE-1;i++)
     {
-        pConsole->gotoLigCol(x0+xsave,y0);
-        std::cout<<"\xB3"<<"P"<<"\xB3";
-        xsave++;
+        pConsole->gotoLigCol(y0+ysave,x0);
+        std::cout<<"\xB3"<<" "<<"\xB3";
+        ysave++;
     }
+    pConsole->gotoLigCol(y0+ysave,x0);
+    std::cout<<"\xC4\xC4\xC4";
 
     return 0;
 }
