@@ -62,7 +62,6 @@ void Pawn::display(BITMAP* dest)
 
 int Pawn::push(BoardGame& board,char direction,char order, float power_sum, bool first)
 {
-    std::cout<<"PAWN PUSH                         "<<std::endl;
     int add_x,add_y, result;
     float bonus_strength;
     add_x= (direction==1 || direction==-1? direction : 0);
@@ -70,8 +69,6 @@ int Pawn::push(BoardGame& board,char direction,char order, float power_sum, bool
 
 
     bonus_strength=m_strength*(direction==m_Orientation? 1 : (direction == -m_Orientation ? -1 : 0)); // Calcul de l(influence sur la poussée
-    std::cout<<  "bonus strength " << power_sum<<"m_x " <<m_x << "addx" << add_x <<"  m_y "<< m_y << "addy" << add_y << std::endl;
-    system("pause");
     if(order==1)//move
     {
         if(power_sum+bonus_strength>0) //Si la pièce laisse la possibilité de pousser derrière
@@ -82,8 +79,6 @@ int Pawn::push(BoardGame& board,char direction,char order, float power_sum, bool
                 {
                     board.Setmap(m_x,m_y,NULL);
                     board.Setmap(m_x+add_x,m_y+add_y,(Piece*)this);
-                    std::cout<<  "strength " << power_sum <<"  m_x " <<m_x <<"  m_y "<< m_y << std::endl << "   team: " << Getteam() ;
-                    system("pause");
                     return 1;
 
                 }
@@ -105,21 +100,24 @@ int Pawn::push(BoardGame& board,char direction,char order, float power_sum, bool
                     else return -1;
                 }
             }
-            else
+            else if(!first)
             {
                 board.Setmap(m_x,m_y,NULL);
                 m_wielder->AddstockPiece(this);
                 m_state=false;
                 return 1;
             }
+            else return -1;
         }
-        else if(board.Getmap(m_x+add_x,m_y+add_y)==NULL && first==true)
+        else if(m_x+add_x>=0 && m_x+add_x<MAP_SIZEX && m_y+add_y<MAP_SIZEY && m_y+add_y>=0)
         {
-            board.Setmap(m_x,m_y,NULL);
-            board.Setmap(m_x+add_x,m_y+add_y,(Piece*)this);
-            m_x+=add_x;
-            m_y+=add_y;
-            return 1;
+            if(board.Getmap(m_x+add_x,m_y+add_y)==NULL && first==true)
+            {
+                board.Setmap(m_x,m_y,NULL);
+                board.Setmap(m_x+add_x,m_y+add_y,(Piece*)this);
+                return 1;
+            }
+            else return -1;
         }
         else return -1;
     }
@@ -133,7 +131,7 @@ int Pawn::push(BoardGame& board,char direction,char order, float power_sum, bool
         board.Setmap(m_x,m_y,NULL);
         m_wielder->AddstockPiece(this);
         m_state=false;
-                        return 1;
+        return 1;
     }
     return 0;
 }

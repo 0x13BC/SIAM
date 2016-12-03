@@ -136,10 +136,11 @@ int Player::Play_console(BoardGame& board, Console* ecran)
 //-----------------------------------WHILE BOUCLE, BOUCLE GENERALE DE JEU DU JOUER ==> DROIT DE RETRACTTIOn DE DECISION-------------
     while(boucle)
     {
-        ecran->setColor(COLOR_NDEFAULT);
+        ecran->setColor(COLOR_GREEN);
         if(GetstockPiece()==NB_PIONS_PLAYER) test=0;
         else
         {
+            ecran->gotoLigCol(0, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
             cout<< "Que souhaitez vous faire?" << endl;
             cout<< "0: faites entrer une piece" << endl;
             cout<< "1: choisissez une piece" << endl;
@@ -174,6 +175,8 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                     ecran->setColor(COLOR_WHITEANDBLACK);
                     if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
                     else cout <<"  ";
+                    ecran->gotoLigCol(0, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
+                    cout<<"                                  "<<endl;
 
                 }
                 else
@@ -193,10 +196,13 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                             if(auth_check(x,y, board)) select=1;
                             else
                             {
-                                ecran->setColor(COLOR_NDEFAULT);
-                                ecran->gotoLigCol(DECALAGE_X_TEXT, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
-                                cout<<"                                  "<<endl;
+                                ecran->setColor(COLOR_GREEN);
+                                ecran->gotoLigCol(3, 0);
                                 cout<<"choix non valide"<<endl;
+                                t=time(NULL);
+                                while(difftime(time(NULL),t)<=2);
+                                ecran->gotoLigCol(3, 0);
+                                cout<<"                "<<endl;
                             }
                         }
                         else if((win_test=board.Getmap(x,y)->push(board, direction, order,0, true))!=-1)
@@ -208,15 +214,15 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                         }
                         else
                         {
-                            ecran->setColor(COLOR_NDEFAULT);
-                            ecran->gotoLigCol(DECALAGE_X_TEXT, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
+                            ecran->setColor(COLOR_GREEN);
+                            ecran->gotoLigCol(DECALAGE_X_TEXT-3, DECALAGE_Y_TEXT+BOARD_HEIGHT);
                             cout<<"                                  "<<endl;
                             cout<<"                                  "<<endl;
-                            ecran->gotoLigCol(DECALAGE_X_TEXT, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
+                            ecran->gotoLigCol(DECALAGE_X_TEXT-2, DECALAGE_Y_TEXT+BOARD_HEIGHT);
                             cout<<"Mouvement impossible, selectionnez une autre action";
                             time_t timer=time(NULL);
                             while(difftime(time(NULL), timer)<2);
-                            ecran->gotoLigCol(DECALAGE_X_TEXT, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
+                            ecran->gotoLigCol(DECALAGE_X_TEXT-2, DECALAGE_Y_TEXT+BOARD_HEIGHT);
                             cout<<"                                                                           "<<endl;
                             select=0;
                         }
@@ -292,15 +298,15 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                         if(select) order = (!order ?  1 : order==1 ? ((x==0 || x==BOARD_WIDTH-1 || y==0 || y==BOARD_HEIGHT-1) ? 2 : 0) : 0);
                         break;
                     }
+                    ecran->setColor(COLOR_GREEN);
                     ecran->gotoLigCol(DECALAGE_X_TEXT, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
                     cout<< (char)(y+'A') << x;
                     if(select)
                     {
-                        ecran->setColor(COLOR_NDEFAULT);
                         ecran->gotoLigCol(DECALAGE_X_TEXT, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN+2);
-                        cout<< "Ordre:           ";
+                        cout<< "Ordre:                 ";
                         ecran->gotoLigCol(DECALAGE_X_TEXT, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN+2);
-                        cout<< "Ordre: " << (order==1 ? "move" : order==0? "turn only" : "remove");
+                        cout<< " Ordre: " << (order==1 ? "move" : order==0? "turn only" : "remove");
                         if(order!= 2)
                         {
                             switch(direction)
@@ -370,11 +376,14 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                         {
                             board.Setmap(x,y, m_stockPiece.top());
                             m_stockPiece.top()->Setstate(true);
+                            ecran->setColor(COLOR_GREEN);
                             ecran->gotoLigCol(0, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
                             cout<<"                                      ";
                             ecran->gotoLigCol(0, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
                             cout<<"Quelle est la direction de la pièce?";
                             turnPiece(m_stockPiece.top(),ecran);
+                            ecran->gotoLigCol(0, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
+                            cout<<"                                      ";
                             m_stockPiece.pop();
                             ecran->setColor(COLOR_NDEFAULT);
                             ecran->gotoLigCol((MULTIPLICATOR)*y+(y+1)+MULTIPLICATOR/2+MARGINBOARDY,(2*(MULTIPLICATOR)*x)+x+MULTIPLICATOR+MARGINBOARDX);
@@ -391,6 +400,7 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                             else if(y!=0 && y!=BOARD_HEIGHT-1) m_stockPiece.top()->SetOrientation(x? -1: 1);
                             else
                             {
+                                ecran->setColor(COLOR_GREEN);
                                 ecran->gotoLigCol(0, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
                                 cout<<"                                      ";
                                 ecran->gotoLigCol(0, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
@@ -410,6 +420,7 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                             }
                             else
                             {
+                                ecran->setColor(COLOR_GREEN);
                                 ecran->gotoLigCol(0, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
                                 cout<<"                                      ";
                                 ecran->gotoLigCol(0, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
