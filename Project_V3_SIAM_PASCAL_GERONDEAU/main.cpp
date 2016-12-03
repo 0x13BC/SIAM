@@ -27,6 +27,8 @@ int main()
 
     system("color 20");
 
+    jeu.homepage(20,5);
+
     int choice=0;
         do
         {

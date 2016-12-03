@@ -32,6 +32,7 @@ class Game
 
         //METHODS
         void win_display(int winner);
+        void homepage(int x0, int y0);
         void start();
         void test();
 
