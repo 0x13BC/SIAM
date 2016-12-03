@@ -238,7 +238,7 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                         {
                             if(!select) y--;
                         }
-                         direction=-2;
+                        direction=-2;
                         test2=1;
 
                         break;
@@ -289,7 +289,7 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                         break;
 
                     case ' ':
-                        if(select) order = (order ?  0 : 1);
+                        if(select) order = (!order ?  1 : order==1 ? ((x==0 || x==BOARD_WIDTH-1 || y==0 || y==BOARD_HEIGHT-1) ? 2 : 0) : 0);
                         break;
                     }
                     ecran->gotoLigCol(DECALAGE_X_TEXT, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
@@ -300,21 +300,24 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                         ecran->gotoLigCol(DECALAGE_X_TEXT, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN+1);
                         cout<< "Ordre:           ";
                         ecran->gotoLigCol(DECALAGE_X_TEXT, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN+1);
-                        cout<< "Ordre: " << (order ? "move" : "turn only");
-                        switch(direction)
+                        cout<< "Ordre: " << (order ? "move" : oreder==0? "turn only" : "remove");
+                        if(order!= 2)
                         {
-                        case -2:
-                            cout << " up";
-                            break;
-                        case -1:
-                            cout << " left";
-                            break;
-                        case 2:
-                            cout << " down";
-                            break;
-                        case 1:
-                            cout << " right";
-                            break;
+                            switch(direction)
+                            {
+                            case -2:
+                                cout << " up";
+                                break;
+                            case -1:
+                                cout << " left";
+                                break;
+                            case 2:
+                                cout << " down";
+                                break;
+                            case 1:
+                                cout << " right";
+                                break;
+                            }
                         }
 
                     }
