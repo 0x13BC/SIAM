@@ -27,11 +27,11 @@ std::string Mountain::Getstring()
     return "MM";
 }
 
-void Mountain::display(BITMAP* dest,int disp_mod, Console* ecran)
+void Mountain::display(BITMAP* dest)
 {
 
 }
-int Mountain::push(BoardGame& board,char direction,char order, int power_sum)
+int Mountain::push(BoardGame& board,char direction,char order, int power_sum, bool first)
 {
     int add_x,add_y, bonus_strength, result;
     add_x= (direction==1 || direction==-1? direction : 0);
@@ -51,7 +51,7 @@ int Mountain::push(BoardGame& board,char direction,char order, int power_sum)
             }
             else
             {
-                if((result=board.Getmap(m_x+add_x,m_y+add_y)->push(board, direction, order, power_sum+bonus_strength))==1)//si la case d'après est d'accord
+                if((result=board.Getmap(m_x+add_x,m_y+add_y)->push(board, direction, order, power_sum+bonus_strength,false))==1)//si la case d'après est d'accord
                 {
                     board.Setmap(m_x+add_x,m_y+add_y,(Piece*)this);
                     board.Setmap(m_x,m_y,NULL);
@@ -66,6 +66,14 @@ int Mountain::push(BoardGame& board,char direction,char order, int power_sum)
         else return 2;
 
     }
+    else if(first && board.Getmap(m_x+add_x,m_y+add_y)==NULL)
+        {
+                board.Setmap(m_x,m_y,NULL);
+                board.Setmap(m_x+add_x,m_y+add_y,(Piece*)this);
+                m_x+=add_x;
+                m_y+=add_y;
+                return 1;
+            }
     else return -1;
 
     return 0;
