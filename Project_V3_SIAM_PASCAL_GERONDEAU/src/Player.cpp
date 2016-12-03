@@ -132,6 +132,7 @@ int Player::Play_console(BoardGame& board, Console* ecran)
     char order=1;
     char direction=1;
     int select=0;
+    time_t t;
     ecran->gotoLigCol(0, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
 //-----------------------------------WHILE BOUCLE, BOUCLE GENERALE DE JEU DU JOUER ==> DROIT DE RETRACTTIOn DE DECISION-------------
     while(boucle)
@@ -149,8 +150,13 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                 test=ecran->getInputKey();
                 if(test!='0' && test!='1')
                 {
-                    ecran->gotoLigCol(0, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN+3);
+                    ecran->gotoLigCol(3, 0);
                     cout<<"Saisie invalide, recommencez";
+                    t=time(NULL);
+                    while(difftime(time(NULL),t)<=0.5);
+                    ecran->gotoLigCol(3, 0);
+                    cout<<"                             "<<endl;
+
                 }
                 if(test==27) return -1; ///OU CALL PAUSE ==> PAUSE DANS GAME OU PAS?
             }
