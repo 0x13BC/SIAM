@@ -80,7 +80,6 @@ void BoardGame::display(BITMAP* buffer, int disp_mod,Console*pEcran)
 int BoardGame::boardCons(Console*pConsole)
 {
     int shift=0;
-    int x=0,y=0;
 
     pConsole->gotoLigCol(MARGINBOARDY,MARGINBOARDX);
     for(int i=0; i<NTAILLE*MULTIPLICATOR; i++)
@@ -106,9 +105,6 @@ int BoardGame::boardCons(Console*pConsole)
             pConsole->setColor(COLOR_BLUE);
 
         }
-        x=0;
-        if(i==(MULTIPLICATOR/2)+MULTIPLICATOR*(i/MULTIPLICATOR))
-        y++;
         std::cout<<"\xBA"/*<<std::endl*/;
     }
     pConsole->gotoLigCol(MARGINBOARDY+shift+NTAILLE*MULTIPLICATOR,MARGINBOARDX);

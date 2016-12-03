@@ -27,7 +27,7 @@ std::string Mountain::Getstring()
     return "MM";
 }
 
-void Mountain::display(BITMAP* dest)
+void Mountain::display(BITMAP* dest,int disp_mod, Console* ecran)
 {
 
 }
