@@ -14,7 +14,7 @@ enum Color
     COLOR_PURPLE = 6,
     COLOR_DEFAULT = 7, // gris couleur de base de la console
     COLOR_NDEFAULT =8, // Fond gris
-    COLOR_WHITEANDBLACK=9,
+    COLOR_WHITEANDBLACK=9;
 };
 
 class Console

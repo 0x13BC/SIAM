@@ -78,6 +78,10 @@ void Console::showCursor(bool visible)
 void Console::_setColor(int back, int front)
 {
     HANDLE H=GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_CURSOR_INFO ci;
+    ci.bVisible=FALSE;
+    ci.dwSize=100;
+    SetConsoleCursorInfo(H,&ci);
     SetConsoleTextAttribute(H,front*16+back);
 }
 

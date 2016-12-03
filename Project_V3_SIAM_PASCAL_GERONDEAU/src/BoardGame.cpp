@@ -9,6 +9,7 @@ BoardGame::BoardGame()
     for(int i=1;i<4;i++)
         m_map[i][2]= new Mountain(NULL);
     //ctor
+    std::cout<<"ctor BoardGame();Map size: "<< m_map.size()<<std::endl;
 }
 
 BoardGame::~BoardGame()
@@ -132,12 +133,4 @@ int BoardGame::stockCons(Console*pConsole,int x0, int y0)
 
     return 0;
 }
-
-int BoardGame::stockDispCons(Console* pConsole,int x0,int y0)
-{
-
-    return 0;
-}
-
-
 
