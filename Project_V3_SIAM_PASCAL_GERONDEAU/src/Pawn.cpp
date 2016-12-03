@@ -79,13 +79,13 @@ int Pawn::push(BoardGame& board,char direction,char order, float power_sum, bool
                 {
                     board.Setmap(m_x,m_y,NULL);
                     board.Setmap(m_x+add_x,m_y+add_y,(Piece*)this);
-                    return 1;
+                    return 0;
 
                 }
 
                 else
                 {
-                    if((result=board.Getmap(m_x+add_x,m_y+add_y)->push(board, direction, order, power_sum+bonus_strength, false))==1)//si la case d'après est d'accord
+                    if((result=board.Getmap(m_x+add_x,m_y+add_y)->push(board, direction, order, power_sum+bonus_strength, false))<=1)//si la case d'après est d'accord
                     {
                         board.Setmap(m_x,m_y,NULL);
                         board.Setmap(m_x+add_x,m_y+add_y,(Piece*)this);
@@ -111,11 +111,11 @@ int Pawn::push(BoardGame& board,char direction,char order, float power_sum, bool
         }
         else if(m_x+add_x>=0 && m_x+add_x<MAP_SIZEX && m_y+add_y<MAP_SIZEY && m_y+add_y>=0)
         {
-            if(board.Getmap(m_x+add_x,m_y+add_y)==NULL && first==true)
+            if(board.Getmap(m_x+add_x,m_y+add_y)==NULL && first)
             {
                 board.Setmap(m_x,m_y,NULL);
                 board.Setmap(m_x+add_x,m_y+add_y,(Piece*)this);
-                return 1;
+                return 0;
             }
             else return -1;
         }

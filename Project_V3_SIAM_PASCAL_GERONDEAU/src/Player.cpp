@@ -12,6 +12,7 @@ using namespace std;
 
 
 Player::Player(int type)
+    :m_team(type)
 {
     for(unsigned int i=0; i<NB_PIONS_PLAYER; i++) m_stockPiece.push(new Pawn(create_bitmap(10,10), type, this));
 }
@@ -30,13 +31,13 @@ Player::Player(const Player& other)
 //-------------------------------------SETTERS-&-GETTERS-------------------------------------//
 
 
-unsigned int Player::GetnbrOut()
+unsigned int Player::Getteam()
 {
-    return m_nbrOut;
+    return m_team;
 }
-void Player::SetnbrOut(unsigned int val)
+void Player::Setteam(unsigned int val)
 {
-    m_nbrOut = val;
+    m_team = val;
 }
 int Player::GetstockPiece()
 {
@@ -131,13 +132,20 @@ int Player::Play_console(BoardGame& board, Console* ecran)
     int x=0, y=0;
     char order=1;
     char direction=1;
+    char direction_save=1;
+    Piece* buff=NULL;
     int select=0;
+    int order_save=order;
     time_t t;
-    ecran->gotoLigCol(0, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
+    ecran->showCursor(false);
 //-----------------------------------WHILE BOUCLE, BOUCLE GENERALE DE JEU DU JOUER ==> DROIT DE RETRACTTIOn DE DECISION-------------
     while(boucle)
     {
         ecran->setColor(COLOR_GREEN);
+        ecran->gotoLigCol(0,0);
+        std::cout<<"              ";
+        ecran->gotoLigCol(0,0);
+        std::cout<< (m_team==RHINOCEROS ? "Tour RHINO" : "TOUR ELEPHANT");
         if(GetstockPiece()==NB_PIONS_PLAYER) test=0;
         else
         {
@@ -148,7 +156,7 @@ int Player::Play_console(BoardGame& board, Console* ecran)
             while(test!='0' && test!='1')
             {
                 test=ecran->getInputKey();
-                if(test!='0' && test!='1')
+                if(test!='0' && test!='1' && test!=27)
                 {
                     ecran->gotoLigCol(3, 0);
                     cout<<"Saisie invalide, recommencez";
@@ -172,9 +180,10 @@ int Player::Play_console(BoardGame& board, Console* ecran)
         {
             time_t t=time(NULL);
 //----------------------------------------------------WHILE TEST BOUCLE DE SELECTION DE CASE--------------------------------------------
-            ecran->showCursor(false);
+
             while(test)
             {
+
                 ecran->gotoLigCol((MULTIPLICATOR)*y+(y+1)+MULTIPLICATOR/2+MARGINBOARDY,(2*(MULTIPLICATOR)*x)+x+MULTIPLICATOR+MARGINBOARDX);
                 if(test2)
                 {
@@ -191,6 +200,50 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                     if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
                     else cout <<"  ";
                 }
+
+                if(test)
+                {
+                    ecran->setColor(COLOR_GREEN);
+                    ecran->gotoLigCol(DECALAGE_X_TEXT, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
+                    cout<< (char)(y+'A') << x;
+                }
+                if(select)
+                {
+                    if(order!=order_save || direction!= direction_save)
+                    {
+                        ecran->gotoLigCol(DECALAGE_X_TEXT, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN+2);
+                        cout<< "Ordre:                    ";
+                        order_save=order;
+                        direction_save=direction;
+                    }
+                    ecran->gotoLigCol(DECALAGE_X_TEXT, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN+2);
+                    cout<< " Ordre: " << (order==1 ? "move" : order==0? "turn only" : "remove");
+                    if(order!= 2)
+                    {
+                        switch(direction)
+                        {
+                        case -2:
+                            cout << " up";
+                            break;
+                        case -1:
+                            cout << " left";
+                            break;
+                        case 2:
+                            cout << " down";
+                            break;
+                        case 1:
+                            cout << " right";
+                            break;
+                        }
+                    }
+
+                }
+                else
+                {
+                    ecran->gotoLigCol(DECALAGE_X_TEXT, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN+2);
+                    cout<< "                       ";
+                }
+
                 if(ecran->isKeyboardPressed())
                 {
                     touche=ecran->getInputKey();
@@ -211,8 +264,20 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                                 cout<<"                "<<endl;
                             }
                         }
-                        else if((win_test=board.Getmap(x,y)->push(board, direction, order,0, true))!=-1)
+                        else if((win_test=(buff=board.Getmap(x,y))->push(board, direction, order,0, true))!=-1)
                         {
+                            if(win_test==0)
+                            {
+                                ecran->setColor(COLOR_GREEN);
+                                ecran->gotoLigCol(0, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
+                                cout<<"Quelle est la direction de la piece?";
+                                turnPiece(buff,ecran);
+                                ecran->gotoLigCol(0, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
+                                cout<<"                                      ";
+                            }
+                            ecran->setColor(COLOR_GREEN);
+                            ecran->gotoLigCol(DECALAGE_X_TEXT, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
+                            cout<<"                                 ";
                             board.boardCons(ecran);
                             board.display(NULL,0,ecran);
                             test=0;
@@ -236,7 +301,10 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                     case 27: //escape
                         if(!select)
                         {
-                            test=0; //EXIT BOUCLE SELECTION CASE, RETOUR CHOIX DE L'ACTION
+                            test=0;
+                            ecran->setColor(COLOR_GREEN);
+                            ecran->gotoLigCol(DECALAGE_X_TEXT, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
+                            cout<<"   "; //EXIT BOUCLE SELECTION CASE, RETOUR CHOIX DE L'ACTION
                         }
                         else select=0;
                     case 'z':
@@ -304,45 +372,18 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                         if(select) order = (!order ?  1 : order==1 ? ((x==0 || x==BOARD_WIDTH-1 || y==0 || y==BOARD_HEIGHT-1) ? 2 : 0) : 0);
                         break;
                     }
-                    ecran->setColor(COLOR_GREEN);
-                    ecran->gotoLigCol(DECALAGE_X_TEXT, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
-                    cout<< (char)(y+'A') << x;
-                    if(select)
-                    {
-                        ecran->gotoLigCol(DECALAGE_X_TEXT, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN+2);
-                        cout<< "Ordre:                 ";
-                        ecran->gotoLigCol(DECALAGE_X_TEXT, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN+2);
-                        cout<< " Ordre: " << (order==1 ? "move" : order==0? "turn only" : "remove");
-                        if(order!= 2)
-                        {
-                            switch(direction)
-                            {
-                            case -2:
-                                cout << " up";
-                                break;
-                            case -1:
-                                cout << " left";
-                                break;
-                            case 2:
-                                cout << " down";
-                                break;
-                            case 1:
-                                cout << " right";
-                                break;
-                            }
-                        }
-
-                    }
-
                 }
+
                 if(difftime(time(NULL),t) >= 0.2)
                 {
                     test2= (test2 ? 0 : 1);
                     t=time(NULL);
                 }
 
+
+
             }
-            ecran->showCursor(true);
+
         }
         else
         {
@@ -386,7 +427,7 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                             ecran->gotoLigCol(0, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
                             cout<<"                                      ";
                             ecran->gotoLigCol(0, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
-                            cout<<"Quelle est la direction de la pièce?";
+                            cout<<"Quelle est la direction de la piece?";
                             turnPiece(m_stockPiece.top(),ecran);
                             ecran->gotoLigCol(0, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
                             cout<<"                                      ";
@@ -497,9 +538,10 @@ int Player::Play_console(BoardGame& board, Console* ecran)
 
                 ///FAIRE RENTRER UNE PIECE
             }
-            ecran->showCursor(TRUE);
+
         }
     }
+    ecran->showCursor(true);
 
     return (win_test==1 || win_test==2 ? 0 : win_test); //SI win_test==1 ou 2 le win n'est pas apparu, c'est juste que le mouvement s'est fait, il faut qu'il vaille 3 ou 4 pour que ça soit significatif
 }

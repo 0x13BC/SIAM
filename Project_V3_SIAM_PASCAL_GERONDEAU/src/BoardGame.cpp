@@ -145,7 +145,7 @@ int BoardGame::stockCons(Console*pConsole,int x0, int y0)
 
 int BoardGame::stockDispCons(Console* pConsole,int x0,int y0,int team,int nbr)
 {
-
+    pConsole->setColor(COLOR_WHITEANDBLACK);
     x0++;
     if(team==ELEPHANT)
     {

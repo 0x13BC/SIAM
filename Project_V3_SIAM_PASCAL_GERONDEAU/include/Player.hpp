@@ -15,7 +15,7 @@ class Player
 
         // ATTRIBUTES
 
-        unsigned int m_nbrOut;
+        unsigned int m_team;
         std::stack <Pawn*> m_stockPiece;
         void turnPiece(Piece* pion, Console* ecran);
 
@@ -28,8 +28,8 @@ class Player
         Player(const Player& other);
 
         //SETTERS & GETTERS
-        unsigned int GetnbrOut() ;
-        void SetnbrOut(unsigned int val) ;
+        unsigned int Getteam() ;
+        void Setteam(unsigned int val) ;
         int GetstockPiece() ;
         void AddstockPiece(Pawn* val) ;
         Pawn* GivePawn();
