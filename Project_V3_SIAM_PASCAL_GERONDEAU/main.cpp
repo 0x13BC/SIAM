@@ -13,12 +13,21 @@ void getCursorXY(int &x, int&y) {
 		}
 }
 
+void options(Game jeu, Console* ecran)
+{
+    char choix;
+    if(allegro_mod)cout<< "Voulez-vous passer en mode graphique?" << endl;
+    else cout<<"Voulez-vous quitter le mode graphique?" << endl;
+    cout << "(1) Oui" << endl
+    << "(2) Non" << endl;
+    choix=ecran->getInputKey();
+    if(choix=='1')jeu.SetdisplayMod((jeu.GetdisplayMod()? 0:1));
+}
 int main()
 {
     allegro_init();
     install_mouse();
     install_keyboard();
-    set_gfx_mode(GFX_AUTODETECT_WINDOWED, 400, 600,0,0);
     Console*pEcran=NULL;
     pEcran = Console::getInstance();
     Game jeu(pEcran);
@@ -35,10 +44,9 @@ int main()
             cout<<"Enter your choice:"<<endl
                  <<"                    (1).Jouer."<<endl
                  <<"                    (2).Option."<<endl
-                 <<"                    (3).Test curseur."<<endl
                  <<"                    (0).Quit."<<endl
                  <<"Choice:";
-            cin>>choice;
+            choice=pEcran->getInputKey();
 
             switch(choice)
             {
@@ -50,6 +58,11 @@ int main()
                 jeu.start();
 
             break;
+            case 2:
+                system("cls");
+                options(jeu, pEcran);
+
+                break;
             case 3:
                 GetCursorPos(&lol);///CAN BE DESTROYED
                 pEcran->gotoLigCol(10,0);
@@ -71,7 +84,7 @@ int main()
 
     remove_mouse();
     remove_keyboard();
-    allegro_exit();
+    //allegro_exit();
     Console::deleteInstance();
     system("color 20");
 
