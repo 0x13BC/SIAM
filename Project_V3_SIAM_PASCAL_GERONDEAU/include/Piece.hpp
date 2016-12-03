@@ -44,7 +44,7 @@ class Piece
         virtual void SetOrientation(int orientation)=0;
         virtual std::string Getstring()=0;
         virtual void display(BITMAP* dest)=0;
-        virtual int push(BoardGame& board,char direction,char order, int power_sum)=0;
+        virtual int push(BoardGame& board,char direction,char order, int power_sum, bool first)=0;
 
 };
 

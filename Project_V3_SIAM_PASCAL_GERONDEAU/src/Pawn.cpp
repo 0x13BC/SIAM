@@ -60,7 +60,7 @@ void Pawn::display(BITMAP* dest)
 
 
 
-int Pawn::push(BoardGame& board,char direction,char order, int power_sum)
+int Pawn::push(BoardGame& board,char direction,char order, int power_sum, bool first)
 {
     int add_x,add_y, bonus_strength, result;
     add_x= (direction==1 || direction==-1? direction : 0);
@@ -68,15 +68,13 @@ int Pawn::push(BoardGame& board,char direction,char order, int power_sum)
     bonus_strength=m_strength*(direction==m_Orientation? 1 : (direction == -m_Orientation ? -1 : 0)); // Calcul de l(influence sur la poussée
     if(order==1)//move
     {
-        if(m_strength+bonus_strength>0) //Si la pièce laisse la possibilité de pousser derrière
+        if(power_sum+bonus_strength>0) //Si la pièce laisse la possibilité de pousser derrière
         {
             if(m_x+add_x>=0 && m_x+add_x<MAP_SIZEX && m_y+add_y<MAP_SIZEY && m_y+add_y>=0)
             {
                 if(board.Getmap(m_x+add_x,m_y+add_y)==NULL) //EN ADMETTANT QU'ON INITIALISE TOUT LE TABLEAU + LES CASES IMMEDIATEMENT A L'EXTERIEUR A NULL
                 {
                     board.Setmap(m_x,m_y,NULL);
-
-
                     board.Setmap(m_x+add_x,m_y+add_y,(Piece*)this);
                     m_x+=add_x;
                     m_y+=add_y;
@@ -86,7 +84,7 @@ int Pawn::push(BoardGame& board,char direction,char order, int power_sum)
 
                 else
                 {
-                    if((result=board.Getmap(m_x+add_x,m_y+add_y)->push(board, direction, order, power_sum+bonus_strength))==1)//si la case d'après est d'accord
+                    if((result=board.Getmap(m_x+add_x,m_y+add_y)->push(board, direction, order, power_sum+bonus_strength, false))==1)//si la case d'après est d'accord
                     {
                         board.Setmap(m_x+add_x,m_y+add_y,(Piece*)this);
                         board.Setmap(m_x,m_y,NULL);
@@ -108,6 +106,16 @@ int Pawn::push(BoardGame& board,char direction,char order, int power_sum)
                 m_state=false;
                 return 1;
             }
+        }
+        else if(board.Getmap(m_x+add_x,m_y+add_y)==NULL && first==true)
+        {
+            board.Setmap(m_x,m_y,NULL);
+
+
+                    board.Setmap(m_x+add_x,m_y+add_y,(Piece*)this);
+                    m_x+=add_x;
+                    m_y+=add_y;
+                    return 1;
         }
         else return -1;
     }
