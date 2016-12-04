@@ -58,12 +58,14 @@ Pawn* Player::GivePawn()
 
 bool Player::auth_check(int x, int y, BoardGame& board)
 {
-    if(board.Getmap(x,y)!= NULL)
+
+      if(board.Getmap(x,y)!= NULL)
     {
-        if(board.Getmap(x,y)->Getteam()==m_stockPiece.top()->Getteam()) return TRUE;
+        if(board.Getmap(x,y)->Getteam()==m_team) return TRUE;
         else return FALSE;
     }
     return FALSE;
+
 }
 
 void Player::harvest(unsigned int dispMod, BoardGame& board)
@@ -147,11 +149,15 @@ int Player::Play_console(BoardGame& board, Console* ecran)
         std::cout<<"              ";
         ecran->gotoLigCol(0,0);
         std::cout<< (m_team==RHINOCEROS ? "Tour RHINO" : "TOUR ELEPHANT");
-        if(GetstockPiece()==NB_PIONS_PLAYER) test=0;
+        if(GetstockPiece()==NB_PIONS_PLAYER ) test=0;
         else
         {
-            ecran->gotoLigCol(0, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
+            if(!GetstockPiece())test=1;
+            else
+            {
+                ecran->gotoLigCol(0, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
             cout<< "Que souhaitez vous faire?" << endl;
+
             cout<< "0: faites entrer une piece" << endl;
             cout<< "1: choisissez une piece" << endl;
             while(test!='0' && test!='1')
@@ -167,6 +173,8 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                     cout<<"                             "<<endl;
 
                 }
+            }
+
                 if(test==27) return -1; ///OU CALL PAUSE ==> PAUSE DANS GAME OU PAS?
             }
             //clear weiting zone
