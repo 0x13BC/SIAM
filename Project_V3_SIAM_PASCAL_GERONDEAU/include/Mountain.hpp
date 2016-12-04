@@ -24,7 +24,7 @@ class Mountain : virtual public Piece
         std::string Getstring();
         void display(BITMAP* dest);
         int push(BoardGame& board,char direction,char order, float power_sum, bool first);
-        void SetOrientation(int x){} //Unused virtual function
+        void SetOrientation(int x){(void)x;} //Unused virtual function
 
 
 

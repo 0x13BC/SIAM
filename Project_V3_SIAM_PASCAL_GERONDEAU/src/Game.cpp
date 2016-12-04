@@ -43,7 +43,7 @@ void Game::start()
 {
 
      BITMAP* buffer;
-     if(allegro_mod)
+     if(GetdisplayMod())
      {
         set_gfx_mode(GFX_AUTODETECT_WINDOWED, 1000, 600,0,0);
         buffer=create_bitmap(SCREEN_W,SCREEN_H);
@@ -51,7 +51,7 @@ void Game::start()
 
     Player rhino(1);
     Player elephant(2);
-    if(!allegro_mod)
+    if(!GetdisplayMod())
     {
         m_BG.boardCons(m_ecran);
         m_BG.stockCons(m_ecran,MARGINBOARDX-3,MARGINBOARDY);
@@ -68,12 +68,12 @@ void Game::start()
     while(!win) //BOUCLE DE JEU
     {
         win=elephant.Play(GetdisplayMod() ,m_BG, m_ecran);
-        if(!allegro_mod) m_BG.stockDispCons(m_ecran ,MARGINBOARDX-3,MARGINBOARDY,ELEPHANT,elephant.GetstockPiece());
+        if(!GetdisplayMod()) m_BG.stockDispCons(m_ecran ,MARGINBOARDX-3,MARGINBOARDY,ELEPHANT,elephant.GetstockPiece());
 
         if(win==3 || win==4) return win_display(win);
         else
             {win=rhino.Play(GetdisplayMod() ,m_BG, m_ecran);
-                if(!allegro_mod) m_BG.stockDispCons(m_ecran,MARGINBOARDX+2*NTAILLE*MULTIPLICATOR+NTAILLE+1,MARGINBOARDY,RHINOCEROS,rhino.GetstockPiece());
+                if(!GetdisplayMod()) m_BG.stockDispCons(m_ecran,MARGINBOARDX+2*NTAILLE*MULTIPLICATOR+NTAILLE+1,MARGINBOARDY,RHINOCEROS,rhino.GetstockPiece());
             }
         if(win==3 || win==4) return win_display(win);
         m_BG.display(buffer, GetdisplayMod(),m_ecran);

@@ -124,6 +124,7 @@ int Pawn::push(BoardGame& board,char direction,char order, float power_sum, bool
     else if(order==0)
     {
         m_Orientation=direction;
+        return 1;
 
     }
     else if(order==2)

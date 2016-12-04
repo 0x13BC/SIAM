@@ -13,10 +13,10 @@ void getCursorXY(int &x, int&y) {
 		}
 }
 
-void options(Game jeu, Console* ecran)
+void options(Game& jeu, Console* ecran)
 {
     char choix;
-    if(allegro_mod)cout<< "Voulez-vous passer en mode graphique?" << endl;
+    if(jeu.GetdisplayMod())cout<< "Voulez-vous passer en mode graphique?" << endl;
     else cout<<"Voulez-vous quitter le mode graphique?" << endl;
     cout << "(1) Oui" << endl
     << "(2) Non" << endl;
@@ -50,7 +50,7 @@ int main()
 
             switch(choice)
             {
-            case 1:
+            case '1':
 
                 system("cls");
 
@@ -58,20 +58,20 @@ int main()
                 jeu.start();
 
             break;
-            case 2:
+            case '2':
                 system("cls");
                 options(jeu, pEcran);
 
                 break;
-            case 3:
+            /*case '3':
                 GetCursorPos(&lol);///CAN BE DESTROYED
                 pEcran->gotoLigCol(10,0);
                 getCursorXY(x,y);
                 std::cout<<lol.x<<" "<<lol.y<<std::endl;///CAN BE DESTROYED
 
                 std::cout<<x<<" "<<y;
-            break;
-            case 0:
+            break;*/
+            case '0':
                 cout<<"Quit..."<<endl;
                 break;
             default:
@@ -80,7 +80,7 @@ int main()
             break;
             }
 
-        }while(choice!=0);
+        }while(choice!='0');
 
     remove_mouse();
     remove_keyboard();

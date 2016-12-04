@@ -29,7 +29,7 @@ std::string Mountain::Getstring()
 
 void Mountain::display(BITMAP* dest)
 {
-
+    (void)dest;
 }
 int Mountain::push(BoardGame& board,char direction,char order, float power_sum, bool first)
 {

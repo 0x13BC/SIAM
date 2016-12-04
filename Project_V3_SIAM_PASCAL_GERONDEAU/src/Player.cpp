@@ -212,7 +212,7 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                     if(order!=order_save || direction!= direction_save)
                     {
                         ecran->gotoLigCol(DECALAGE_X_TEXT, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN+2);
-                        cout<< "Ordre:                    ";
+                        cout<< "Ordre:                 ";
                         order_save=order;
                         direction_save=direction;
                     }
