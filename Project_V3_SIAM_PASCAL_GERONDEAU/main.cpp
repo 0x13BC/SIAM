@@ -56,6 +56,7 @@ int main()
 
                 //jeu.test();
                 jeu.start();
+                jeu.reset();
 
             break;
             case '2':

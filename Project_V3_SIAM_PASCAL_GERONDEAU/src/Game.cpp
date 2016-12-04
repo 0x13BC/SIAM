@@ -83,6 +83,26 @@ void Game::start()
 
 }
 
+void Game::reset()
+{
+    for(int y=0;y<NTAILLE;y++)
+    {
+        for(int x=0;x<NTAILLE;x++)
+        {
+            if(m_BG.Getmap(x,y))
+                m_BG.Setmap(x,y,NULL);
+
+
+
+        }
+    }
+    for(int i=1;i<4;i++)
+        {
+            m_BG.Setmap(i,2,new Mountain(NULL));
+        }
+}
+
+
 void Game::test()
 {
     Pawn chocolate(NULL,1,NULL);

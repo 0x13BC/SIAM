@@ -97,7 +97,8 @@ void Player::pushPiece(unsigned int dispMod, BoardGame& board)
 void Player::turnPiece(Piece* pion, Console* ecran)
 {
     char touche=' ';
-    while(touche!='z' && touche!='q' && touche!='s' && touche!='d')
+    while(touche!='z' && touche!='q' && touche!='s' && touche!='d'
+          &&touche!='Z' && touche!='Q' && touche!='S' && touche!='D')
     {
         touche=ecran->getInputKey();
         switch(touche)
