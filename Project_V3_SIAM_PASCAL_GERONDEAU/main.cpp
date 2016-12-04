@@ -65,7 +65,7 @@ int main()
                 options(jeu, pEcran);
 
                 break;
-            /*case '3':
+          /*  case '3':
                 GetCursorPos(&lol);///CAN BE DESTROYED
                 pEcran->gotoLigCol(10,0);
                 getCursorXY(x,y);

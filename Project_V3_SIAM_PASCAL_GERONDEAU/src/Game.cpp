@@ -50,8 +50,8 @@ void Game::start()
         buffer=create_bitmap(SCREEN_W,SCREEN_H);
      }
 
-    Player rhino(1);
-    Player elephant(2);
+    Player rhino(RHINOCEROS);
+    Player elephant(ELEPHANT);
     if(!GetdisplayMod())
     {
         m_BG.boardCons(m_ecran);
