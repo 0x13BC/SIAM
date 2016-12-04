@@ -8,18 +8,23 @@
 class Graphic
 {
     public:
+
+        // CTOR , DTOR , INIT UNINIT
         Graphic();
         ~Graphic();
 
+         static Graphic* GetInstce();
+         static void deleteInstce();
+
         int init();
-        void deinit();
+        void uninit();
 
-        void cursor(int l, int c, int color);
-
+    //SETTER & GETTER
 
         BITMAP*GetMnt();
         BITMAP*GetRhn();
         BITMAP*GetEle();
+        BITMAP*GetBoard();
 
         BITMAP*Getbuff();
         void Setbuff();
@@ -29,7 +34,8 @@ class Graphic
 
 
     private:
-        BITMAP *m_SprtRhino,*m_SprtEleph,*m_SprtBoard,*m_SprtMount,*m_buffer;
+        static Graphic* m_instance;
+        BITMAP *m_buffer,*m_SprtBoard, *m_SprtEleph,*m_SprtRhino,*m_SprtMount;
 
 
 };

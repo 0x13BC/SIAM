@@ -3,6 +3,7 @@
 
 #include "BoardGame.hpp"
 #include "Console.h"
+#include "Graphic.hpp"
 #include "Player.hpp"
 
 
@@ -12,6 +13,7 @@ class Game
         // ATTRIBUTES
 
         Console* m_ecran;
+        Graphic* m_Graphic;
         unsigned int m_displayMod;
         BoardGame m_BG;
         BITMAP* m_board_image;
@@ -22,7 +24,7 @@ class Game
     public:
         //CTOR & DTOR
 
-        Game(Console* ecran);
+        Game(Console* ecran,Graphic* graph);
         ~Game();
 
         //SETTERS & GETTERS

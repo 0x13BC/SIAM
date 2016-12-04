@@ -1,9 +1,10 @@
 #include "Game.hpp"
+#define WHITE makecol(255, 255, 255)
 
 //----------------------------------------CTOR-&-DTOR----------------------------------------//
 
-Game::Game(Console* ecran)
-: m_ecran(ecran),m_displayMod(0)
+Game::Game(Console* ecran,Graphic* graph)
+: m_ecran(ecran),m_Graphic(graph),m_displayMod(0)
 {
     //ctor
 }
@@ -42,7 +43,7 @@ void Game::win_display(int winner)
 void Game::start()
 {
 
-     BITMAP* buffer;
+     BITMAP* buffer=m_Graphic->Getbuff();
      if(GetdisplayMod())
      {
         set_gfx_mode(GFX_AUTODETECT_WINDOWED, 1000, 600,0,0);
@@ -105,21 +106,10 @@ void Game::reset()
 
 void Game::test()
 {
-    Pawn chocolate(NULL,1,NULL);
-    Pawn chocolate2(NULL,0,NULL);
-    Pawn chocolate3(NULL,0,NULL);
-    Pawn chocolate4(NULL,1,NULL);
+    if(m_Graphic->GetRhn())std::cout<<"LE rhnino existe bordel!";
 
-    Mountain vanilla(NULL);
-    m_BG.Setmap(3,0,&chocolate);
-    m_BG.Setmap(4,1,&chocolate2);
-    m_BG.Setmap(2,3,&chocolate3);
-    m_BG.Setmap(3,4,&vanilla);
-
-    m_BG.stockCons(m_ecran,MARGINBOARDX-3,MARGINBOARDY);
-    m_BG.stockCons(m_ecran,MARGINBOARDX+2*NTAILLE*MULTIPLICATOR+NTAILLE+1,MARGINBOARDY);
-    m_BG.boardCons(m_ecran);
-    m_BG.display(NULL,0,m_ecran);
+    blit(m_Graphic->GetRhn(),screen,0,0,100,100,m_Graphic->GetRhn()->w,m_Graphic->GetRhn()->h);
+    textout(screen, font, "TEST", 0, 50, WHITE);
 
 }
 

@@ -25,14 +25,15 @@ void options(Game& jeu, Console* ecran)
 }
 int main()
 {
-    allegro_init();
-    install_mouse();
-    install_keyboard();
+
+    Graphic*pGraph=NULL;
+    pGraph= Graphic::GetInstce();
+    if(!pGraph->init())cout<<"Cannot load allegro!";
+
+
     Console*pEcran=NULL;
     pEcran = Console::getInstance();
-    Game jeu(pEcran);
-    POINT lol;///CAN BE DESTROYED
-    int x,y;
+    Game jeu(pEcran,pGraph);
 
     //system("COLOR A");
     pEcran->setColor(COLOR_GREEN);
@@ -54,9 +55,9 @@ int main()
 
                 system("cls");
 
-                //jeu.test();
-                jeu.start();
-                jeu.reset();
+                jeu.test();
+                //jeu.start();
+                //jeu.reset();
 
             break;
             case '2':
@@ -83,9 +84,8 @@ int main()
 
         }while(choice!='0');
 
-    remove_mouse();
-    remove_keyboard();
-    //allegro_exit();
+    pGraph->uninit();
+    Graphic::deleteInstce();
     Console::deleteInstance();
     system("color 20");
 
