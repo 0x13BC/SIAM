@@ -142,6 +142,8 @@ int Player::Play_console(BoardGame& board, Console* ecran)
 //-----------------------------------WHILE BOUCLE, BOUCLE GENERALE DE JEU DU JOUER ==> DROIT DE RETRACTTIOn DE DECISION-------------
     while(boucle)
     {
+        x=0;
+        y=0;
         ecran->setColor(COLOR_GREEN);
         ecran->gotoLigCol(0,0);
         std::cout<<"              ";
@@ -459,14 +461,17 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                                 ecran->gotoLigCol(0, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
                                 std::cout<<"                                      ";
                                 ecran->gotoLigCol(0, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
-                                std::cout<<"Quelle est la direction de la pièce?";
+                                std::cout<<"Quelle est la direction de la piece?";
                                 turnPiece(m_stockPiece.top(),ecran);
+                                ecran->gotoLigCol(0, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
+                                std::cout<<"                                      ";
 
                             }
-                            if((win_test=board.Getmap(x,y)->push(board, m_stockPiece.top()->GetOrientation(), 1, m_stockPiece.top()->Getstrength(), false))!=-1)
+                            buff=m_stockPiece.top(); //AU CAS OU ON SORS UNE PIECE DU MEME JOUEUR
+                            if((win_test=board.Getmap(x,y)->push(board, buff->GetOrientation(), 1, buff->Getstrength(), false))!=-1)
                             {
-                                board.Setmap(x,y, m_stockPiece.top());
-                                m_stockPiece.top()->Setstate(true);
+                                board.Setmap(x,y, buff);
+                                buff->Setstate(true);
                                 m_stockPiece.pop();
                                 board.boardCons(ecran);
                                 board.display(NULL,0,ecran);
@@ -480,6 +485,10 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                                 std::cout<<"                                      ";
                                 ecran->gotoLigCol(0, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
                                 std::cout<<"Mouvement impossible!";
+                                t=time(NULL);
+                                while(difftime(time(NULL),t)<=0.5);
+                                ecran->gotoLigCol(0, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
+                                std::cout<<"                                      ";
                             }
                         }
 
