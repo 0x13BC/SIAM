@@ -74,7 +74,7 @@ void BoardGame::display(BITMAP* buffer, int disp_mod,Console*pEcran)
                 posy=(MULTIPLICATOR)*j+(j+1)+MULTIPLICATOR/2+MARGINBOARDY;
             pEcran->gotoLigCol(posy,posx);
             if(Getmap(i,j)!=NULL)
-                std::cout<<Getmap(i,j)->Getstring(); ///PUT BOARD[x][y] HERE!!!
+                std::cout<<Getmap(i,j)->Getstring();
                 else
                 std::cout<<"  ";
         }
@@ -145,6 +145,7 @@ int BoardGame::stockCons(Console*pConsole,int x0, int y0)
 
 void BoardGame::alleg_display(Graphic* Pgraph, Player* joueur)
 {
+    blit(Pgraph->GetBackground(), Pgraph->Getbuff(),0,0,0,0, SCREEN_W, SCREEN_H);
     blit(Pgraph->GetBoard(),Pgraph->Getbuff(),0,0,BOARD_X_BLIT,BOARD_Y_BLIT,Pgraph->GetBoard()->w,Pgraph->GetBoard()->h);
     for(int i=0; i<BOARD_WIDTH; i++)
     {

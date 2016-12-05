@@ -627,7 +627,6 @@ int Player::get_rotate(Piece* piece, Graphic* Pgraph)
                     {
                         blit( save_screen,Pgraph->Getbuff(),0,0,0,0, SCREEN_W, SCREEN_H);
                         destroy_bitmap(save_screen);
-                        std::cout<<"HAUT";
                         return -2;
                     }
             else if(mouse_x>board_to_screen_x(piece->Getx())-Pgraph->GetLeft()->w
@@ -637,7 +636,6 @@ int Player::get_rotate(Piece* piece, Graphic* Pgraph)
                     {
                         blit( save_screen,Pgraph->Getbuff(),0,0,0,0, SCREEN_W, SCREEN_H);
                         destroy_bitmap(save_screen);
-                        std::cout<<"GAUCHE";
                         return -1;
                     }
             else if(mouse_x>board_to_screen_x(piece->Getx())+(TILE_SIZE-Pgraph->GetDown()->w)/2
@@ -647,7 +645,6 @@ int Player::get_rotate(Piece* piece, Graphic* Pgraph)
                     {
                         blit( save_screen,Pgraph->Getbuff(),0,0,0,0, SCREEN_W, SCREEN_H);
                        destroy_bitmap(save_screen);
-                       std::cout<<"BAS";
                         return 2;
                     }
             else if(mouse_x>board_to_screen_x(piece->Getx())+(piece->Getteam()==RHINOCEROS? Pgraph->GetRhn()->w : Pgraph->GetEle()->w)
@@ -657,13 +654,12 @@ int Player::get_rotate(Piece* piece, Graphic* Pgraph)
                     {
                         blit( save_screen,Pgraph->Getbuff(),0,0,0,0, SCREEN_W, SCREEN_H);
                         destroy_bitmap(save_screen);
-                        std::cout<<"DROITE";
                         return 1;
                     }
         }
     }
     destroy_bitmap(save_screen);
-    return -1;
+    return 0;
 }
 
 fixed Player::get_angle(int orientation)
@@ -671,19 +667,15 @@ fixed Player::get_angle(int orientation)
     switch(orientation)
     {
     case 1:
-        std::cout<<"DROITE ANGLE"<<std::endl;
         return itofix(192);
         break;
     case 2:
-        std::cout<<"BAS ANGLE"<<std::endl;
         return itofix(0);
         break;
     case -1:
-        std::cout<<"GAUCHE ANGLE"<<std::endl;
         return itofix(64);
         break;
     case -2:
-        std::cout<<"HAUT ANGLE"<<std::endl;
         return itofix(128);
         break;
     }
@@ -691,18 +683,21 @@ fixed Player::get_angle(int orientation)
 }
 void Player::display_piece(Piece* piece, Graphic* Pgraph)
 {
-    std::cout<<get_angle(piece->GetOrientation());
     rotate_sprite( Pgraph->Getbuff(),(piece->Getteam()==RHINOCEROS? Pgraph->GetRhn() :(piece->Getteam()==ELEPHANT? Pgraph->GetEle() : Pgraph->GetMnt()) ), board_to_screen_x(piece->Getx()), board_to_screen_y(piece->Gety()), get_angle(piece->GetOrientation()));
 }
 
 int Player::get_action(Piece* piece, Graphic* Pgraph)
 {
     mouse_b=0;
+    int select=-1;
+    BITMAP* save_original_screen=create_bitmap(Pgraph->Getbuff()->w,Pgraph->Getbuff()->h);
+    blit(Pgraph->Getbuff(),save_original_screen,0,0,0,0, SCREEN_W, SCREEN_H);
+    BITMAP* save_screen=create_bitmap(Pgraph->Getbuff()->w,Pgraph->Getbuff()->h);
     if(piece)
     {
-    int select=-1;
-    BITMAP* save_screen=create_bitmap(Pgraph->Getbuff()->w,Pgraph->Getbuff()->h);
+
     display_piece(piece,Pgraph);
+    blit(Pgraph->Getbuff(),save_original_screen,0,0,0,0, SCREEN_W, SCREEN_H);
     draw_sprite(Pgraph->Getbuff(),Pgraph->GetRight(),board_to_screen_x(piece->Getx())-Pgraph->GetRight()->w,board_to_screen_y(piece->Gety())-Pgraph->GetRight()->h );
     draw_sprite(Pgraph->Getbuff(),Pgraph->GetTurn(),board_to_screen_x(piece->Getx())+(TILE_SIZE-Pgraph->GetTurn()->w)/2,board_to_screen_y(piece->Gety())-Pgraph->GetTurn()->h );
     draw_sprite(Pgraph->Getbuff(),Pgraph->GetUp(),board_to_screen_x(piece->Getx())+(piece->Getteam()==RHINOCEROS? Pgraph->GetRhn()->w : Pgraph->GetEle()->w),board_to_screen_y(piece->Gety())-Pgraph->GetUp()->h);
@@ -710,6 +705,7 @@ int Player::get_action(Piece* piece, Graphic* Pgraph)
     blit(Pgraph->Getbuff(),save_screen,0,0,0,0, SCREEN_W, SCREEN_H);
     while(select==-1)
     {
+        if(mouse_b&2) select=0;
         if(mouse_x>board_to_screen_x(piece->Getx())-Pgraph->GetRight()->w
                 && mouse_x<board_to_screen_x(piece->Getx())-Pgraph->GetRight()->w+Pgraph->GetRight()->w
                 && mouse_y>board_to_screen_y(piece->Gety())-Pgraph->GetRight()->h
@@ -721,6 +717,8 @@ int Player::get_action(Piece* piece, Graphic* Pgraph)
             if(mouse_b&1)
             {
                 destroy_bitmap(save_screen);
+                blit(save_original_screen,Pgraph->Getbuff(),0,0,0,0, SCREEN_W, SCREEN_H);
+                destroy_bitmap(save_original_screen);
                 return 2;
             }
         }
@@ -735,6 +733,8 @@ int Player::get_action(Piece* piece, Graphic* Pgraph)
             if(mouse_b&1)
             {
                 destroy_bitmap(save_screen);
+                blit(save_original_screen,Pgraph->Getbuff(),0,0,0,0, SCREEN_W, SCREEN_H);
+                destroy_bitmap(save_original_screen);
                 return 1;
             }
         }
@@ -750,12 +750,17 @@ int Player::get_action(Piece* piece, Graphic* Pgraph)
             if(mouse_b&1)
             {
                 destroy_bitmap(save_screen);
+                blit(save_original_screen,Pgraph->Getbuff(),0,0,0,0, SCREEN_W, SCREEN_H);
+                destroy_bitmap(save_original_screen);
                 return 0;
             }
         }
 
     }
     }
+    destroy_bitmap(save_screen);
+    blit(save_original_screen,Pgraph->Getbuff(),0,0,0,0, SCREEN_W, SCREEN_H);
+    destroy_bitmap(save_original_screen);
     return -1;
 }
 
@@ -776,8 +781,8 @@ int Player::Play_alleg(BoardGame& board, Graphic* Pgraph)
     Piece* buff;
     mouse_b=0;
     BITMAP* save_screen=create_bitmap(SCREEN_W, SCREEN_H);
-    textout_ex(Pgraph->Getbuff(), font, "                                                                            ", 2,3, COLOR_VERT, makecol(0,0,0));
-    textprintf_ex(Pgraph->Getbuff(), font, 2,3, COLOR_VERT, -1, (m_team==1 ? "TOUR RHINO Pieces restantes: %d": "TOUR ELEPHANT Pieces restantes: %d")    , m_stockPiece.size());
+    textout_ex(Pgraph->Getbuff(), font, "                                                 ", 2,3, COLOR_VERT, COLOR_CYAN);
+    textprintf_ex(Pgraph->Getbuff(), font, 2,3, COLOR_ROUGE, -1, (m_team==1 ? "TOUR RHINO Pieces restantes: %d": "TOUR ELEPHANT Pieces restantes: %d")    , m_stockPiece.size());
     blit(Pgraph->Getbuff(),save_screen,0,0,0,0, SCREEN_W, SCREEN_H);
     blit(Pgraph->Getbuff(),screen,0,0,0,0, SCREEN_W, SCREEN_H);
     show_mouse(screen);
@@ -810,7 +815,8 @@ int Player::Play_alleg(BoardGame& board, Graphic* Pgraph)
                 {
                     board.Setmap(x,y, m_stockPiece.top());
                     m_stockPiece.top()->Setstate(true);
-                    m_stockPiece.top()->SetOrientation(get_rotate(board.Getmap(x,y), Pgraph));
+                    test=get_rotate(board.Getmap(x,y), Pgraph);
+                    if(test)m_stockPiece.top()->SetOrientation(test);
                     m_stockPiece.pop();
                     test=1;
                     blit(save_screen, Pgraph->Getbuff(), 0,0,0,0, SCREEN_W, SCREEN_H);
@@ -829,28 +835,36 @@ int Player::Play_alleg(BoardGame& board, Graphic* Pgraph)
             if((select=get_action(board.Getmap(x,y), Pgraph))==1) //TURN ONLY
             {
                 blit(save_screen, Pgraph->Getbuff(), 0,0,0,0, SCREEN_W, SCREEN_H);
-                board.Getmap(x,y)->SetOrientation(get_rotate(board.Getmap(x,y), Pgraph));
-                test=1;
+                test=get_rotate(board.Getmap(x,y), Pgraph);
+                if(test)
+                {
+                    board.Getmap(x,y)->SetOrientation(test);
+                    win_test=1;
+                    test=1;
+                }
             }
             else if(select==2) // MOVE
             {
                 blit(save_screen, Pgraph->Getbuff(), 0,0,0,0, SCREEN_W, SCREEN_H);
-                if((win_test=(buff=board.Getmap(x,y))->push(board,get_rotate(board.Getmap(x,y), Pgraph), 1, 0, true))!=-1)
+                test=get_rotate(board.Getmap(x,y), Pgraph);
+                if((win_test=(buff=board.Getmap(x,y))->push(board,test, 1, 0, true))!=-1)
                 {
                     if(win_test==0)
                     {
                         board.alleg_display(Pgraph, this);
-                        buff->SetOrientation(get_rotate(buff, Pgraph));
+                        test=get_rotate(buff, Pgraph);
+                        if(test)buff->SetOrientation(test);
                     }
                     test=1;
                 }
+                else if(test) allegro_message("Mouvement Impossible!");
 
             }
-            else //REMOVE
+            else if(select==0) //REMOVE
             {
                 blit(save_screen, Pgraph->Getbuff(), 0,0,0,0, SCREEN_W, SCREEN_H);
                 board.Getmap(x,y)->push(board,0, 2, 0, true);
-                blit(Pgraph->GetBoard(),Pgraph->Getbuff(), board_to_screen_x(x)-BOARD_X_BLIT, board_to_screen_y(y)-BOARD_Y_BLIT,board_to_screen_x(x), board_to_screen_y(y), TILE_SIZE, TILE_SIZE);
+                blit(save_screen,Pgraph->Getbuff(), board_to_screen_x(x)-Pgraph->GetLeft()->w, board_to_screen_y(y)-Pgraph->GetUp()->h,board_to_screen_x(x)-Pgraph->GetLeft()->w, board_to_screen_y(y)-Pgraph->GetUp()->h, Pgraph->GetLeft()->w+Pgraph->GetEle()->w+Pgraph->GetRight()->w, Pgraph->GetUp()->h+Pgraph->GetEle()->h+Pgraph->GetDown()->h);
                 blit(Pgraph->Getbuff(),screen, 0,0,0,0, SCREEN_W, SCREEN_H);
                 test=1;
             }

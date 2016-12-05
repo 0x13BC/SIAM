@@ -47,6 +47,7 @@ void Game::start()
     {
         m_Graphic=Graphic::GetInstce();
         m_Graphic->init();
+        blit(m_Graphic->GetBackground(), m_Graphic->Getbuff(),0,0,0,0, SCREEN_W, SCREEN_H);
         blit(m_Graphic->GetBoard(),m_Graphic->Getbuff(),0,0,BOARD_X_BLIT,BOARD_Y_BLIT,m_Graphic->GetBoard()->w,m_Graphic->GetBoard()->h);
     }
     Player rhino(RHINOCEROS);
@@ -62,6 +63,7 @@ void Game::start()
         m_BG.display(NULL,0,m_ecran);
     }
     else m_BG.alleg_display( m_Graphic, &rhino);
+
     int win=0;
 
     while(!win) //BOUCLE DE JEU
@@ -73,6 +75,7 @@ void Game::start()
             m_BG.alleg_display( m_Graphic, &elephant);
             blit(m_Graphic->Getbuff(),screen,0,0,0,0, SCREEN_W, SCREEN_H);
         }
+
         if(win==3 || win==4) return win_display(win);
         else
         {

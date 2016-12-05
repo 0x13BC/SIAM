@@ -16,15 +16,30 @@ void getCursorXY(int &x, int&y) {
 void options(Game& jeu, Console* ecran)
 {
     char choix=0;
-    if(!jeu.GetdisplayMod())cout<< "Voulez-vous passer en mode graphique?" << endl;
-    else cout<<"Voulez-vous quitter le mode graphique?" << endl;
-    cout << "(1) Oui" << endl
-    << "(2) Non" << endl;
+     system("cls");
+     ecran->setColor(COLOR_GREEN);
+            ecran->gotoLigCol(MARGINBOARDY,MARGINBOARDX);
+            cout<<"\xC9\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xBB"<<endl;
+           ecran->gotoLigCol(MARGINBOARDY+1,MARGINBOARDX);
+            if(!jeu.GetdisplayMod())cout<< "\xBAVoulez-vous passer en mode graphique? \xBA" << endl;
+            else cout<<"\xBAVoulez-vous quitter le mode graphique?\xBA" << endl;
+           ecran->gotoLigCol(MARGINBOARDY+2,MARGINBOARDX);
+             cout << "\xBA (1) Oui                              \xBA" << endl;
+             ecran->gotoLigCol(MARGINBOARDY+3,MARGINBOARDX);
+             cout<< "\xBA (2) Non                              \xBA" << endl;
+
+             ecran->gotoLigCol(MARGINBOARDY+4,MARGINBOARDX);
+            cout<<"\xC8\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xBC";
+
+
+
+
     while(choix!='1' && choix!='2')
     {
         choix=ecran->getInputKey();
         if(choix=='1')jeu.SetdisplayMod((jeu.GetdisplayMod()? 0:1));
     }
+    system("cls");
 }
 int main()
 {
@@ -56,16 +71,20 @@ int main()
     int choice=0;
         do
         {
-            for(int y=0; y<MARGINBOARDY; y++)
-                {
-                    std::cout<<std::endl;
-                }
-            for(int x=0; x<MARGINBOARDX; x++)cout<<" ";cout<<"\xC9\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xBB"<<endl;
-           for(int x=0; x<MARGINBOARDX; x++)cout<<" "; cout<<"\xBA Enter your choice:            \xBA"<<endl;
-            for(int x=0; x<MARGINBOARDX; x++)cout<<" "; cout<<"\xBA                   (1).Jouer.  \xBA"<<endl;
-             for(int x=0; x<MARGINBOARDX; x++)cout<<" ";cout<<"\xBA                   (2).Option. \xBA"<<endl;
-             for(int x=0; x<MARGINBOARDX; x++)cout<<" ";cout<<"\xBA                   (0).Quit.   \xBA"<<endl;
-            for(int x=0; x<MARGINBOARDX; x++)cout<<" ";cout<<"\xC8\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xBC";
+            pEcran->setColor(COLOR_GREEN);
+            pEcran->gotoLigCol(MARGINBOARDY,MARGINBOARDX);
+            cout<<"\xC9\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xBB"<<endl;
+           pEcran->gotoLigCol(MARGINBOARDY+1,MARGINBOARDX);
+            cout<<"\xBA Enter your choice:            \xBA"<<endl;
+           pEcran->gotoLigCol(MARGINBOARDY+2,MARGINBOARDX);
+             cout<<"\xBA                   (1).Jouer.  \xBA"<<endl;
+             pEcran->gotoLigCol(MARGINBOARDY+3,MARGINBOARDX);
+             cout<<"\xBA                   (2).Option. \xBA"<<endl;
+           pEcran->gotoLigCol(MARGINBOARDY+4,MARGINBOARDX);
+             cout<<"\xBA                   (0).Quit.   \xBA"<<endl;
+
+             pEcran->gotoLigCol(MARGINBOARDY+5,MARGINBOARDX);
+            cout<<"\xC8\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xBC";
             choice=pEcran->getInputKey();
 
             switch(choice)

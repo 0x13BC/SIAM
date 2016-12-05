@@ -19,6 +19,7 @@ Graphic::~Graphic()
     destroy_bitmap(m_SprtEleph);
     destroy_bitmap(m_SprtMount);
     destroy_bitmap(m_SprtRhino);
+    destroy_bitmap(m_background);
     uninit();
     //dtor
 }
@@ -87,7 +88,8 @@ int Graphic::LoadAllSprites()
     m_down      = LoadSprite("ressources/down.bmp");
     m_right     = LoadSprite("ressources/right.bmp");
     m_turn      = LoadSprite("ressources/turn.bmp");
-    if(!m_SprtBoard || !m_SprtEleph || !m_SprtMount|| !m_SprtRhino || !m_Select || !m_up || !m_left || !m_down || !m_right || !m_turn)return -1;
+    m_background= LoadSprite("ressources/background.bmp");
+    if(!m_background || !m_SprtBoard || !m_SprtEleph || !m_SprtMount|| !m_SprtRhino || !m_Select || !m_up || !m_left || !m_down || !m_right || !m_turn)return -1;
     else return 0;
 
 }
@@ -152,5 +154,9 @@ BITMAP* Graphic::GetRight()
 BITMAP* Graphic::GetTurn()
 {
     return m_turn;
+}
+BITMAP* Graphic::GetBackground()
+{
+    return m_background;
 }
 
