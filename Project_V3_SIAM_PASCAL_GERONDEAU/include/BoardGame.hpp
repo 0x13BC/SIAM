@@ -47,8 +47,6 @@ class BoardGame
         int boardCons(Console*pConsole);
         int stockCons(Console*pConsole,int x0,int y0);
         int stockDispCons(Console* pConsole,int x0,int y0,int team,int nbr);
-        void homepage(int x0, int y0);
-
 
 };
 
