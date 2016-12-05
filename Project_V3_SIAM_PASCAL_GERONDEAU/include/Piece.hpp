@@ -24,7 +24,7 @@ class Piece
 
         //CTOR & DTOR
 
-        Piece(BITMAP* image, unsigned short team=0, float strength=0.9);
+        Piece(BITMAP* image, unsigned short team=0/*TEAM MOUNTAIN*/, float strength=0.9);
         virtual ~Piece();
         Piece(const Piece& other);
 
@@ -34,6 +34,7 @@ class Piece
         unsigned short Gety() ;
         unsigned short Getstrength() ;
         unsigned short Getteam();
+
         void Setx(int x);
         void Sety(int y);
         void Setstrength(unsigned short val) ;
@@ -42,7 +43,9 @@ class Piece
         BITMAP* GetimgPiece();
         void SetimgPiece(BITMAP* val);
 
+
         //METHODS
+        virtual int GetOrientation()=0;
         virtual void SetOrientation(int orientation)=0;
         virtual std::string Getstring()=0;
         virtual void display(BITMAP* dest)=0;

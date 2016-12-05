@@ -21,7 +21,7 @@ Pawn::~Pawn()
     //copy ctor
 }*/
 
-char Pawn::GetOrientation()
+int Pawn::GetOrientation()
 {
     return m_Orientation;
 }

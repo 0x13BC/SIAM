@@ -2,6 +2,7 @@
 #define BOARDGAME_HPP
 #include "Piece.hpp"
 #include "Mountain.hpp"
+#include "Graphic.hpp"
 #include <vector>
 
 #define NTAILLE 5
@@ -12,6 +13,7 @@
 #define MARGINBOARDX 50
 #define MARGINBOARDY 10
 
+class Player;
 
 class BoardGame
 {
@@ -40,7 +42,7 @@ class BoardGame
         void Setmap(int x, int y, Piece* pt);
 
         //METHODS
-
+        void alleg_display(Graphic* Pgraph, Player* joueur);
         void display(BITMAP* buffer, int disp_mod,Console* pEcran);
         int boardCons(Console*pConsole);
         int stockCons(Console*pConsole,int x0,int y0);

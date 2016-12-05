@@ -1,5 +1,4 @@
-#include "BoardGame.hpp"
-#include "General.h"
+#include "Player.hpp"
 
 //----------------------------------------CTOR-&-DTOR----------------------------------------//
 
@@ -142,6 +141,17 @@ int BoardGame::stockCons(Console*pConsole,int x0, int y0)
     return 0;
 }
 
+void BoardGame::alleg_display(Graphic* Pgraph, Player* joueur)
+{
+    blit(Pgraph->GetBoard(),Pgraph->Getbuff(),0,0,BOARD_X_BLIT,BOARD_Y_BLIT,Pgraph->GetBoard()->w,Pgraph->GetBoard()->h);
+    for(int i=0; i<BOARD_WIDTH; i++)
+    {
+        for(int j=0; j<BOARD_HEIGHT; j++)
+        {
+            if(Getmap(i,j))joueur->display_piece(Getmap(i,j),Pgraph);
+        }
+    }
+}
 
 int BoardGame::stockDispCons(Console* pConsole,int x0,int y0,int team,int nbr)
 {

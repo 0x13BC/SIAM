@@ -3,21 +3,32 @@
 Graphic* Graphic::m_instance = NULL;
 
 Graphic::Graphic()
-        :m_buffer(NULL),m_SprtBoard(NULL),m_SprtEleph(NULL),m_SprtRhino(NULL),m_SprtMount(NULL)
+:m_buffer(NULL),m_SprtBoard(NULL),m_SprtEleph(NULL),m_SprtRhino(NULL),m_SprtMount(NULL), m_Select(NULL)
 {
     //ctor
 }
 
 Graphic::~Graphic()
 {
-    remove_mouse();
-    remove_keyboard();
+    destroy_bitmap(m_up);
+    destroy_bitmap(m_down);
+    destroy_bitmap(m_left);
+    destroy_bitmap(m_right);
+    destroy_bitmap(m_Select);
+    destroy_bitmap(m_SprtBoard);
+    destroy_bitmap(m_SprtEleph);
+    destroy_bitmap(m_SprtMount);
+    destroy_bitmap(m_SprtRhino);
+    uninit();
     //dtor
 }
 
 
 void Graphic::deleteInstce()
 {
+    clear(screen);
+    set_gfx_mode(GFX_TEXT,0,0,0,0);
+
     delete m_instance;
     m_instance = NULL;
 }
@@ -56,21 +67,27 @@ allegro_init();
         std::cout << ("Failed to enter in graphic mode") << std::endl;
         return false;
     }
+    m_buffer=create_bitmap(RESOLUTION_X, RESOLUTION_Y);
 
     set_keyboard_rate(500, 100);
 
-    show_mouse(screen);
 
-    return LoadAllSprites();}
+    return LoadAllSprites();
+    }
 
 int Graphic::LoadAllSprites()
 {
-    m_SprtBoard = LoadSprite("BOARDGAME.bmp");
-    m_SprtEleph = LoadSprite("ELEPHANT.bmp");
-    m_SprtMount = LoadSprite("MOUNTAIN.bmp");
-    m_SprtRhino = LoadSprite("RHINOCEROS.bmp");
-
-    if(m_SprtBoard ||m_SprtEleph||m_SprtMount||m_SprtRhino)return -1;
+    m_SprtBoard = LoadSprite("ressources/BOARDGAME.bmp");
+    m_SprtEleph = LoadSprite("ressources/ELEPHANT.bmp");
+    m_SprtMount = LoadSprite("ressources/MOUNTAIN.bmp");
+    m_SprtRhino = LoadSprite("ressources/RHINOCEROS.bmp");
+    m_Select    = LoadSprite("ressources/selec.bmp");
+    m_up        = LoadSprite("ressources/up.bmp");
+    m_left      = LoadSprite("ressources/left.bmp");
+    m_down      = LoadSprite("ressources/down.bmp");
+    m_right     = LoadSprite("ressources/right.bmp");
+    m_turn      = LoadSprite("ressources/turn.bmp");
+    if(!m_SprtBoard || !m_SprtEleph || !m_SprtMount|| !m_SprtRhino || !m_Select || !m_up || !m_left || !m_down || !m_right || !m_turn)return -1;
     else return 0;
 
 }
@@ -110,5 +127,30 @@ BITMAP* Graphic::GetRhn()
 BITMAP* Graphic::GetBoard()
 {
     return m_SprtBoard;
+}
+
+BITMAP* Graphic::GetSel()
+{
+    return m_Select;
+}
+BITMAP* Graphic::GetUp()
+{
+    return m_up;
+}
+BITMAP* Graphic::GetLeft()
+{
+    return m_left;
+}
+BITMAP* Graphic::GetDown()
+{
+    return m_down;
+}
+BITMAP* Graphic::GetRight()
+{
+    return m_right;
+}
+BITMAP* Graphic::GetTurn()
+{
+    return m_turn;
 }
 

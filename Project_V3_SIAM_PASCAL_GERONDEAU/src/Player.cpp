@@ -2,10 +2,8 @@
 #define NB_PIONS_PLAYER 5
 #define DECALAGE_X_TEXT 10
 #define DECALAGE_Y_TEXT 10
-#define BOARD_HEIGHT 5
-#define BOARD_WIDTH  5
+
 #define MARGIN 2
-using namespace std;
 
 
 //----------------------------------------CTOR-&-DTOR----------------------------------------//
@@ -14,7 +12,7 @@ using namespace std;
 Player::Player(int type)
     :m_team(type)
 {
-    for(unsigned int i=0; i<NB_PIONS_PLAYER; i++) m_stockPiece.push(new Pawn(create_bitmap(10,10), type, this));
+    for(unsigned int i=0; i<NB_PIONS_PLAYER; i++) m_stockPiece.push(new Pawn(NULL, type, this));
 }
 
 Player::~Player()
@@ -41,7 +39,7 @@ void Player::Setteam(unsigned int val)
 }
 int Player::GetstockPiece()
 {
-    //cout<<m_stockPiece.size();
+    //std::cout<<m_stockPiece.size();
     return m_stockPiece.size();
 }
 void Player::AddstockPiece(Pawn* val)
@@ -59,7 +57,7 @@ Pawn* Player::GivePawn()
 bool Player::auth_check(int x, int y, BoardGame& board)
 {
 
-      if(board.Getmap(x,y)!= NULL)
+    if(board.Getmap(x,y)!= NULL)
     {
         if(board.Getmap(x,y)->Getteam()==m_team) return TRUE;
         else return FALSE;
@@ -100,7 +98,7 @@ void Player::turnPiece(Piece* pion, Console* ecran)
 {
     char touche=' ';
     while(touche!='z' && touche!='q' && touche!='s' && touche!='d'
-          &&touche!='Z' && touche!='Q' && touche!='S' && touche!='D')
+            &&touche!='Z' && touche!='Q' && touche!='S' && touche!='D')
     {
         touche=ecran->getInputKey();
         switch(touche)
@@ -152,38 +150,39 @@ int Player::Play_console(BoardGame& board, Console* ecran)
         if(GetstockPiece()==NB_PIONS_PLAYER ) test=0;
         else
         {
-            if(!GetstockPiece())test=1;
+            if(!GetstockPiece())test='1';
             else
             {
                 ecran->gotoLigCol(0, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
-            cout<< "Que souhaitez vous faire?" << endl;
+                std::cout<< "Que souhaitez vous faire?" << std::endl;
 
-            cout<< "0: faites entrer une piece" << endl;
-            cout<< "1: choisissez une piece" << endl;
-            while(test!='0' && test!='1')
-            {
-                test=ecran->getInputKey();
-                if(test!='0' && test!='1' && test!=27)
+                std::cout<< "0: faites entrer une piece" << std::endl;
+                std::cout<< "1: choisissez une piece" <<std::endl;
+                while(test!='0' && test!='1')
                 {
-                    ecran->gotoLigCol(3, 0);
-                    cout<<"Saisie invalide, recommencez";
-                    t=time(NULL);
-                    while(difftime(time(NULL),t)<=0.5);
-                    ecran->gotoLigCol(3, 0);
-                    cout<<"                             "<<endl;
+                    test=ecran->getInputKey();
+                    if(test!='0' && test!='1' && test!=27)
+                    {
+                        ecran->gotoLigCol(3, 0);
+                        std::cout<<"Saisie invalide, recommencez";
+                        t=time(NULL);
+                        while(difftime(time(NULL),t)<=0.5);
+                        ecran->gotoLigCol(3, 0);
+                        std::cout<<"                             "<<std::endl;
 
+                    }
+                    if(test==27) return -1;
                 }
-            }
 
-                if(test==27) return -1; ///OU CALL PAUSE ==> PAUSE DANS GAME OU PAS?
+                ///OU CALL PAUSE ==> PAUSE DANS GAME OU PAS?
             }
             //clear weiting zone
 
             ecran->gotoLigCol(0, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
-            cout<<"                                                  "<<endl;
-            cout<<"                                                  "<<endl;
-            cout<<"                                                  "<<endl;
-            cout<<"                                                  "<<endl;
+            std::cout<<"                                                  "<<std::endl;
+            std::cout<<"                                                  "<<std::endl;
+            std::cout<<"                                                  "<<std::endl;
+            std::cout<<"                                                  "<<std::endl;
         }
         if(test=='1')
         {
@@ -197,51 +196,51 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                 if(test2)
                 {
                     ecran->setColor(COLOR_WHITEANDBLACK);
-                    if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
-                    else cout <<"  ";
+                    if(board.Getmap(x,y)!=NULL) std::cout<<board.Getmap(x,y)->Getstring();
+                    else std::cout <<"  ";
                     ecran->gotoLigCol(0, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
-                    cout<<"                                  "<<endl;
+                    std::cout<<"                                  "<<std::endl;
 
                 }
                 else
                 {
                     ecran->setColor(COLOR_NDEFAULT);
-                    if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
-                    else cout <<"  ";
+                    if(board.Getmap(x,y)!=NULL) std::cout<<board.Getmap(x,y)->Getstring();
+                    else std::cout <<"  ";
                 }
 
                 if(test)
                 {
                     ecran->setColor(COLOR_GREEN);
                     ecran->gotoLigCol(DECALAGE_X_TEXT, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
-                    cout<< (char)(y+'A') << x;
+                    std::cout<< (char)(y+'A') << x;
                 }
                 if(select)
                 {
                     if(order!=order_save || direction!= direction_save)
                     {
                         ecran->gotoLigCol(DECALAGE_X_TEXT, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN+2);
-                        cout<< "Ordre:                 ";
+                        std::cout<< "Ordre:               ";
                         order_save=order;
                         direction_save=direction;
                     }
                     ecran->gotoLigCol(DECALAGE_X_TEXT, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN+2);
-                    cout<< " Ordre: " << (order==1 ? "move" : order==0? "turn only" : "remove");
+                    std::cout<< " Ordre: " << (order==1 ? "move" : order==0? "turn only" : "remove");
                     if(order!= 2)
                     {
                         switch(direction)
                         {
                         case -2:
-                            cout << " up";
+                            std::cout << " up";
                             break;
                         case -1:
-                            cout << " left";
+                            std::cout << " left";
                             break;
                         case 2:
-                            cout << " down";
+                            std::cout << " down";
                             break;
                         case 1:
-                            cout << " right";
+                            std::cout << " right";
                             break;
                         }
                     }
@@ -250,7 +249,7 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                 else
                 {
                     ecran->gotoLigCol(DECALAGE_X_TEXT, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN+2);
-                    cout<< "                       ";
+                    std::cout<< "                       ";
                 }
 
                 if(ecran->isKeyboardPressed())
@@ -266,11 +265,11 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                             {
                                 ecran->setColor(COLOR_GREEN);
                                 ecran->gotoLigCol(3, 0);
-                                cout<<"choix non valide"<<endl;
+                                std::cout<<"choix non valide"<<std::endl;
                                 t=time(NULL);
                                 while(difftime(time(NULL),t)<=2);
                                 ecran->gotoLigCol(3, 0);
-                                cout<<"                "<<endl;
+                                std::cout<<"                "<<std::endl;
                             }
                         }
                         else if((win_test=(buff=board.Getmap(x,y))->push(board, direction, order,0, true))!=-1)
@@ -279,14 +278,14 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                             {
                                 ecran->setColor(COLOR_GREEN);
                                 ecran->gotoLigCol(0, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
-                                cout<<"Quelle est la direction de la piece?";
+                                std::cout<<"Quelle est la direction de la piece?";
                                 turnPiece(buff,ecran);
                                 ecran->gotoLigCol(0, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
-                                cout<<"                                      ";
+                                std::cout<<"                                      ";
                             }
                             ecran->setColor(COLOR_GREEN);
                             ecran->gotoLigCol(DECALAGE_X_TEXT, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
-                            cout<<"                                 ";
+                            std::cout<<"                                 ";
                             board.boardCons(ecran);
                             board.display(NULL,0,ecran);
                             test=0;
@@ -296,14 +295,14 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                         {
                             ecran->setColor(COLOR_GREEN);
                             ecran->gotoLigCol(DECALAGE_X_TEXT-3, DECALAGE_Y_TEXT+BOARD_HEIGHT);
-                            cout<<"                                  "<<endl;
-                            cout<<"                                  "<<endl;
+                            std::cout<<"                                  "<<std::endl;
+                            std::cout<<"                                  "<<std::endl;
                             ecran->gotoLigCol(DECALAGE_X_TEXT-2, DECALAGE_Y_TEXT+BOARD_HEIGHT);
-                            cout<<"Mouvement impossible, selectionnez une autre action";
+                            std::cout<<"Mouvement impossible, selectionnez une autre action";
                             time_t timer=time(NULL);
                             while(difftime(time(NULL), timer)<2);
                             ecran->gotoLigCol(DECALAGE_X_TEXT-2, DECALAGE_Y_TEXT+BOARD_HEIGHT);
-                            cout<<"                                                                           "<<endl;
+                            std::cout<<"                                                                           "<<std::endl;
                             select=0;
                         }
                         break;
@@ -313,15 +312,15 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                             test=0;
                             ecran->setColor(COLOR_GREEN);
                             ecran->gotoLigCol(DECALAGE_X_TEXT, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
-                            cout<<"   "; //EXIT BOUCLE SELECTION CASE, RETOUR CHOIX DE L'ACTION
+                            std::cout<<"   "; //EXIT BOUCLE SELECTION CASE, RETOUR CHOIX DE L'ACTION
                         }
                         else select=0;
                     case 'z':
                     case 'Z':
                         ecran->setColor(COLOR_NDEFAULT);
                         ecran->gotoLigCol((MULTIPLICATOR)*y+(y+1)+MULTIPLICATOR/2+MARGINBOARDY,(2*(MULTIPLICATOR)*x)+x+MULTIPLICATOR+MARGINBOARDX);
-                        if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
-                        else cout <<"  ";
+                        if(board.Getmap(x,y)!=NULL) std::cout<<board.Getmap(x,y)->Getstring();
+                        else std::cout <<"  ";
                         ecran->setColor(COLOR_WHITEANDBLACK);
                         if(y>0)
                         {
@@ -335,8 +334,8 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                     case 'Q':
                         ecran->setColor(COLOR_NDEFAULT);
                         ecran->gotoLigCol((MULTIPLICATOR)*y+(y+1)+MULTIPLICATOR/2+MARGINBOARDY,(2*(MULTIPLICATOR)*x)+x+MULTIPLICATOR+MARGINBOARDX);
-                        if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
-                        else cout <<"  ";
+                        if(board.Getmap(x,y)!=NULL) std::cout<<board.Getmap(x,y)->Getstring();
+                        else std::cout <<"  ";
                         ecran->setColor(COLOR_WHITEANDBLACK);
                         if(x>0)
                         {
@@ -349,8 +348,8 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                     case 'S':
                         ecran->setColor(COLOR_NDEFAULT);
                         ecran->gotoLigCol((MULTIPLICATOR)*y+(y+1)+MULTIPLICATOR/2+MARGINBOARDY,(2*(MULTIPLICATOR)*x)+x+MULTIPLICATOR+MARGINBOARDX);
-                        if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
-                        else cout <<"  ";
+                        if(board.Getmap(x,y)!=NULL) std::cout<<board.Getmap(x,y)->Getstring();
+                        else std::cout <<"  ";
                         ecran->setColor(COLOR_WHITEANDBLACK);
                         if (y+1<BOARD_HEIGHT)
                         {
@@ -366,8 +365,8 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                     case 'D':
                         ecran->setColor(COLOR_NDEFAULT);
                         ecran->gotoLigCol((MULTIPLICATOR)*y+(y+1)+MULTIPLICATOR/2+MARGINBOARDY,(2*(MULTIPLICATOR)*x)+x+MULTIPLICATOR+MARGINBOARDX);
-                        if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
-                        else cout <<"  ";
+                        if(board.Getmap(x,y)!=NULL) std::cout<<board.Getmap(x,y)->Getstring();
+                        else std::cout <<"  ";
                         ecran->setColor(COLOR_WHITEANDBLACK);
                         if(x+1<BOARD_WIDTH)
                         {
@@ -405,14 +404,14 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                 if(test2)
                 {
                     ecran->setColor(COLOR_WHITEANDBLACK);
-                    if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
-                    else cout <<"  ";
+                    if(board.Getmap(x,y)!=NULL) std::cout<<board.Getmap(x,y)->Getstring();
+                    else std::cout <<"  ";
                 }
                 else
                 {
                     ecran->setColor(COLOR_NDEFAULT);
-                    if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
-                    else cout <<"  ";
+                    if(board.Getmap(x,y)!=NULL) std::cout<<board.Getmap(x,y)->Getstring();
+                    else std::cout <<"  ";
                 }
                 if(difftime(time(NULL),t) >= 0.2)
                 {
@@ -434,17 +433,17 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                             m_stockPiece.top()->Setstate(true);
                             ecran->setColor(COLOR_GREEN);
                             ecran->gotoLigCol(0, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
-                            cout<<"                                      ";
+                            std::cout<<"                                      ";
                             ecran->gotoLigCol(0, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
-                            cout<<"Quelle est la direction de la piece?";
+                            std::cout<<"Quelle est la direction de la piece?";
                             turnPiece(m_stockPiece.top(),ecran);
                             ecran->gotoLigCol(0, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
-                            cout<<"                                      ";
+                            std::cout<<"                                      ";
                             m_stockPiece.pop();
                             ecran->setColor(COLOR_NDEFAULT);
                             ecran->gotoLigCol((MULTIPLICATOR)*y+(y+1)+MULTIPLICATOR/2+MARGINBOARDY,(2*(MULTIPLICATOR)*x)+x+MULTIPLICATOR+MARGINBOARDX);
-                            if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
-                            else cout <<"  ";
+                            if(board.Getmap(x,y)!=NULL) std::cout<<board.Getmap(x,y)->Getstring();
+                            else std::cout <<"  ";
                             ecran->setColor(COLOR_WHITEANDBLACK);
                             test=1;
                             boucle=0;
@@ -458,9 +457,9 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                             {
                                 ecran->setColor(COLOR_GREEN);
                                 ecran->gotoLigCol(0, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
-                                cout<<"                                      ";
+                                std::cout<<"                                      ";
                                 ecran->gotoLigCol(0, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
-                                cout<<"Quelle est la direction de la pièce?";
+                                std::cout<<"Quelle est la direction de la pièce?";
                                 turnPiece(m_stockPiece.top(),ecran);
 
                             }
@@ -478,9 +477,9 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                             {
                                 ecran->setColor(COLOR_GREEN);
                                 ecran->gotoLigCol(0, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
-                                cout<<"                                      ";
+                                std::cout<<"                                      ";
                                 ecran->gotoLigCol(0, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
-                                cout<<"Mouvement impossible!";
+                                std::cout<<"Mouvement impossible!";
                             }
                         }
 
@@ -500,8 +499,8 @@ int Player::Play_console(BoardGame& board, Console* ecran)
 
                         ecran->setColor(COLOR_NDEFAULT);
                         ecran->gotoLigCol((MULTIPLICATOR)*y+(y+1)+MULTIPLICATOR/2+MARGINBOARDY,(2*(MULTIPLICATOR)*x)+x+MULTIPLICATOR+MARGINBOARDX);
-                        if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
-                        else cout <<"  ";
+                        if(board.Getmap(x,y)!=NULL) std::cout<<board.Getmap(x,y)->Getstring();
+                        else std::cout <<"  ";
                         ecran->setColor(COLOR_WHITEANDBLACK);
                         if(y>0 && (x==0 || x==BOARD_WIDTH-1) && !select) y--;
                         break;
@@ -513,8 +512,8 @@ int Player::Play_console(BoardGame& board, Console* ecran)
 
                         ecran->setColor(COLOR_NDEFAULT);
                         ecran->gotoLigCol((MULTIPLICATOR)*y+(y+1)+MULTIPLICATOR/2+MARGINBOARDY,(2*(MULTIPLICATOR)*x)+x+MULTIPLICATOR+MARGINBOARDX);
-                        if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
-                        else cout <<"  ";
+                        if(board.Getmap(x,y)!=NULL) std::cout<<board.Getmap(x,y)->Getstring();
+                        else std::cout <<"  ";
                         ecran->setColor(COLOR_WHITEANDBLACK);
                         if(x>0 && (y==0 || y==BOARD_HEIGHT-1) && !select) x--;
                         break;
@@ -524,8 +523,8 @@ int Player::Play_console(BoardGame& board, Console* ecran)
 
                         ecran->setColor(COLOR_NDEFAULT);
                         ecran->gotoLigCol((MULTIPLICATOR)*y+(y+1)+MULTIPLICATOR/2+MARGINBOARDY,(2*(MULTIPLICATOR)*x)+x+MULTIPLICATOR+MARGINBOARDX);
-                        if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
-                        else cout <<"  ";
+                        if(board.Getmap(x,y)!=NULL) std::cout<<board.Getmap(x,y)->Getstring();
+                        else std::cout <<"  ";
                         ecran->setColor(COLOR_WHITEANDBLACK);
                         if (y+1<BOARD_HEIGHT && (x==0 || x==BOARD_WIDTH-1) && !select) y++;
                         break;
@@ -535,8 +534,8 @@ int Player::Play_console(BoardGame& board, Console* ecran)
 
                         ecran->setColor(COLOR_NDEFAULT);
                         ecran->gotoLigCol((MULTIPLICATOR)*y+(y+1)+MULTIPLICATOR/2+MARGINBOARDY,(2*(MULTIPLICATOR)*x)+x+MULTIPLICATOR+MARGINBOARDX);
-                        if(board.Getmap(x,y)!=NULL) cout<<board.Getmap(x,y)->Getstring();
-                        else cout <<"  ";
+                        if(board.Getmap(x,y)!=NULL) std::cout<<board.Getmap(x,y)->Getstring();
+                        else std::cout <<"  ";
                         ecran->setColor(COLOR_WHITEANDBLACK);
                         if(x+1<BOARD_WIDTH &&(y==0 || y==BOARD_HEIGHT-1) && !select) x++;
                         break;
@@ -556,15 +555,325 @@ int Player::Play_console(BoardGame& board, Console* ecran)
 }
 
 
-int Player::Play(unsigned int display_mode, BoardGame& board, Console* ecran)
+int Player::Play(unsigned int display_mode, BoardGame& board, Console* ecran, Graphic* Pgraph)
 {
+
     if(!display_mode) return(Play_console(board, ecran));
-    else return(Play_alleg(board));
+    else return(Play_alleg(board, Pgraph));
 
 }
 
-int Player::Play_alleg(BoardGame& board)
+////////////////////////////////////////////////////
+// ENTREE: x/y correspondant a l'écran
+// SORTIE: x/y correspondant au tableau
+//
+///////////////////////////////////////////////////
+int Player::screen_to_board_x(int x)
 {
-    (void)board;
+    for(int i=0; i<BOARD_WIDTH; i++) if(x<BOARD_X_BLIT+GRID_DECAL+(i+1)*TILE_SIZE) return i;
+    return BOARD_WIDTH-1;
+}
+int Player::screen_to_board_y(int y)
+{
+    for(int i=0; i<BOARD_HEIGHT; i++) if(y<BOARD_Y_BLIT+GRID_DECAL+(1+i)*TILE_SIZE) return i;
+    return BOARD_HEIGHT-1;
+}
+////////////////////////////////////////////////////
+// ENTREE: x/y correspondant au tableau           //
+// SORTIE: x/y correspondant a l'écran            //
+//                                                //
+////////////////////////////////////////////////////
+int Player::board_to_screen_x(int x)
+{
+    return BOARD_X_BLIT+GRID_DECAL+x*TILE_SIZE;
+}
+
+int Player::board_to_screen_y(int y)
+{
+    return BOARD_Y_BLIT+GRID_DECAL+y*TILE_SIZE;
+}
+
+
+int Player::get_rotate(Piece* piece, Graphic* Pgraph)
+{
+    mouse_b=0;
+    int boucle=1;
+    BITMAP* save_screen=create_bitmap(Pgraph->Getbuff()->w,Pgraph->Getbuff()->h);
+    display_piece(piece,Pgraph);
+    blit(Pgraph->Getbuff(), save_screen,0,0,0,0, SCREEN_W, SCREEN_H);
+    draw_sprite(Pgraph->Getbuff(),Pgraph->GetUp(), board_to_screen_x(piece->Getx())+(TILE_SIZE-Pgraph->GetUp()->w)/2, board_to_screen_y(piece->Gety())-Pgraph->GetUp()->h);
+    draw_sprite(Pgraph->Getbuff(),Pgraph->GetLeft(), board_to_screen_x(piece->Getx())-Pgraph->GetLeft()->w, board_to_screen_y(piece->Gety())+(TILE_SIZE-Pgraph->GetLeft()->h)/2);
+    draw_sprite(Pgraph->Getbuff(),Pgraph->GetDown(), board_to_screen_x(piece->Getx())+(TILE_SIZE-Pgraph->GetDown()->w)/2, board_to_screen_y(piece->Gety())+ (piece->Getteam()==RHINOCEROS? Pgraph->GetRhn()->h : Pgraph->GetEle()->h));
+    draw_sprite(Pgraph->Getbuff(),Pgraph->GetRight(), board_to_screen_x(piece->Getx())+(piece->Getteam()==RHINOCEROS? Pgraph->GetRhn()->w : Pgraph->GetEle()->w), board_to_screen_y(piece->Gety())+(TILE_SIZE-Pgraph->GetRight()->h)/2);
+    blit(Pgraph->Getbuff(),screen,0,0,0,0, SCREEN_W, SCREEN_H);
+    while(boucle)
+    {
+        if(mouse_b&2) boucle=0;
+        if(mouse_b&1)
+        {
+            if(mouse_x<board_to_screen_x(piece->Getx())+(TILE_SIZE-Pgraph->GetUp()->w)/2+Pgraph->GetUp()->w
+                    && mouse_x>=board_to_screen_x(piece->Getx())+(TILE_SIZE-Pgraph->GetUp()->w)/2
+                    && mouse_y>board_to_screen_y(piece->Gety())-Pgraph->GetUp()->h
+                    && mouse_y<board_to_screen_y(piece->Gety()))
+                    {
+                        blit( save_screen,Pgraph->Getbuff(),0,0,0,0, SCREEN_W, SCREEN_H);
+                        destroy_bitmap(save_screen);
+                        std::cout<<"HAUT";
+                        return -2;
+                    }
+            else if(mouse_x>board_to_screen_x(piece->Getx())-Pgraph->GetLeft()->w
+                    && mouse_x<board_to_screen_x(piece->Getx())
+                    && mouse_y>board_to_screen_y(piece->Gety())+(TILE_SIZE-Pgraph->GetLeft()->h)/2
+                    && mouse_y<board_to_screen_y(piece->Gety())+(TILE_SIZE-Pgraph->GetLeft()->h)/2+Pgraph->GetLeft()->h)
+                    {
+                        blit( save_screen,Pgraph->Getbuff(),0,0,0,0, SCREEN_W, SCREEN_H);
+                        destroy_bitmap(save_screen);
+                        std::cout<<"GAUCHE";
+                        return -1;
+                    }
+            else if(mouse_x>board_to_screen_x(piece->Getx())+(TILE_SIZE-Pgraph->GetDown()->w)/2
+                    && mouse_x<board_to_screen_x(piece->Getx())+(TILE_SIZE-Pgraph->GetDown()->w)/2+Pgraph->GetDown()->w
+                    && mouse_y>board_to_screen_y(piece->Gety())+ (piece->Getteam()==RHINOCEROS? Pgraph->GetRhn()->h : Pgraph->GetEle()->h)
+                    && mouse_y<board_to_screen_y(piece->Gety())+ (piece->Getteam()==RHINOCEROS? Pgraph->GetRhn()->h : Pgraph->GetEle()->h)+Pgraph->GetDown()->h)
+                    {
+                        blit( save_screen,Pgraph->Getbuff(),0,0,0,0, SCREEN_W, SCREEN_H);
+                       destroy_bitmap(save_screen);
+                       std::cout<<"BAS";
+                        return 2;
+                    }
+            else if(mouse_x>board_to_screen_x(piece->Getx())+(piece->Getteam()==RHINOCEROS? Pgraph->GetRhn()->w : Pgraph->GetEle()->w)
+                    && mouse_x<board_to_screen_x(piece->Getx())+(piece->Getteam()==RHINOCEROS? Pgraph->GetRhn()->w : Pgraph->GetEle()->w)+Pgraph->GetRight()->w
+                    && mouse_y>board_to_screen_y(piece->Gety())+(TILE_SIZE-Pgraph->GetRight()->h)/2
+                    && mouse_y<board_to_screen_y(piece->Gety())+(TILE_SIZE-Pgraph->GetRight()->h)/2+Pgraph->GetRight()->h)
+                    {
+                        blit( save_screen,Pgraph->Getbuff(),0,0,0,0, SCREEN_W, SCREEN_H);
+                        destroy_bitmap(save_screen);
+                        std::cout<<"DROITE";
+                        return 1;
+                    }
+        }
+    }
+    destroy_bitmap(save_screen);
+    return -1;
+}
+
+fixed Player::get_angle(int orientation)
+{
+    switch(orientation)
+    {
+    case 1:
+        std::cout<<"DROITE ANGLE"<<std::endl;
+        return itofix(192);
+        break;
+    case 2:
+        std::cout<<"BAS ANGLE"<<std::endl;
+        return itofix(0);
+        break;
+    case -1:
+        std::cout<<"GAUCHE ANGLE"<<std::endl;
+        return itofix(64);
+        break;
+    case -2:
+        std::cout<<"HAUT ANGLE"<<std::endl;
+        return itofix(128);
+        break;
+    }
     return 0;
+}
+void Player::display_piece(Piece* piece, Graphic* Pgraph)
+{
+    std::cout<<get_angle(piece->GetOrientation());
+    rotate_sprite( Pgraph->Getbuff(),(piece->Getteam()==RHINOCEROS? Pgraph->GetRhn() :(piece->Getteam()==ELEPHANT? Pgraph->GetEle() : Pgraph->GetMnt()) ), board_to_screen_x(piece->Getx()), board_to_screen_y(piece->Gety()), get_angle(piece->GetOrientation()));
+}
+
+int Player::get_action(Piece* piece, Graphic* Pgraph)
+{
+    mouse_b=0;
+    if(piece)
+    {
+    int select=-1;
+    BITMAP* save_screen=create_bitmap(Pgraph->Getbuff()->w,Pgraph->Getbuff()->h);
+    display_piece(piece,Pgraph);
+    draw_sprite(Pgraph->Getbuff(),Pgraph->GetRight(),board_to_screen_x(piece->Getx())-Pgraph->GetRight()->w,board_to_screen_y(piece->Gety())-Pgraph->GetRight()->h );
+    draw_sprite(Pgraph->Getbuff(),Pgraph->GetTurn(),board_to_screen_x(piece->Getx())+(TILE_SIZE-Pgraph->GetTurn()->w)/2,board_to_screen_y(piece->Gety())-Pgraph->GetTurn()->h );
+    draw_sprite(Pgraph->Getbuff(),Pgraph->GetUp(),board_to_screen_x(piece->Getx())+(piece->Getteam()==RHINOCEROS? Pgraph->GetRhn()->w : Pgraph->GetEle()->w),board_to_screen_y(piece->Gety())-Pgraph->GetUp()->h);
+    blit(Pgraph->Getbuff(),screen,0,0,0,0, SCREEN_W, SCREEN_H);
+    blit(Pgraph->Getbuff(),save_screen,0,0,0,0, SCREEN_W, SCREEN_H);
+    while(select==-1)
+    {
+        if(mouse_x>board_to_screen_x(piece->Getx())-Pgraph->GetRight()->w
+                && mouse_x<board_to_screen_x(piece->Getx())-Pgraph->GetRight()->w+Pgraph->GetRight()->w
+                && mouse_y>board_to_screen_y(piece->Gety())-Pgraph->GetRight()->h
+                && mouse_y<board_to_screen_y(piece->Gety()))
+        {
+            textout_ex(Pgraph->Getbuff(),font,"MOVE",board_to_screen_x(piece->Getx())-Pgraph->GetRight()->w+(Pgraph->GetRight()->w-text_length(font,"MOVE"))/2,board_to_screen_y(piece->Gety())-Pgraph->GetRight()->h-text_height(font),COLOR_VERT,COLOR_BLANC);
+            blit(Pgraph->Getbuff(),screen,0,0,0,0, SCREEN_W, SCREEN_H);
+            blit(save_screen,Pgraph->Getbuff(),0,0,0,0, SCREEN_W, SCREEN_H);
+            if(mouse_b&1)
+            {
+                destroy_bitmap(save_screen);
+                return 2;
+            }
+        }
+        if(mouse_x>board_to_screen_x(piece->Getx())+(TILE_SIZE-Pgraph->GetTurn()->w)/2
+                && mouse_x<board_to_screen_x(piece->Getx())+(TILE_SIZE-Pgraph->GetTurn()->w)/2+Pgraph->GetTurn()->w
+                && mouse_y>board_to_screen_y(piece->Gety())-Pgraph->GetTurn()->h
+                && mouse_y<board_to_screen_y(piece->Gety()))
+        {
+            textout_ex(Pgraph->Getbuff(),font,"TURN",board_to_screen_x(piece->Getx())+(TILE_SIZE-Pgraph->GetTurn()->w)/2+(Pgraph->GetTurn()->w-text_length(font,"TURN"))/2,board_to_screen_y(piece->Gety())-Pgraph->GetTurn()->h-text_height(font),COLOR_VERT,COLOR_BLANC);
+            blit(Pgraph->Getbuff(),screen,0,0,0,0, SCREEN_W, SCREEN_H);
+            blit(save_screen,Pgraph->Getbuff(),0,0,0,0, SCREEN_W, SCREEN_H);
+            if(mouse_b&1)
+            {
+                destroy_bitmap(save_screen);
+                return 1;
+            }
+        }
+        if(mouse_x>board_to_screen_x(piece->Getx())+(piece->Getteam()==RHINOCEROS? Pgraph->GetRhn()->w : Pgraph->GetEle()->w)
+           && mouse_x<board_to_screen_x(piece->Getx())+(piece->Getteam()==RHINOCEROS? Pgraph->GetRhn()->w : Pgraph->GetEle()->w)+Pgraph->GetUp()->w
+           && mouse_y>board_to_screen_y(piece->Gety())-Pgraph->GetUp()->h
+           && mouse_y<board_to_screen_y(piece->Gety())
+           && (piece->Getx()==0 || piece->Getx()==BOARD_WIDTH-1 || piece->Gety()==0 || piece->Gety()==BOARD_HEIGHT-1))
+            {
+            textout_ex(Pgraph->Getbuff(),font,"REMOVE",board_to_screen_x(piece->Getx())+(piece->Getteam()==RHINOCEROS? Pgraph->GetRhn()->w : Pgraph->GetEle()->w)+(Pgraph->GetUp()->w-text_length(font,"REMOVE"))/2,board_to_screen_y(piece->Gety())-Pgraph->GetUp()->h-text_height(font),COLOR_VERT,COLOR_BLANC);
+            blit(Pgraph->Getbuff(),screen,0,0,0,0, SCREEN_W, SCREEN_H);
+            blit(save_screen,Pgraph->Getbuff(),0,0,0,0, SCREEN_W, SCREEN_H);
+            if(mouse_b&1)
+            {
+                destroy_bitmap(save_screen);
+                return 0;
+            }
+        }
+
+    }
+    }
+    return -1;
+}
+
+
+
+/////////////////////////////////////////////////
+// Fonction de jeu allegro                     //
+//                                             //
+//                                             //
+//                                             //
+/////////////////////////////////////////////////
+int Player::Play_alleg(BoardGame& board, Graphic* Pgraph)
+{
+    int test=0;
+    int x=0,y=0;
+    int select=0;
+    int win_test=0;
+    Piece* buff;
+    mouse_b=0;
+    BITMAP* save_screen=create_bitmap(SCREEN_W, SCREEN_H);
+    textout_ex(Pgraph->Getbuff(), font, "                                                                            ", 2,3, COLOR_VERT, makecol(0,0,0));
+    textprintf_ex(Pgraph->Getbuff(), font, 2,3, COLOR_VERT, -1, (m_team==1 ? "TOUR RHINO Pieces restantes: %d": "TOUR ELEPHANT Pieces restantes: %d")    , m_stockPiece.size());
+    blit(Pgraph->Getbuff(),save_screen,0,0,0,0, SCREEN_W, SCREEN_H);
+    blit(Pgraph->Getbuff(),screen,0,0,0,0, SCREEN_W, SCREEN_H);
+    show_mouse(screen);
+    while(!test)
+    {
+        mouse_b=0;
+        x=screen_to_board_x(mouse_x);
+        y=screen_to_board_y(mouse_y);
+        while(!mouse_b&1)
+        {
+            scare_mouse();
+            x=screen_to_board_x(mouse_x);
+            y=screen_to_board_y(mouse_y);
+            if((m_stockPiece.size()==NB_PIONS_PLAYER &&(x==0 || x==BOARD_WIDTH-1 || y==0 || y== BOARD_HEIGHT-1))|| m_stockPiece.size()!=NB_PIONS_PLAYER)
+            {
+                draw_sprite(Pgraph->Getbuff(),Pgraph->GetSel(),board_to_screen_x(x), board_to_screen_y(y));
+                blit(Pgraph->Getbuff(), screen, 0,0,0,0, SCREEN_W, SCREEN_H);
+                blit(save_screen, Pgraph->Getbuff(), 0,0,0,0, SCREEN_W, SCREEN_H);
+            }
+            else blit(Pgraph->Getbuff(), screen, 0,0,0,0, SCREEN_W, SCREEN_H);
+            show_mouse(screen);
+
+        }
+
+        if(!board.Getmap(x,y))
+        {
+            if(x==0 || x==BOARD_WIDTH-1 || y==0 || y==BOARD_HEIGHT-1)
+            {
+                if(m_stockPiece.size())
+                {
+                    board.Setmap(x,y, m_stockPiece.top());
+                    m_stockPiece.top()->Setstate(true);
+                    m_stockPiece.top()->SetOrientation(get_rotate(board.Getmap(x,y), Pgraph));
+                    m_stockPiece.pop();
+                    test=1;
+                    blit(save_screen, Pgraph->Getbuff(), 0,0,0,0, SCREEN_W, SCREEN_H);
+                    display_piece(board.Getmap(x,y), Pgraph);
+                    blit(Pgraph->Getbuff(),screen, 0,0,0,0, SCREEN_W, SCREEN_H);
+                }
+                else allegro_message("Plus de pieces!");
+            }
+            else
+            {
+                allegro_message("Choix non valide");
+            }
+        }
+        else if(auth_check(x,y,board))
+        {
+            if((select=get_action(board.Getmap(x,y), Pgraph))==1) //TURN ONLY
+            {
+                blit(save_screen, Pgraph->Getbuff(), 0,0,0,0, SCREEN_W, SCREEN_H);
+                board.Getmap(x,y)->SetOrientation(get_rotate(board.Getmap(x,y), Pgraph));
+                test=1;
+            }
+            else if(select==2) // MOVE
+            {
+                blit(save_screen, Pgraph->Getbuff(), 0,0,0,0, SCREEN_W, SCREEN_H);
+                if((win_test=(buff=board.Getmap(x,y))->push(board,get_rotate(board.Getmap(x,y), Pgraph), 1, 0, true))!=-1)
+                {
+                    if(win_test==0)
+                    {
+                        board.alleg_display(Pgraph, this);
+                        buff->SetOrientation(get_rotate(buff, Pgraph));
+                    }
+                    test=1;
+                }
+
+            }
+            else //REMOVE
+            {
+                blit(save_screen, Pgraph->Getbuff(), 0,0,0,0, SCREEN_W, SCREEN_H);
+                board.Getmap(x,y)->push(board,0, 2, 0, true);
+                blit(Pgraph->GetBoard(),Pgraph->Getbuff(), board_to_screen_x(x)-BOARD_X_BLIT, board_to_screen_y(y)-BOARD_Y_BLIT,board_to_screen_x(x), board_to_screen_y(y), TILE_SIZE, TILE_SIZE);
+                blit(Pgraph->Getbuff(),screen, 0,0,0,0, SCREEN_W, SCREEN_H);
+                test=1;
+            }
+        }
+        else if(x==0 || x==BOARD_WIDTH-1 || y==0 || y==BOARD_HEIGHT-1)
+        {
+            if(m_stockPiece.size()) //AJOUT EN POUSSANT
+            {
+                if(x!=0 && x!=BOARD_WIDTH-1) m_stockPiece.top()->SetOrientation(y? -2: 2);
+                        else if(y!=0 && y!=BOARD_HEIGHT-1) m_stockPiece.top()->SetOrientation(x? -1: 1);
+                        else m_stockPiece.top()->SetOrientation(get_rotate(board.Getmap(x,y), Pgraph));
+
+                if((win_test=board.Getmap(x,y)->push(board, m_stockPiece.top()->GetOrientation(), 1, m_stockPiece.top()->Getstrength(), false))!=-1)
+                        {
+                            board.Setmap(x,y, m_stockPiece.top());
+                            m_stockPiece.top()->Setstate(true);
+                            m_stockPiece.pop();
+                            test=1;
+                        }
+                        else
+                        {
+                            allegro_message("Choix non valide");
+                            mouse_b=0;
+                        }
+            }
+        }
+        else {
+                allegro_message("Choix non valide");
+                mouse_b=0;
+        }
+    }
+    scare_mouse();
+    destroy_bitmap(save_screen);
+    return (win_test==1 || win_test==2 ? 0 : win_test);
 }

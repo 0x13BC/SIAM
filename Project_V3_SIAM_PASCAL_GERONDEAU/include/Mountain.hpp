@@ -25,6 +25,7 @@ class Mountain : virtual public Piece
         void display(BITMAP* dest);
         int push(BoardGame& board,char direction,char order, float power_sum, bool first);
         void SetOrientation(int x){(void)x;} //Unused virtual function
+        int GetOrientation(){return 0;} //Unused virtual function
 
 
 

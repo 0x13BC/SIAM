@@ -1,10 +1,9 @@
 #include "Game.hpp"
-#define WHITE makecol(255, 255, 255)
 
 //----------------------------------------CTOR-&-DTOR----------------------------------------//
 
 Game::Game(Console* ecran,Graphic* graph)
-: m_ecran(ecran),m_Graphic(graph),m_displayMod(0)
+    : m_ecran(ecran),m_Graphic(graph),m_displayMod(0)
 {
     //ctor
 }
@@ -40,16 +39,16 @@ void Game::win_display(int winner)
         std::cout<< (winner==3 ? "Les rhinoceros": "Les elephants") << " gagnent !" << std::endl;
     }
 }
+
+
 void Game::start()
 {
-
-     BITMAP* buffer=m_Graphic->Getbuff();
-     if(GetdisplayMod())
-     {
-        set_gfx_mode(GFX_AUTODETECT_WINDOWED, 1000, 600,0,0);
-        buffer=create_bitmap(SCREEN_W,SCREEN_H);
-     }
-
+    if(GetdisplayMod())
+    {
+        m_Graphic=Graphic::GetInstce();
+        m_Graphic->init();
+        blit(m_Graphic->GetBoard(),m_Graphic->Getbuff(),0,0,BOARD_X_BLIT,BOARD_Y_BLIT,m_Graphic->GetBoard()->w,m_Graphic->GetBoard()->h);
+    }
     Player rhino(RHINOCEROS);
     Player elephant(ELEPHANT);
     if(!GetdisplayMod())
@@ -61,34 +60,43 @@ void Game::start()
         m_BG.stockDispCons(m_ecran,MARGINBOARDX-3,MARGINBOARDY,ELEPHANT,elephant.GetstockPiece());
         m_BG.display(NULL,0,m_ecran);
     }
-
-
-
+    else m_BG.alleg_display( m_Graphic, &rhino);
     int win=0;
 
     while(!win) //BOUCLE DE JEU
     {
-        win=elephant.Play(GetdisplayMod() ,m_BG, m_ecran);
-        if(!GetdisplayMod()) m_BG.stockDispCons(m_ecran ,MARGINBOARDX-3,MARGINBOARDY,ELEPHANT,elephant.GetstockPiece());
-
+        win=elephant.Play(GetdisplayMod(),m_BG, m_ecran, m_Graphic);
+        if(!GetdisplayMod()) m_BG.stockDispCons(m_ecran,MARGINBOARDX-3,MARGINBOARDY,ELEPHANT,elephant.GetstockPiece());
+        else
+        {
+            m_BG.alleg_display( m_Graphic, &elephant);
+            blit(m_Graphic->Getbuff(),screen,0,0,0,0, SCREEN_W, SCREEN_H);
+        }
         if(win==3 || win==4) return win_display(win);
         else
-            {win=rhino.Play(GetdisplayMod() ,m_BG, m_ecran);
-                if(!GetdisplayMod()) m_BG.stockDispCons(m_ecran,MARGINBOARDX+2*NTAILLE*MULTIPLICATOR+NTAILLE+1,MARGINBOARDY,RHINOCEROS,rhino.GetstockPiece());
+        {
+            win=rhino.Play(GetdisplayMod(),m_BG, m_ecran, m_Graphic);
+            if(!GetdisplayMod()) m_BG.stockDispCons(m_ecran,MARGINBOARDX+2*NTAILLE*MULTIPLICATOR+NTAILLE+1,MARGINBOARDY,RHINOCEROS,rhino.GetstockPiece());
+            else
+            {
+                m_BG.alleg_display( m_Graphic, &rhino);
+                blit(m_Graphic->Getbuff(),screen,0,0,0,0, SCREEN_W, SCREEN_H);
             }
+        }
         if(win==3 || win==4) return win_display(win);
-        m_BG.display(buffer, GetdisplayMod(),m_ecran);
-        if(GetdisplayMod()) blit(buffer,screen,0,0,0,0, SCREEN_W, SCREEN_H);
+
+        if(GetdisplayMod()) blit(m_Graphic->Getbuff(),screen,0,0,0,0, SCREEN_W, SCREEN_H);
+        else m_BG.display(NULL, GetdisplayMod(),m_ecran);
     }
 
-
+if(GetdisplayMod()) m_Graphic->deleteInstce();
 }
 
 void Game::reset()
 {
-    for(int y=0;y<NTAILLE;y++)
+    for(int y=0; y<NTAILLE; y++)
     {
-        for(int x=0;x<NTAILLE;x++)
+        for(int x=0; x<NTAILLE; x++)
         {
             if(m_BG.Getmap(x,y))
                 m_BG.Setmap(x,y,NULL);
@@ -97,41 +105,89 @@ void Game::reset()
 
         }
     }
-    for(int i=1;i<4;i++)
-        {
-            m_BG.Setmap(i,2,new Mountain(NULL));
-        }
+    for(int i=1; i<4; i++)
+    {
+        m_BG.Setmap(i,2,new Mountain(NULL));
+    }
 }
 
 
 void Game::test()
 {
+    std::cout<<"GAME TEST";
     if(m_Graphic->GetRhn())std::cout<<"LE rhnino existe bordel!";
 
     blit(m_Graphic->GetRhn(),screen,0,0,100,100,m_Graphic->GetRhn()->w,m_Graphic->GetRhn()->h);
-    textout(screen, font, "TEST", 0, 50, WHITE);
+    textout_ex(screen, font, "TEST", 0, 50, COLOR_BLANC,-1);
 
 }
 
 void Game::homepage(int x0,int y0)
 {
 
-            for(int y=0;y<y0;y++){std::cout<<std::endl;}
+    for(int y=0; y<y0; y++)
+    {
+        std::cout<<std::endl;
+    }
 
 
-            for(int x=0;x<x0;x++){std::cout<<" ";} std::cout<<"   \xDB\xDB\xDB\xDB\xDB   "<<"   \xDB\xDB\xDB\xDB\xDB\xDB  "<<"     \xDB\xDB  "<<"   \xDB       \xDB"<<std::endl;
-             for(int x=0;x<x0;x++){std::cout<<" ";}std::cout<<"\xDB\xDB         "<<"      \xDB    "<<"    \xDB\xDB\xDB  "<<"  \xDB \xDB     \xDB \xDB"<<std::endl;
-            for(int x=0;x<x0;x++){std::cout<<" ";} std::cout<<"\xDB          "<<"     \xDB\xDB   "<<"    \xDB \xDB\xDB  "<<" \xDB\xDB  \xDB\xDB  \xDB\xDB \xDB\xDB"<<std::endl;
-            for(int x=0;x<x0;x++){std::cout<<" ";} std::cout<<"\xDB\xDB         "<<"     \xDB    "<<"   \xDB\xDB \xDB\xDB  "<<" \xDB\xDB   \xDB \xDB   \xDB\xDB"<<std::endl;
-             for(int x=0;x<x0;x++){std::cout<<" ";}std::cout<<"   \xDB\xDB\xDB     "<<"     \xDB    "<<"   \xDB  \xDB\xDB  "<<" \xDB\xDB    \xDB\xDB   \xDB\xDB"<<std::endl;
-           for(int x=0;x<x0;x++){std::cout<<" ";}  std::cout<<"     \xDB\xDB\xDB    "<<"   \xDB     "<<"  \xDB\xDB  \xDB\xDB  "<<" \xDB\xDB    \xDB\xDB   \xDB\xDB"<<std::endl;
-            for(int x=0;x<x0;x++){std::cout<<" ";} std::cout<<"      \xDB\xDB    "<<"   \xDB     "<<"  \xDB\xDB\xDB\xDB\xDB\xDB  "<<" \xDB\xDB    \xDB    \xDB\xDB"<<std::endl;
-           for(int x=0;x<x0;x++){std::cout<<" ";}  std::cout<<"      \xDB\xDB    "<<"  \xDB\xDB     "<<" \xDB\xDB\xDB   \xDB  "<<"\xDB\xDB         \xDB\xDB"<<std::endl;
-           for(int x=0;x<x0;x++){std::cout<<" ";}  std::cout<<"      \xDB     "<<"  \xDB      "<<" \xDB     \xDB  "<<"\xDB\xDB         \xDB\xDB"<<std::endl;
-           for(int x=0;x<x0;x++){std::cout<<" ";}  std::cout<<"\xDB\xDB\xDB\xDB\xDB       "<<"\xDB\xDB\xDB\xDB\xDB    "<<"\xDB\xDB     \xDB  "<<"\xDB\xDB         \xDB\xDB"<<std::endl<<std::endl<<std::endl;
-           for(int x=0;x<x0+8;x++){std::cout<<" ";} std::cout<<"PRESS ANY KEY TO CONTINUE:";
-   m_ecran->showCursor(false);
-   while(!m_ecran->isKeyboardPressed());
+    for(int x=0; x<x0; x++)
+    {
+        std::cout<<" ";
+    }
+    std::cout<<"   \xDB\xDB\xDB\xDB\xDB   "<<"   \xDB\xDB\xDB\xDB\xDB\xDB  "<<"     \xDB\xDB  "<<"   \xDB       \xDB"<<std::endl;
+    for(int x=0; x<x0; x++)
+    {
+        std::cout<<" ";
+    }
+    std::cout<<"\xDB\xDB         "<<"      \xDB    "<<"    \xDB\xDB\xDB  "<<"  \xDB \xDB     \xDB \xDB"<<std::endl;
+    for(int x=0; x<x0; x++)
+    {
+        std::cout<<" ";
+    }
+    std::cout<<"\xDB          "<<"     \xDB\xDB   "<<"    \xDB \xDB\xDB  "<<" \xDB\xDB  \xDB\xDB  \xDB\xDB \xDB\xDB"<<std::endl;
+    for(int x=0; x<x0; x++)
+    {
+        std::cout<<" ";
+    }
+    std::cout<<"\xDB\xDB         "<<"     \xDB    "<<"   \xDB\xDB \xDB\xDB  "<<" \xDB\xDB   \xDB \xDB   \xDB\xDB"<<std::endl;
+    for(int x=0; x<x0; x++)
+    {
+        std::cout<<" ";
+    }
+    std::cout<<"   \xDB\xDB\xDB     "<<"     \xDB    "<<"   \xDB  \xDB\xDB  "<<" \xDB\xDB    \xDB\xDB   \xDB\xDB"<<std::endl;
+    for(int x=0; x<x0; x++)
+    {
+        std::cout<<" ";
+    }
+    std::cout<<"     \xDB\xDB\xDB    "<<"   \xDB     "<<"  \xDB\xDB  \xDB\xDB  "<<" \xDB\xDB    \xDB\xDB   \xDB\xDB"<<std::endl;
+    for(int x=0; x<x0; x++)
+    {
+        std::cout<<" ";
+    }
+    std::cout<<"      \xDB\xDB    "<<"   \xDB     "<<"  \xDB\xDB\xDB\xDB\xDB\xDB  "<<" \xDB\xDB    \xDB    \xDB\xDB"<<std::endl;
+    for(int x=0; x<x0; x++)
+    {
+        std::cout<<" ";
+    }
+    std::cout<<"      \xDB\xDB    "<<"  \xDB\xDB     "<<" \xDB\xDB\xDB   \xDB  "<<"\xDB\xDB         \xDB\xDB"<<std::endl;
+    for(int x=0; x<x0; x++)
+    {
+        std::cout<<" ";
+    }
+    std::cout<<"      \xDB     "<<"  \xDB      "<<" \xDB     \xDB  "<<"\xDB\xDB         \xDB\xDB"<<std::endl;
+    for(int x=0; x<x0; x++)
+    {
+        std::cout<<" ";
+    }
+    std::cout<<"\xDB\xDB\xDB\xDB\xDB       "<<"\xDB\xDB\xDB\xDB\xDB    "<<"\xDB\xDB     \xDB  "<<"\xDB\xDB         \xDB\xDB"<<std::endl<<std::endl<<std::endl;
+    for(int x=0; x<x0+8; x++)
+    {
+        std::cout<<" ";
+    }
+    std::cout<<"PRESS ANY KEY TO CONTINUE:";
+    m_ecran->showCursor(false);
+    while(!m_ecran->isKeyboardPressed());
     m_ecran->getInputKey();
     m_ecran->showCursor(true);
     system("cls");

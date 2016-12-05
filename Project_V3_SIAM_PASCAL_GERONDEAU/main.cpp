@@ -15,25 +15,37 @@ void getCursorXY(int &x, int&y) {
 
 void options(Game& jeu, Console* ecran)
 {
-    char choix;
-    if(jeu.GetdisplayMod())cout<< "Voulez-vous passer en mode graphique?" << endl;
+    char choix=0;
+    if(!jeu.GetdisplayMod())cout<< "Voulez-vous passer en mode graphique?" << endl;
     else cout<<"Voulez-vous quitter le mode graphique?" << endl;
     cout << "(1) Oui" << endl
     << "(2) Non" << endl;
-    choix=ecran->getInputKey();
-    if(choix=='1')jeu.SetdisplayMod((jeu.GetdisplayMod()? 0:1));
+    while(choix!='1' && choix!='2')
+    {
+        choix=ecran->getInputKey();
+        if(choix=='1')jeu.SetdisplayMod((jeu.GetdisplayMod()? 0:1));
+    }
 }
 int main()
 {
 
-    Graphic*pGraph=NULL;
+    /*Graphic*pGraph=NULL;
     pGraph= Graphic::GetInstce();
-    if(!pGraph->init())cout<<"Cannot load allegro!";
 
+    if(!pGraph)
+    {
+        cout<<"Cannot load allegro!";
+        system("pause");
+    }
+    if(pGraph->init())
+        {
+        cout<<"Cannot load images!";
+        system("pause");
+    };*/
 
     Console*pEcran=NULL;
     pEcran = Console::getInstance();
-    Game jeu(pEcran,pGraph);
+    Game jeu(pEcran,NULL);
 
     //system("COLOR A");
     pEcran->setColor(COLOR_GREEN);
@@ -55,9 +67,9 @@ int main()
 
                 system("cls");
 
-                jeu.test();
-                //jeu.start();
-                //jeu.reset();
+                //jeu.test();
+                jeu.start();
+                jeu.reset();
 
             break;
             case '2':
@@ -84,8 +96,6 @@ int main()
 
         }while(choice!='0');
 
-    pGraph->uninit();
-    Graphic::deleteInstce();
     Console::deleteInstance();
     system("color 20");
 

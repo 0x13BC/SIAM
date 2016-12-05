@@ -24,7 +24,7 @@ class Pawn :  public Piece
 
         //SETTERS & GETTERS
 
-        char GetOrientation();
+        int GetOrientation();
         void SetOrientation(int val);
 
         //METHODS

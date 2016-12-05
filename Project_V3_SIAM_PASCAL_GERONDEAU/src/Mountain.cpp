@@ -68,8 +68,6 @@ int Mountain::push(BoardGame& board,char direction,char order, float power_sum, 
         {
                 board.Setmap(m_x,m_y,NULL);
                 board.Setmap(m_x+add_x,m_y+add_y,(Piece*)this);
-                m_x+=add_x;
-                m_y+=add_y;
                 return 1;
             }
     else return -1;
