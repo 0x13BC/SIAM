@@ -49,16 +49,23 @@ int main()
 
     //system("COLOR A");
     pEcran->setColor(COLOR_GREEN);
+
     jeu.homepage(20,5);
+    pEcran->showCursor(false);
 
     int choice=0;
         do
         {
-            cout<<"Enter your choice:"<<endl
-                 <<"                    (1).Jouer."<<endl
-                 <<"                    (2).Option."<<endl
-                 <<"                    (0).Quit."<<endl
-                 <<"Choice:";
+            for(int y=0; y<MARGINBOARDY; y++)
+                {
+                    std::cout<<std::endl;
+                }
+            for(int x=0; x<MARGINBOARDX; x++)cout<<" ";cout<<"\xC9\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xBB"<<endl;
+           for(int x=0; x<MARGINBOARDX; x++)cout<<" "; cout<<"\xBA Enter your choice:            \xBA"<<endl;
+            for(int x=0; x<MARGINBOARDX; x++)cout<<" "; cout<<"\xBA                   (1).Jouer.  \xBA"<<endl;
+             for(int x=0; x<MARGINBOARDX; x++)cout<<" ";cout<<"\xBA                   (2).Option. \xBA"<<endl;
+             for(int x=0; x<MARGINBOARDX; x++)cout<<" ";cout<<"\xBA                   (0).Quit.   \xBA"<<endl;
+            for(int x=0; x<MARGINBOARDX; x++)cout<<" ";cout<<"\xC8\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xBC";
             choice=pEcran->getInputKey();
 
             switch(choice)
@@ -68,8 +75,10 @@ int main()
                 system("cls");
 
                 //jeu.test();
+                pEcran->showCursor(TRUE);
                 jeu.start();
                 jeu.reset();
+                system("cls");
 
             break;
             case '2':
@@ -86,7 +95,7 @@ int main()
                 std::cout<<x<<" "<<y;
             break;*/
             case '0':
-                cout<<"Quit..."<<endl;
+                cout<<endl<<"Quit..."<<endl;
                 break;
             default:
             system("cls");

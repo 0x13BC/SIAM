@@ -170,7 +170,7 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                         t=time(NULL);
                         while(difftime(time(NULL),t)<=0.5);
                         ecran->gotoLigCol(3, 0);
-                        std::cout<<"                             "<<std::endl;
+                        std::cout<<"                           "<<std::endl;
 
                     }
                     if(test==27) return -1;
@@ -201,7 +201,7 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                     if(board.Getmap(x,y)!=NULL) std::cout<<board.Getmap(x,y)->Getstring();
                     else std::cout <<"  ";
                     ecran->gotoLigCol(0, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN);
-                    std::cout<<"                                  "<<std::endl;
+                    std::cout<<"                                     "<<std::endl;
 
                 }
                 else
@@ -222,7 +222,7 @@ int Player::Play_console(BoardGame& board, Console* ecran)
                     if(order!=order_save || direction!= direction_save)
                     {
                         ecran->gotoLigCol(DECALAGE_X_TEXT, DECALAGE_Y_TEXT+BOARD_HEIGHT+MARGIN+2);
-                        std::cout<< "Ordre:               ";
+                        std::cout<< "Ordre:                 ";
                         order_save=order;
                         direction_save=direction;
                     }
