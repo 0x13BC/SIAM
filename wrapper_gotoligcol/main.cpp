@@ -5,23 +5,25 @@
 #define MULTIPLICATOR 3
 
 
-void homepage(int x0,int y0)
+void ShowOption(Console*ecran ,int x0,int y0)
 {
+        ecran->setColor(COLOR_GREEN);
 
-            for(int y=0;y<y0;y++){std::cout<<std::endl;}
+        ecran->gotoLigCol(y0,x0);y0++;
+        std::cout<< "\xC9\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xBB";ecran->gotoLigCol(y0,x0);y0++;
+        std::cout<< "\xBA Z: Up               \xBA";ecran->gotoLigCol(y0,x0);y0++;
+        std::cout<< "\xBA S: Down             \xBA";ecran->gotoLigCol(y0,x0);y0++;
+        std::cout<< "\xBA Q: Left             \xBA";ecran->gotoLigCol(y0,x0);y0++;
+        std::cout<< "\xBA D: Right            \xBA";ecran->gotoLigCol(y0,x0);y0++;
+        std::cout<< "\xBA                     \xBA";ecran->gotoLigCol(y0,x0);y0++;
+        std::cout<< "\xBA Space:Switch order  \xBA";ecran->gotoLigCol(y0,x0);y0++;
+        std::cout<< "\xBA Escape: Cancel      \xBA";ecran->gotoLigCol(y0,x0);y0++;
+        std::cout<< "\xBA 1 or 0 : choice     \xBA";ecran->gotoLigCol(y0,x0);y0++;
+        std::cout<< "\xBA                     \xBA";ecran->gotoLigCol(y0,x0);y0++;
+        std::cout<< "\xC8\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xBC";
 
 
-            for(int x=0;x<x0;x++){std::cout<<" ";} std::cout<<"   \xDB\xDB\xDB\xDB\xDB   "<<"   \xDB\xDB\xDB\xDB\xDB\xDB  "<<"     \xDB\xDB  "<<"   \xDB       \xDB"<<std::endl;
-             for(int x=0;x<x0;x++){std::cout<<" ";}std::cout<<"\xDB\xDB         "<<"      \xDB    "<<"    \xDB\xDB\xDB  "<<"  \xDB \xDB     \xDB \xDB"<<std::endl;
-            for(int x=0;x<x0;x++){std::cout<<" ";} std::cout<<"\xDB          "<<"     \xDB\xDB   "<<"    \xDB \xDB\xDB  "<<" \xDB\xDB  \xDB\xDB  \xDB\xDB \xDB\xDB"<<std::endl;
-            for(int x=0;x<x0;x++){std::cout<<" ";} std::cout<<"\xDB\xDB         "<<"     \xDB    "<<"   \xDB\xDB \xDB\xDB  "<<" \xDB\xDB   \xDB \xDB   \xDB\xDB"<<std::endl;
-             for(int x=0;x<x0;x++){std::cout<<" ";}std::cout<<"   \xDB\xDB\xDB     "<<"     \xDB    "<<"   \xDB  \xDB\xDB  "<<" \xDB\xDB    \xDB\xDB   \xDB\xDB"<<std::endl;
-           for(int x=0;x<x0;x++){std::cout<<" ";}  std::cout<<"     \xDB\xDB\xDB    "<<"   \xDB     "<<"  \xDB\xDB  \xDB\xDB  "<<" \xDB\xDB    \xDB\xDB   \xDB\xDB"<<std::endl;
-            for(int x=0;x<x0;x++){std::cout<<" ";} std::cout<<"      \xDB\xDB    "<<"   \xDB     "<<"  \xDB\xDB\xDB\xDB\xDB\xDB  "<<" \xDB\xDB    \xDB    \xDB\xDB"<<std::endl;
-           for(int x=0;x<x0;x++){std::cout<<" ";}  std::cout<<"      \xDB\xDB    "<<"  \xDB\xDB     "<<" \xDB\xDB\xDB   \xDB  "<<"\xDB\xDB         \xDB\xDB"<<std::endl;
-           for(int x=0;x<x0;x++){std::cout<<" ";}  std::cout<<"      \xDB     "<<"  \xDB      "<<" \xDB     \xDB  "<<"\xDB\xDB         \xDB\xDB"<<std::endl;
-           for(int x=0;x<x0;x++){std::cout<<" ";}  std::cout<<"\xDB\xDB\xDB\xDB\xDB       "<<"\xDB\xDB\xDB\xDB\xDB    "<<"\xDB\xDB     \xDB  "<<"\xDB\xDB         \xDB\xDB"<<std::endl<<std::endl<<std::endl;
-           for(int x=0;x<x0+8;x++){std::cout<<" ";} std::cout<<"PRESS ANY KEY TO CONTINUE:";
+
 
 
 }
@@ -39,7 +41,7 @@ int main()
     pConsole->setColor(COLOR_GREEN);
     std::cout << "Hello World !" << std::endl;
     pConsole->gotoLigCol(5, 10);
-    homepage(5,10);
+    ShowOption(pConsole,10,10);
     pConsole->setColor(COLOR_DEFAULT);
 pConsole->showCursor(false);
     // Boucle événementielle
